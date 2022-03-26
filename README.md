@@ -2,11 +2,11 @@
 ### Repo de nuestro proyecto integrador Digital House - Ecommerce -  Equipo #04
 
 #### Idea del proyecto
-La idea del proyecto, **¨beautyPoint¨**, es crear un sitio web, orientado a la venta de productos de una marca en particular, en este caso, **"LACA"**. Dicha empresa tiene la particularidad de vender sus cremas y cosméticos sólo a profesionales de la estética para que éstos los utilicen en sus gabinetes y/o, principalmente, los revendan.
+**¨beautyPoint¨** será un sitio web orientado a la reventa de productos de una marca en particular: **"LACA"**. Dicha empresa tiene la particularidad de vender sus cremas y cosméticos sólo a profesionales de la estética para que éstos los utilicen en sus gabinetes y/o principalmente los revendan.
 
-Aquí entra en juego nuestro proyecto: ofrecer el desarrollo web del sitio para revendedores **"LACA"** así la empresa se lo brinda como un servicio extra a su fuerza de ventas.  No sólo contarán con una herramienta más, sino que ésta les facilitará la gestión de las ventas, y les ahorrará las altas comisiones de marketplaces del estilo de ML.
+Aquí entra en juego nuestro proyecto: ofrecerle a **"LACA"** el desarrollo web del sitio para que se lo disponibilice a su fuerza de ventas (los profesionales de la estética que compran sus productos). De ésta manera los revendedores no sólo contarán con un espacio online para revender, sino que se les facilitará la gestión de las ventas ahorrándoles tanto la gestión manual de las mismas como las altas comisiones que cobran los marketplaces habituales. Por otro lado, **"LACA"** cuidará su imagen, ya que les impondrá un standard similar al modelo de franquicias.
 
-Nuestro mencionado público objetivo suele ser en su mayoría mujeres, entre los 40 y 60 años, que ven en esta reventa de productos una forma de incrementar sus ingresos.
+Nuestro mencionado público objetivo indirecto (quienes serán los usuarios finales del sitio web) suelen ser en su mayoría mujeres, entre los 40 y 60 años, que ven en esta reventa de productos una forma de incrementar sus ingresos. Nuestro objetivo directo, **"LACA"**,  accederá al sitio pero sólo a los tableros de gestión del mismo (para gestión de revendedores y consulta de métricas acordes al negocio).
 
 #### Referentes del mercado (para inspirar secciones)
 Como referencia para los wireframes de nuestro proyecto, nos gustaron las siguientes secciones de cada página:
