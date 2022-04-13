@@ -14,6 +14,53 @@
     <title>BeautyPoint</title>
   </head>
   <body>
-    Login
+    <header>
+      <div>
+        <a href="#"><img
+            src="/images/logo.jpg"
+            alt="Imagen logo"
+            class="logo"
+          /></a>
+         
+      </div>
+    </header>
+    <main>
+      <form action="/ruta" method="POST" class="login-form">
+        <div class="email-login">
+          <input
+            type="email"
+            name="email"
+            class="login"
+            placeholder="Email"
+            required
+            maxlength="20"
+          />
+        </div>
+        <div class="password-login">
+          <input
+            type="password"
+            name="password"
+            class="login"
+            placeholder="Contraseña"
+            required
+            maxlength="10"
+          />
+        </div>
+        <div>
+          <button type="submit" class="button-login">Iniciar Sesión</button>
+        </div>
+        <div class="auto-login">
+          <label for="checkbox-login">Recordar usuario y contraseña</label>
+          <input type="checkbox" id="checkbox-login" name="checkbox-login" />
+        </div>
+        <div>
+          <a href="#" class="forgot-password">Olvidaste la contraseña?</a>
+        </div>
+        <div>
+          <a href="#" class="create-account">Crear una cuenta</a>
+        </div>
+      </form>
+    </main>
+    <footer></footer>
   </body>
 </html>
