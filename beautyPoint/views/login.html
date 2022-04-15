@@ -9,6 +9,10 @@
       src="https://kit.fontawesome.com/445d982738.js"
       crossorigin="anonymous"
     ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/normalize.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <title>BeautyPoint</title>
@@ -25,38 +29,41 @@
       </div>
     </header>
     <main>
-      <form action="/ruta" method="POST" class="login-form">
-        <div class="email-login">
+      <form action="/login" method="POST" class="form-login">
+        <div class="form-element-login">
           <input
             type="email"
             name="email"
-            class="login"
-            placeholder="Email"
+            placeholder="Correo electrónico"
+            id="email"
             required
-            maxlength="20"
+            maxlength="40"
           />
         </div>
-        <div class="password-login">
+
+        <div class="form-element-login">
           <input
             type="password"
             name="password"
-            class="login"
             placeholder="Contraseña"
             required
             maxlength="10"
           />
         </div>
-        <div>
-          <button type="submit" class="button-login">Iniciar Sesión</button>
+
+        <div class="form-element-login">
+          <button type="submit" class="form-boton">Iniciar Sesión</button>
         </div>
-        <div class="auto-login">
+
+        <div class="form-element-login">
           <label for="checkbox-login">Recordar usuario y contraseña</label>
           <input type="checkbox" id="checkbox-login" name="checkbox-login" />
         </div>
-        <div>
-          <a href="#" class="forgot-password">Olvidaste la contraseña?</a>
+
+        <div class="form-element-login">
+          <a href="#" class="forgot-password">¿Olvidaste la contraseña?</a>
         </div>
-        <div>
+        <div class="form-element-login">
           <a href="#" class="create-account">Crear una cuenta</a>
         </div>
       </form>
