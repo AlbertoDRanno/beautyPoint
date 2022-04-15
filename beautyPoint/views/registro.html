@@ -9,14 +9,141 @@
       src="https://kit.fontawesome.com/445d982738.js"
       crossorigin="anonymous"
     ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/normalize.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <title>BeautyPoint</title>
   </head>
   <body>
-    Registro
     <header></header>
-    <main></main>
+    <main>
+      <form action="/registro" method="POST" class="form-register">
+        <h1>Crear cuenta</h1>
+
+        <div class="form-element">
+          <label for="first_name">Nombre:</label>
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            placeholder="Ingresá tu nombre"
+            required
+          />
+        </div>
+
+        <div class="form-element">
+          <label for="last_name">Apellido:</label>
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            placeholder="Ingresá tu apellido"
+            required
+          />
+        </div>
+
+        <div class="form-element">
+          <label for="dni">DNI:</label>
+          <input
+            type="number"
+            name="dni"
+            id="dni"
+            placeholder="Ingresá tu DNI (sin puntos. Ej. 12345678)"
+            required
+          />
+        </div>
+
+        <div class="form-element">
+          <label for="email">E-mail:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Ingresá tu correo"
+            required
+          />
+        </div>
+
+        <div class="form-element">
+          <label for="phone">Celular:</label>
+          <input
+            type="number"
+            name="phone"
+            id="phone"
+            placeholder="Ingresá tu celular (sólo números)"
+            required
+          />
+        </div>
+
+        <div class="form-element">
+          <div>
+            <label>Género:</label>
+          </div>
+
+          <div>
+            <input type="radio" name="genere" value="Femenino" id="Femenino" />
+            <label for="Femenino" id="label-radiobutton">Femenino</label>
+
+            <input
+              type="radio"
+              name="genere"
+              value="Masculino"
+              id="Masculino"
+            />
+            <label for="Masculino" id="label-radiobutton">Masculino</label>
+
+            <input type="radio" name="genere" value="Otro" id="Otro" />
+            <label for="Otro" id="label-radiobutton">Otro</label>
+          </div>
+        </div>
+
+        <div class="form-element">
+          <label for="birthDate">Fecha de nacimiento:</label>
+          <input type="date" class="form-element-input" id="birthDate" />
+        </div>
+
+        <div class="form-element">
+          <label for="image">Foto de perfil:</label>
+          <input type="file" name="image" id="image" />
+        </div>
+
+        <div class="form-element">
+          <label for="password">Contraseña:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Elegí una contraseña"
+            required
+          />
+        </div>
+        <div class="form-element">
+          <label for="repeatPassword">Repetir contraseña:</label>
+          <input
+            type="password"
+            name="repeatPassword"
+            id="repeatPassword"
+            placeholder="Repetí tu contraseña"
+            required
+          />
+        </div>
+
+        <div class="form-element">
+          <div class="form-botonera">
+            <button type="submit" value="REGISTRAR" class="form-boton">
+              Crear cuenta
+            </button>
+
+            <button type="reset" value="LIMPIAR" class="form-boton">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </main>
     <footer></footer>
   </body>
 </html>
