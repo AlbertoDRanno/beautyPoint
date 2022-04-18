@@ -173,12 +173,39 @@ input:valid:required {
   color: #222222;
 }
 
+.home {
+  margin-top: 250px;
+  margin-bottom: 150px;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-items: center;
+}
+
+.home-elements a, select {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+
+}
+
+.images {
+  max-width: 230px;
+ 
+}
+
+
+
 /*Footer*/
 .footer-father {
   position: relative;
 }
 .footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   z-index: 100;
   width: 100%;
