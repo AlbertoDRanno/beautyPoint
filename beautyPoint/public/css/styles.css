@@ -174,7 +174,7 @@ input:valid:required {
 }
 
 .home {
-  margin-top: 250px;
+  margin-top: 150px;
   margin-bottom: 150px;
   list-style: none;
   display: flex;
@@ -190,7 +190,7 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px auto;
+  margin: 20px auto;
 }
 
 .home-elements select {
@@ -207,6 +207,24 @@ select {
   max-width: 230px;
   margin: auto;
   padding: 15px;
+}
+.container-menu {
+  position: relative;
+}
+.menu nav ul li {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  position: absolute;
+  top: -10px;
+  opacity: 0;
+  z-index: 10;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.menu nav ul:hover li {
+  opacity: 1;
 }
 
 /*Footer*/
