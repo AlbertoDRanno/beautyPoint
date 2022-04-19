@@ -1,76 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="images/favicon.png" />
-    <script
-      src="https://kit.fontawesome.com/445d982738.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="/css/normalize.css" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <title>BeautyPoint-productDetail</title>
-  </head>
 
-  <body>
-    <header class="header">
-      <div class="header-elements">
-        <a href="/"
-          ><img
-            src="/images/logo_transparent.png"
-            alt="Imagen logo"
-            class="logo"
-        /></a>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="images/favicon.png" />
+  <script src="https://kit.fontawesome.com/445d982738.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <title>BeautyPoint-productDetail</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-elements">
+      <a href="/"><img src="/images/logo_transparent.png" alt="Imagen logo" class="logo" /></a>
+    </div>
+    <div class="header-elements">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="search" placeholder="Encontrá eso que querés" size="40" />
+    </div>
+    <nav class="header-elements">
+      <ul>
+        <li>
+          <a href="#">Creá tu cuenta <i class="fa-solid fa-id-card"></i></a>
+        </li>
+        <li>
+          <a href="#">Ingresá <i class="fa-solid fa-door-open"></i></a>
+        </li>
+        <li>
+          <a href="#">Mi cuenta <i class="fa-solid fa-circle-user"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="product-main">
+    <h3>Sérum demaquillante de ojos y labios</h3>
+    <section class="product-section">
+      <article class="product-article">
+        <img src="/images/serumDemaq.png" alt="Serum Demaquillante" />
+        <h3>$ 2330</h3>
+      </article>
+      <article class="product-article">
+        <!--Descripción-->
+        <p>
+          Sérum siliconado que retira facilmente maquillaje waterproof. Es
+          totalmente oil free.
+        </p>
+        <!--Presentanción-->
+        <div>70 ml</div>
+        <!--Línea-->
+        <div>Cuidados Básicos</div>
+        <div class="product-cart">
+                      <button type="submit" value="sumarAlCarrito" class="product-cart-button">
+              Agregar al carrito
+            </button>
+            <input type="number" size="1" />
+                </article>
+    </section>
+    <div class="product-cart-icon-father">
+      <a href="/productCart"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </main>
+  <div class="footer-father">
+    <footer class="footer">
+      <div class="footer-elements">
+        <a href="#"><img src="/images/logo_transparent.png" alt="Imagen logo" class="logo-footer" /></a>
       </div>
-      <div class="header-elements">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="search" placeholder="Encontrá eso que querés" size="40" />
+      <div class="footer-elements">
+        <h4>Sobre Nosotros</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
       </div>
-      <nav class="header-elements">
-        <ul>
-          <li>
-            <a href="#">Creá tu cuenta <i class="fa-solid fa-id-card"></i></a>
-          </li>
-          <li>
-            <a href="#">Ingresá <i class="fa-solid fa-door-open"></i></a>
-          </li>
-          <li>
-            <a href="#">Mi cuenta <i class="fa-solid fa-circle-user"></i></a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <main></main>
-    <div class="footer-father">
-  <footer class="footer">
-    <div class="footer-elements">
-      <a href="#"
-        ><img
-          src="/images/logo_transparent.png"
-          alt="Imagen logo"
-          class="logo-footer"
-      /></a>
-    </div>
-    <div class="footer-elements">
-      <h4>Sobre Nosotros</h4>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </p>
-    </div>
-    <div class="footer-elements footer-redes-sociales">
-      <h4>Seguinos</h4>
-      <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-      <a href=""><i class="fa-brands fa-instagram"></i></a>
-      <a href=""><i class="fa-brands fa-twitter"></i></a>
-      <a href=""><i class="fa-brands fa-youtube"></i></a>
-    </div>
-    <div class="footer-elements">
-      <h4><i class="fa-solid fa-copyright"></i> 2022 <b>BeautyPoint</b></h4>
-      Todos los derechos Reservados
-    </div>
-  </footer>
-    </div>
-  </body>
- </html>
+      <div class="footer-elements footer-redes-sociales">
+        <h4>Seguinos</h4>
+        <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+        <a href=""><i class="fa-brands fa-instagram"></i></a>
+        <a href=""><i class="fa-brands fa-twitter"></i></a>
+        <a href=""><i class="fa-brands fa-youtube"></i></a>
+      </div>
+      <div class="footer-elements">
+        <h4><i class="fa-solid fa-copyright"></i> 2022 <b>BeautyPoint</b></h4>
+        Todos los derechos Reservados
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
