@@ -41,6 +41,7 @@
             placeholder="Ingresá tu nombre"
             required
           />
+          <span class="feedback"></span>
         </div>
 
         <div class="form-element">
@@ -52,6 +53,7 @@
             placeholder="Ingresá tu apellido"
             required
           />
+          <span class="feedback"></span>
         </div>
 
         <div class="form-element">
@@ -63,6 +65,7 @@
             placeholder="Ingresá tu DNI (sin puntos. Ej. 12345678)"
             required
           />
+          <span class="feedback"></span>
         </div>
 
         <div class="form-element">
@@ -73,7 +76,7 @@
             name="email"
             placeholder="Ingresá tu correo"
             required
-          />
+          /><span class="feedback"></span>
         </div>
 
         <div class="form-element">
@@ -84,7 +87,7 @@
             id="phone"
             placeholder="Ingresá tu celular (sólo números)"
             required
-          />
+          /><span class="feedback"></span>
         </div>
 
         <div class="form-element">
@@ -116,7 +119,8 @@
 
         <div class="form-element">
           <label for="image">Foto de perfil:</label>
-          <input type="file" name="image" id="image" />
+          <input type="file" name="image" id="image" accept=".jpg, .png" />
+          <span class="feedback"></span>
         </div>
 
         <div class="form-element">
@@ -127,7 +131,7 @@
             id="password"
             placeholder="Elegí una contraseña"
             required
-          />
+          /><span class="feedback"></span>
         </div>
         <div class="form-element">
           <label for="repeatPassword">Repetir contraseña:</label>
@@ -137,7 +141,7 @@
             id="repeatPassword"
             placeholder="Repetí tu contraseña"
             required
-          />
+          /><span class="feedback"></span>
         </div>
 
         <div class="form-element">
