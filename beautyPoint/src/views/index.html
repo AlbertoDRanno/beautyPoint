@@ -31,7 +31,9 @@
       <nav class="header-elements">
         <ul>
           <li>
-            <a href="/register">Creá tu cuenta <i class="fa-solid fa-id-card"></i></a>
+            <a href="/register"
+              >Creá tu cuenta <i class="fa-solid fa-id-card"></i
+            ></a>
           </li>
           <li>
             <a href="/login">Ingresá <i class="fa-solid fa-door-open"></i></a>
@@ -42,82 +44,79 @@
         </ul>
       </nav>
     </header>
-    <main>
-      <section>
-        <ul class="home">
-          <li class="home-elements">
-            <article>
-              <img
-                src="/images/rostro.png"
-                alt="rostro de mujer"
-                class="images"
-              />
-              <a href="#">Rostro</a>
-              <div class="container-menu">
-                <div class="menu">
-                  <nav>
-                    <ul>
-                      <li><a href="#">Leche de Limpieza</a></li>
-                      <li><a href="#">Dermopulido Gel</a></li>
-                      <li><a href="#">Serum Demaquillante</a></li>
-                      <li><a href="#">Crema de Limpieza</a></li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </article>
-          </li>
-          <li class="home-elements">
-            <article>
-              <img
-                src="/images/cuerpo.png"
-                alt="cuerpo de mujer"
-                class="images"
-              />
-              <a href="#">Cuerpo</a>
-            </article>
-            <select name="cuerpo" id="cuerpo">
-              <option value="15000-04">Leche de Limpieza</option>
-              <option value="15100-03">Dermopulido Gel</option>
-              <option value="15200-04">Serum Demaquillante</option>
-              <option value="15300-03">Crema de Limpieza</option>
-            </select>
-          </li>
-          <li class="home-elements">
-            <article>
-              <img
-                src="/images/solares.png"
-                alt="mujer corriendo"
-                class="images"
-              />
-              <a href="#">Solares</a>
-            </article>
-            <select name="solares" id="solares">
-              <option value="15000-04">Leche de Limpieza</option>
-              <option value="15100-03">Dermopulido Gel</option>
-              <option value="15200-04">Serum Demaquillante</option>
-              <option value="15300-03">Crema de Limpieza</option>
-            </select>
-          </li>
-          <li class="home-elements">
-            <article>
-              <img
-                src="/images/maquillajes.png"
-                alt="mujer maquillada"
-                class="images"
-              />
-              <a href="#">Maquillaje</a>
-            </article>
-            <select name="maquillaje" id="maquillaje">
-              <option value="15000-04">Leche de Limpieza</option>
-              <option value="15100-03">Dermopulido Gel</option>
-              <option value="15200-04">Serum Demaquillante</option>
-              <option value="15300-03">Crema de Limpieza</option>
-            </select>
-          </li>
-        </ul>
+    <main class="home-main">
+      <div class="home-banners">
+        <img src="/images/rostro.png" alt="rostro de mujer" />
+        <h2><a href="#">Cuidados Básicos</a></h2>
+      </div>
+      <section class="home-section">
+        <article class="home-products">
+          <a href="/productDetail"
+            ><img src="/images/serumDemaq.png" alt="" class="home-images"
+          /></a>
+          <div>Sérum Demaquillante</div>
+          <div>$ 2200</div>
+        </article>
+        <article class="home-products">
+          <a href="/productDetail"
+            ><img src="/images/cremaLimpieza.png" alt="" class="home-images"
+          /></a>
+          <div>Crema de Limpieza</div>
+          <div>$ 3500</div>
+        </article>
+        <article class="home-products">
+          <a href="/productDetail"
+            ><img src="/images/dermopulidoGel.png" alt="" class="home-images"
+          /></a>
+          <div>Dermopulido Gel</div>
+          <div>$ 3100</div>
+        </article>
+        <article class="home-products">
+          <a href="/productDetail"
+            ><img src="/images/lecheLimpieza.png" alt="" class="home-images"
+          /></a>
+          <div>Leche de Limpieza</div>
+          <div>$ 2900</div>
+        </article>
       </section>
-    </main>
+      <div class="home-banners">
+        <img src="/images/maquillajes.png" alt="rostro de mujer" />
+        <h2><a href="#">Maquillajes</a></h2>
+      </div>
+      <section class="home-section">
+        <article class="home-products">
+          <a href="/productDetail"
+            ><img src="/images/IluminadorTonalizador.png" alt="" class="home-images"
+          /></a>
+          <div>Sérum Demaquillante</div>
+          <div>$ 2200</div>
+        </article>
+        <article class="home-products">
+          <a href="/productDetail"
+            ><img src="/images/neblinaFijadora.png" alt="" class="home-images"
+          /></a>
+          <div>Crema de Limpieza</div>
+          <div>$ 3500</div>
+        </article>
+        <article class="home-products">
+          <a href="/productDetail"
+            ><img src="/images/paletaCromatica.png" alt="" class="home-images"
+          /></a>
+          <div>Dermopulido Gel</div>
+          <div>$ 3100</div>
+        </article>
+        <article class="home-products">
+          <a href="/productDetail"
+            ><img src="/images/PrebasePrimeLuminous.png" alt="" class="home-images"
+          /></a>
+          <div>Leche de Limpieza</div>
+          <div>$ 2900</div>
+        </article>
+      </section>
+      <div class="home-cart-icon-father">
+      <a href="/productCart"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+         </main>
     <div class="footer-father">
       <footer class="footer">
         <div class="footer-elements">
