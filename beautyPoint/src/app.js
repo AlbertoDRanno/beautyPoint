@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
 app.get("/productDetail", (req, res) => {
   res
     .status(200)
-    .sendFile(path.join(__dirname, "../src/views/productDetail.html"));
+    .sendFile(path.join(__dirname, "../src/views/products/productDetail.html"));
 });
 app.get("/productCart", (req, res) => {
   res
@@ -20,10 +20,14 @@ app.get("/productCart", (req, res) => {
     .sendFile(path.join(__dirname, "../src/views/productCart.html"));
 });
 app.get("/login", (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, "../src/views/login.html"));
+  res
+    .status(200)
+    .sendFile(path.join(__dirname, "../src/views/users/login.html"));
 });
 app.get("/register", (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, "../src/views/register.html"));
+  res
+    .status(200)
+    .sendFile(path.join(__dirname, "../src/views/users/register.html"));
 });
 
 app.listen(3000, () => {
