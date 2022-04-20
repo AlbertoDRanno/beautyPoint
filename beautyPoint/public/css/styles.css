@@ -101,9 +101,12 @@ input:valid:required {
   0% {
     transform: scale(1);
   }
-
+25% {
+  transform: rotateY(90deg);
+}
   100% {
     transform: scale(1.5);
+    
   }
 }
 .header {
@@ -128,6 +131,7 @@ input:valid:required {
 .header-elements a {
   text-decoration: none;
 }
+
 .header-elements section {
   display: flex;
   flex-direction: row;
@@ -139,7 +143,13 @@ input:valid:required {
 }
 .header-cart {
   font-size: 250%;
+  transition: all 1s;
 }
+.header-cart:hover {
+  font-size: 350%;
+}
+
+
 .header-cart i {
   color: #3cc3b2;
 }
@@ -147,7 +157,14 @@ input:valid:required {
   background-color: #3cc3b2;
   color: white;
   font-size: 300%;
+  border-radius: 10%; 
+  transition: all 1s;
 }
+.header-hamburguer-button:hover {
+  font-size: 400%;
+  border-radius: 30%;  
+}
+
 
 /*index*/
 .home-main, .product-main, .cart-main, .register-main, .login-main {
@@ -222,16 +239,6 @@ input:valid:required {
   margin: 5px;
   width: 50%;
   text-align: center;
-}
-.product-cart-icon-father {
-  position: relative;
-}
-.product-cart-icon-father i {
-  position: absolute;
-  right: 25px;
-  bottom: 0;
-  color: rgb(35, 239, 35);
-  font-size: xx-large;
 }
 
 /*Footer*/
