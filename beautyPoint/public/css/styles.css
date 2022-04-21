@@ -20,12 +20,6 @@ input:valid:required {
   text-decoration: none;
 }
 
-.login-remember {
-  position: relative;
-  left: 20vw;
-  text-align: center;
-}
-
 /* Estilos para formularios de login.html y registro.html */
 .form-login,
 .form-register {
@@ -45,10 +39,11 @@ input:valid:required {
 
 .form-element-login {
   /* border: dotted 2px red; */
-  margin: 5px 0px;
+  margin: 5px auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 70vw;
 }
 
 .form-element-login input {
@@ -56,6 +51,12 @@ input:valid:required {
 }
 
 /* #checkbox-login */
+
+.login-remember {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
 
 .form-register h1 {
   font-weight: 200;
@@ -101,13 +102,68 @@ input:valid:required {
   0% {
     transform: scale(1);
   }
-25% {
-  transform: rotateY(90deg);
-}
+  25% {
+    transform: rotateY(90deg);
+  }
   100% {
     transform: scale(1.5);
-    
   }
+}
+.respmenu a {
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  max-width: 200px;
+  background: #3cc3b2;
+  
+}
+.respmenu input[type="checkbox"], .respmenu .fa-bars, .respmenu .fa-times {
+  position: absolute;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  right: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.respmenu .fa-bars, .respmenu .fa-times {
+  font-size: 48px;
+  pointer-events: none;
+}
+
+.respmenu input[type="checkbox"] {
+  opacity: 0;
+}
+
+.respmenu {
+  color: white;
+  position: relative;
+  background: #3cc3b2;
+  min-height: 48px;
+  width: 40%;
+}
+.respmenu ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; 
+  align-items: center; 
+}
+.respmenu nav {
+  display: none;
+}
+
+.respmenu input:checked ~ nav {
+  display: block;
+}
+
+.respmenu input:checked ~ .fa-bars {
+  display: none;
+}
+
+.respmenu input:not(:checked) ~ .fa-times {
+  display: none;
 }
 .header {
   position: fixed;
@@ -124,11 +180,14 @@ input:valid:required {
 
 .header-elements ul {
   list-style: none;
-    display: flex;
+  display: flex;
   justify-content: space-around;
   padding-left: 0;
 }
-.header-elements a {
+.header-elements a:link,
+.header-elements a:visited,
+.header-elements a:hover,
+.header-elements a:active {
   text-decoration: none;
 }
 
@@ -138,8 +197,8 @@ input:valid:required {
   justify-content: space-around;
   align-items: center;
 }
-.header-elements section div {
-  width: 33%;
+.header-elements-ang {
+  width: 30%;
 }
 .header-cart {
   font-size: 250%;
@@ -149,7 +208,6 @@ input:valid:required {
   font-size: 350%;
 }
 
-
 .header-cart i {
   color: #3cc3b2;
 }
@@ -157,18 +215,41 @@ input:valid:required {
   background-color: #3cc3b2;
   color: white;
   font-size: 300%;
-  border-radius: 10%; 
+  border-radius: 10%;
   transition: all 1s;
 }
 .header-hamburguer-button:hover {
   font-size: 400%;
-  border-radius: 30%;  
+  border-radius: 30%;
+}
+.input-father {
+  position: relative;
+  margin: 15px auto ;
+  width: 70vw;
+}
+.input {
+  color: #191919;
+  padding: 15px 15px 15px 35px;
+  width: 100%;
+  text-align: left;
+}
+.input-icon {
+  color: #191919;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-
 /*index*/
-.home-main, .product-main, .cart-main, .register-main, .login-main {
-  margin-top: 200px;
+.home-main,
+.product-main,
+.cart-main,
+.register-main,
+.login-main {
+  margin-top: 180px;
   margin-bottom: 140px;
 }
 .home-banners {
