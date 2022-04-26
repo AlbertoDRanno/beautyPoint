@@ -2,30 +2,16 @@ const path = require("path");
 
 const productsController = {
   productDetail: (req, res) => {
-    res
-      .status(200)
-      .sendFile(
-        path.join(__dirname, "../views/products/productDetail.html")
-      );
+    res.status(200).render("products/productDetail");
   },
   productCart: (req, res) => {
-    res
-      .status(200)
-      .sendFile(path.join(__dirname, "../views/products/productCart.html"));
+    res.status(200).render("products/productCart");
   },
-  productsCreate: function (req, res) {
-    res
-      .status(200)
-      .sendFile(
-        path.join(__dirname, "../src/views/products/productCreate.html")
-      );
+  productsCreate: (req, res) => {
+    res.status(200).render("");
   },
-  productList: function (req, res) {
-    res
-      .status(200)
-      .sendFile(
-        path.join(__dirname, "../src/views/productos/productsList.html")
-      );
+  productList: (req, res) => {
+    res.status(200).render("");
   },
 };
 module.exports = productsController;
