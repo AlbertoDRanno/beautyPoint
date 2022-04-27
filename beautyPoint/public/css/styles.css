@@ -258,6 +258,14 @@ input:valid:required {
   width: 100%;
   text-align: center;
 }
+
+.home-banners img {
+  width: 100%;
+  max-height: 400px;
+
+  object-position: top;
+}
+
 .home-banners a {
   text-decoration: none;
 }
@@ -329,7 +337,6 @@ input:valid:required {
   position: relative;
 }
 .footer {
-  position: absolute;
   bottom: 0;
   left: 0;
   z-index: 100;
@@ -371,6 +378,7 @@ input:valid:required {
 .carrito-Row {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .carrito-Row .carrito-Column {
   width: 20%;
@@ -383,5 +391,15 @@ input:valid:required {
 .productCart-table {
   width: 100%;
 }
-
+@media (min-width: 760px) {
+  .carrito-Column.First {
+    width: 60%;
+    text-align: left;
+  }
+}
+.productCart-table td h5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 /*/productCart main*/
