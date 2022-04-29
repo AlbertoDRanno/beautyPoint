@@ -1,53 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="images/favicon.png" />
-  <script src="https://kit.fontawesome.com/445d982738.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/css/normalize.css" />
-  <link rel="stylesheet" href="/css/styles.css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-  <title>BeautyPoint-productCart</title>
-</head>
+<%- include('../partials/head.ejs')%>
 
 <body>
-  <header class="header">
-    <div class="header-elements">
-      <section>
-        <div>
-          <a href="/"><img src="/images/logo_transparent.png" alt="Imagen logo" class="logo" /></a>
-        </div>
-        <div>
-          <a href="#" class="header-hamburguer-button">
-            <i class="fas fa-bars"></i></a>
-        </div>
-        <div class="header-cart">
-          <a href="/productCart"><i class="fa-solid fa-cart-shopping"></i></a>
-        </div>
-      </section>
-    </div>
-    <div class="header-elements">
-      <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <input type="search" placeholder="Encontrá eso que querés" size="35" />
-    </div>
-    <nav class="header-elements">
-      <ul>
-        <li>
-          <a href="/register">Creá tu cuenta <i class="fa-solid fa-id-card"></i></a>
-        </li>
-        <li>
-          <a href="/login">Ingresá <i class="fa-solid fa-door-open"></i></a>
-        </li>
-        <li>
-          <a href="#">Mi cuenta <i class="fa-solid fa-circle-user"></i></a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+<%- include('../partials/header.ejs')%>
   <main class="cart-main">
     <table class="productCart-table">
       <thead>
@@ -124,30 +80,7 @@
       </tbody>
     </table>
   </main>
-  <div class="footer-father">
-    <footer class="footer">
-      <div class="footer-elements">
-        <a href="#"><img src="/images/logo_transparent.png" alt="Imagen logo" class="logo-footer" /></a>
-      </div>
-      <div class="footer-elements">
-        <h4>Sobre Nosotros</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        </p>
-      </div>
-      <div class="footer-elements footer-redes-sociales">
-        <h4>Seguinos</h4>
-        <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-        <a href=""><i class="fa-brands fa-instagram"></i></a>
-        <a href=""><i class="fa-brands fa-twitter"></i></a>
-        <a href=""><i class="fa-brands fa-youtube"></i></a>
-      </div>
-      <div class="footer-elements">
-        <h4><i class="fa-solid fa-copyright"></i> 2022 <b>BeautyPoint</b></h4>
-        Todos los derechos Reservados
-      </div>
-    </footer>
-  </div>
+<%- include('../partials/footer.ejs')%>
 </body>
 
 </html>
