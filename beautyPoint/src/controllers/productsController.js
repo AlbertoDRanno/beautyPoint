@@ -1,7 +1,7 @@
 const productsController = {
   productDetail: (req, res) => {
     console.log("entrando al render de productDetail");
-    let products = [
+    let cuidadosBasicos = [
       {
         id: 1,
         name: "Sérum demaquillante de ojos y labios",
@@ -15,7 +15,7 @@ const productsController = {
       {
         id: 2,
         name: "Crema de limpieza",
-        image: "/images/products/serumDemaq.png",
+        image: "/images/products/cremaLimpieza.png",
         price: 3500,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -25,7 +25,7 @@ const productsController = {
       {
         id: 3,
         name: "Dermopulido gel",
-        image: "/images/products/serumDemaq.png",
+        image: "/images/products/dermopulidoGel.png",
         price: 3100,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -35,17 +35,19 @@ const productsController = {
       {
         id: 4,
         name: "Leche de limpieza",
-        image: "/images/products/serumDemaq.png",
+        image: "/images/products/lecheLimpieza.png",
         price: 2900,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
         package: "70 ml",
         class: "Cuidados Básicos",
       },
+  //  ];
+   // let maquillaje = [
       {
         id: 5,
-        name: "Sérum demaquillante de ojos y labios",
-        image: "/images/products/serumDemaq.png",
+        name: "Iluminador Tonalizador",
+        image: "/images/products/IluminadorTonalizador.png",
         price: 2330,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -54,8 +56,8 @@ const productsController = {
       },
       {
         id: 6,
-        name: "Crema de limpieza",
-        image: "/images/products/serumDemaq.png",
+        name: "Paleta Cromatica",
+        image: "/images/products/paletaCromatica.png",
         price: 3500,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -64,8 +66,8 @@ const productsController = {
       },
       {
         id: 7,
-        name: "Dermopulido gel",
-        image: "/images/products/serumDemaq.png",
+        name: "Prebase Prime Luminous",
+        image: "/images/products/PrebasePrimeLuminous.png",
         price: 3100,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -74,8 +76,8 @@ const productsController = {
       },
       {
         id: 8,
-        name: "Leche de limpieza",
-        image: "/images/products/serumDemaq.png",
+        name: "Neblina Fijadora",
+        image: "/images/products/neblinaFijadora.png",
         price: 2900,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -83,20 +85,27 @@ const productsController = {
         class: "Cuidados Básicos",
       },
     ];
-    let filteredProduct = products.filter(
+    let filteredProduct = cuidadosBasicos.filter(
       (filtered) => filtered.id == req.params.id
     );
+    console.log(filteredProduct);
+    
     res
       .status(200)
-      .render("products/productDetail", { theFiltered: filteredProduct[0] });
+      .render("products/productDetail", {
+        theFiltered: filteredProduct[0],
+         });
   },
   productCart: (req, res) => {
+    console.log("entrando al render de productCart");
     res.status(200).render("products/productCart");
   },
   productsCreate: (req, res) => {
+    console.log("entrando al render de productsCreate");
     res.status(200).render("");
   },
   productList: (req, res) => {
+    console.log("entrando al render de productList");
     res.status(200).render("");
   },
 };

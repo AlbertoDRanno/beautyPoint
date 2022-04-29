@@ -4,22 +4,21 @@
 <body>
   <%- include('../partials/header.ejs')%>
   <main class="product-main">
-    <h3>Sérum demaquillante de ojos y labios</h3>
+    <h3><%= theFiltered.name %></h3>
     <section class="product-section">
       <article class="product-article">
-        <img src="/images/products/serumDemaq.png" alt="Serum Demaquillante" />
-        <h3>$ 2330</h3>
+        <img src=<%= theFiltered.image %> alt=<%= theFiltered.name %> />
+        <h3>$ <%= theFiltered.price %></h3>
       </article>
       <article class="product-article">
         <!--Descripción-->
         <p>
-          Sérum siliconado que retira facilmente maquillaje waterproof. Es
-          totalmente oil free.
+          <%= theFiltered.description %>
         </p>
         <!--Presentanción-->
-        <div>70 ml</div>
+        <div><%= theFiltered.package %></div>
         <!--Línea-->
-        <div>Cuidados Básicos</div>
+        <div><%= theFiltered.class %></div>
         <div class="product-cart">
                       <button type="submit" value="sumarAlCarrito" class="product-cart-button">
               Agregar al carrito
