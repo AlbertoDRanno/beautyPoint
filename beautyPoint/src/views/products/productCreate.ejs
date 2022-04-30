@@ -1,10 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include('../partials/head.ejs')%>
-
   <body>
-    <main>
-      <h1>Esta es la vista productCreate.ejs</h1>
+    <%- include('../partials/header.ejs')%>
+    <main class="register-main">
+      <form action="/registro" method="POST" class="form-register">
+        <h1>Crear producto</h1>
+
+        <div class="form-element">
+          <label for="idProducto">ID:</label>
+          <input id="idProducto" type="number" size="1" required />
+        </div>
+
+        <div class="form-element">
+          <label for="first_name">Nombre de producto:</label>
+          <input
+            type="text"
+            id="product_title"
+            name="product_title"
+            placeholder="Ingresá el título del producto"
+            required
+          />
+          <span class="feedback"></span>
+        </div>
+
+        <div class="form-element">
+          <label for="image">Imagen de producto:</label>
+          <input type="file" name="image" id="image" accept=".jpg, .png" />
+          <span class="feedback"></span>
+        </div>
+
+        <div class="form-element">
+          <label for="product_price">Precio:</label>
+          <input
+            type="number"
+            name="product_price"
+            id="product_price"
+            placeholder="Ingresá el precio del producto"
+            required
+          />
+          <span class="feedback"></span>
+        </div>
+
+        <div class="form-element">
+          <label for="product_description">Descripción del producto:</label>
+          <textarea
+            name="product_description"
+            id="product_description"
+            cols="30"
+            rows="10"
+            placeholder="Ingresá la presentación del producto"
+            required
+          ></textarea>
+          <span class="feedback"></span>
+        </div>
+
+        <div class="form-element">
+          <label for="product_package">Package:</label>
+          <input
+            type="text"
+            id="product_package"
+            name="product_package"
+            placeholder="Ingresá el package del producto"
+            required
+          />
+          <span class="feedback"></span>
+        </div>
+
+        <div class="form-element">
+          <label for="product_category">Categoría:</label>
+
+          <select name="product_category" id="product_category" required>
+            <option value="categoria-1">Cuidados básicos</option>
+            <option value="categoria-2">Maquillaje</option>
+            <option value="categoria-3">Cremas</option>
+          </select>
+
+          <span class="feedback"></span>
+        </div>
+
+        <div class="form-element">
+          <div class="form-botonera">
+            <button type="submit" value="crear" class="form-boton">
+              Crear producto
+            </button>
+
+            <button type="reset" value="LIMPIAR" class="form-boton">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
     </main>
+    <%- include('../partials/footer.ejs')%>
   </body>
 </html>
