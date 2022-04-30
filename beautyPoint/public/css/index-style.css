@@ -1,0 +1,42 @@
+.home-main {
+  margin-top: 180px;
+  margin-bottom: 20px;
+}
+.home-products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  font-style: italic;
+}
+.home-products img{
+  max-width: 60%;
+}
+.home-contenedor {
+  text-align: center;
+  max-width: 50%;
+  padding: 15px;
+  min-height: 50%;
+}
+.home-contenedor div {
+  padding: 5px;
+}
+.home-price {
+  font-weight: 800;
+  color: rgb(26, 214, 26);
+}
+.home-banners {
+  text-align: center;
+}
+
+.home-banners img {
+  width: 100%;
+  max-height: 400px;
+
+  object-position: top;
+}
+
+.home-banners a {
+  text-decoration: none;
+}

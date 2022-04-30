@@ -13,17 +13,18 @@
         <h2><a href="#">Cuidados Básicos</a></h2>
       </div>
 
-      <section class="home-section">
+      <section>
         <article class="home-products">
           <% for (let i = 0; i < listOfCuidadosBasicos.length; i++) { %>
+            <div class="home-contenedor">
           <a href="/products/productDetail/<%= listOfCuidadosBasicos[i].id%>"
             ><img
               src= <%= listOfCuidadosBasicos[i].image%>
-              alt=""
-              class="home-images"
+              alt=<%= listOfCuidadosBasicos[i].name%>
           /></a>
           <div><%= listOfCuidadosBasicos[i].name%></div>
-          <div>$ <%= listOfCuidadosBasicos[i].price%></div>
+          <div class="home-price">$ <%= listOfCuidadosBasicos[i].price%></div>
+          </div>
           <% } %>
         </article>
       </section>
@@ -34,17 +35,18 @@
         />
         <h2><a href="#">Maquillajes</a></h2>
       </div>
-      <section class="home-section">
+      <section>
         <article class="home-products">
           <% for (let i = 0; i < listOfMaquillaje.length; i++) { %>
+            <div class="home-contenedor">
           <a href="/products/productDetail/<%= listOfMaquillaje[i].id%>"
             ><img
               src= <%= listOfMaquillaje[i].image%>
-              alt=""
-              class="home-images"
+              alt=<%= listOfMaquillaje[i].name%>
           /></a>
           <div><%= listOfMaquillaje[i].name%></div>
-          <div>$ <%= listOfMaquillaje[i].price%></div>
+          <div class="home-price">$ <%= listOfMaquillaje[i].price%></div>
+          </div>
           <% } %>
         </article>
       </section>
