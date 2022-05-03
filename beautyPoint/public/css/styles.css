@@ -2,11 +2,6 @@
   box-sizing: border-box;
 }
 
-.logo-footer {
-  width: 20vw;
-  margin: 0;
-}
-
 input:invalid:required {
   border: solid 2px red;
 }
@@ -152,7 +147,6 @@ input:valid:required {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  
 }
 .respmenu nav {
   display: none;
@@ -256,6 +250,10 @@ input:valid:required {
 }
 
 /*Footer*/
+.logo-footer {
+  width: 20vw;
+  margin: 0;
+}
 .footer-father {
   position: relative;
 }
@@ -270,22 +268,53 @@ input:valid:required {
   font-size: 10px;
   display: flex;
   align-items: top;
-  justify-content: space-around;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .footer-elements {
   text-align: center;
   padding: 10px;
+  width: 33%;
+}
+.footer-copyright {
+  flex-grow: 1;
+  padding: 10px;
 }
 
 .footer-redes-sociales {
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-left: 10vw;
 }
-
-@media (min-width: 481px) {
-}
+ .footer-redes-sociales a {
+    color: white;
+    text-decoration: none;
+  }
 
 @media (min-width: 768px) {
+  /*Footer*/
+  .footer {
+    font-size: 20px;
+  }
+  .footer-redes-sociales {
+    
+    flex-grow: 1;
+    
+  }
+  .footer-redes-sociales a {
+    font-size: large;
+  }
+  .footer-us {
+    width: 45%;
+  }
+.footer-logo {
+  width: 20%;
+}
 }
 
 @media (min-width: 1280px) {

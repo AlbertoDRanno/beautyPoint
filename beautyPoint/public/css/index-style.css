@@ -39,4 +39,21 @@
 
 .home-banners a {
   text-decoration: none;
+   color: black;
+}
+
+@media (min-width: 768px) {
+.home-products img{
+  max-width: 45%;
+  
+}
+.home-contenedor {
+  max-width: 25%;
+  min-height: 25%;
+}  
+.home-banners h2 {
+  font-size: xx-large;
+  color: black;
+}
+
 }
