@@ -291,10 +291,10 @@ input:valid:required {
   justify-content: space-between;
   padding-left: 10vw;
 }
- .footer-redes-sociales a {
-    color: white;
-    text-decoration: none;
-  }
+.footer-redes-sociales a {
+  color: white;
+  text-decoration: none;
+}
 
 @media (min-width: 768px) {
   /*Footer*/
@@ -302,9 +302,7 @@ input:valid:required {
     font-size: 20px;
   }
   .footer-redes-sociales {
-    
     flex-grow: 1;
-    
   }
   .footer-redes-sociales a {
     font-size: large;
@@ -312,9 +310,9 @@ input:valid:required {
   .footer-us {
     width: 45%;
   }
-.footer-logo {
-  width: 20%;
-}
+  .footer-logo {
+    width: 20%;
+  }
 }
 
 @media (min-width: 1280px) {

@@ -46,8 +46,8 @@ const mainController = {
     let maquillaje = [
       {
         id: 5,
-        name: "Iluminador Tonalizador",
-        image: "/images/products/IluminadorTonalizador.png",
+        name: "Cellular Diamond",
+        image: "/images/products/cellularDiamond.png",
         price: 2330,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -56,8 +56,8 @@ const mainController = {
       },
       {
         id: 6,
-        name: "Paleta Cromatica",
-        image: "/images/products/paletaCromatica.png",
+        name: "Filler Diamond",
+        image: "/images/products/fillerDiamond.png",
         price: 3500,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -66,8 +66,8 @@ const mainController = {
       },
       {
         id: 7,
-        name: "Prebase Prime Luminous",
-        image: "/images/products/PrebasePrimeLuminous.png",
+        name: "Retinol Plus",
+        image: "/images/products/retinolPlus.png",
         price: 3100,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
@@ -76,8 +76,8 @@ const mainController = {
       },
       {
         id: 8,
-        name: "Neblina Fijadora",
-        image: "/images/products/neblinaFijadora.png",
+        name: "Crema con Oxígeno",
+        image: "/images/products/cremaOxigeno.png",
         price: 2900,
         description:
           "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
