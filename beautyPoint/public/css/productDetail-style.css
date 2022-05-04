@@ -1,9 +1,12 @@
 .product-main {
-  margin-top: 200px;
-  margin-bottom: 10px;
+  margin-top: 180px;
+  margin-bottom: 0;
+  background-image: url("../images/bg3.png");
+  padding-top: 10px;
 }
 .product-main h3 {
   text-align: center;
+  font-size: x-large;
 }
 .product-article {
   width: 50%;
@@ -15,10 +18,9 @@
 }
 .product-article {
   font-style: italic;
+  font-size: large;
 }
-.product-article img {
-  max-width: 150px;
-}
+
 .product-section {
   display: flex;
 }
