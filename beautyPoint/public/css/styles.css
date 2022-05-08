@@ -1,7 +1,12 @@
 * {
   box-sizing: border-box;
 }
-
+.not-found {
+  background-image: url("../images/404-error.jpg");
+  background-size: cover;
+  background-repeat:no-repeat;
+ 
+}
 input:invalid:required {
   border: solid 2px red;
 }

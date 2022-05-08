@@ -16,6 +16,11 @@ app.use("/users", rutasUsers);
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
+//error 404
+app.use((req,res) => {
+  res.status(404).render("not-found")
+}) 
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("Servidor corriendo en el puerto 3000");
 });
