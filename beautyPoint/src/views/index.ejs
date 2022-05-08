@@ -17,7 +17,7 @@
         <article class="home-products">
           <% for (let i = 0; i < listOfCuidadosBasicos.length; i++) { %>
             <div class="home-contenedor">
-          <a href="/products/productDetail/<%= listOfCuidadosBasicos[i].id%>"
+          <a href="/products/detail/<%= listOfCuidadosBasicos[i].id%>"
             ><img
               src= <%= listOfCuidadosBasicos[i].image%>
               alt=<%= listOfCuidadosBasicos[i].name%>
@@ -39,7 +39,7 @@
         <article class="home-products">
           <% for (let i = 0; i < listOfMaquillaje.length; i++) { %>
             <div class="home-contenedor">
-          <a href="/products/productDetail/<%= listOfMaquillaje[i].id%>"
+          <a href="/products/detail/<%= listOfMaquillaje[i].id%>"
             ><img
               src= <%= listOfMaquillaje[i].image%>
               alt=<%= listOfMaquillaje[i].name%>

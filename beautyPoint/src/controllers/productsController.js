@@ -43,8 +43,6 @@ const productsController = {
         package: "70 ml",
         class: "Cuidados Básicos",
       },
-      //  ];
-      // let maquillaje = [
       {
         id: 5,
         name: "Cellular Diamond",
@@ -91,21 +89,21 @@ const productsController = {
     );
     console.log(filteredProduct);
 
-    res.status(200).render("./products/productDetail", {
+    res.status(200).render("./products/detail", {
       theFiltered: filteredProduct[0],
     });
   },
-  productCart: (req, res) => {
-    console.log("entrando al render productCart");
-    res.status(200).render("./products/productCart");
+  cart: (req, res) => {
+    console.log("entrando al render cart");
+    res.status(200).render("./products/cart");
   },
   create: (req, res) => {
     console.log("entrando al render de product create");
-    res.status(200).render("./products/productCreate");
+    res.status(200).render("./products/create");
   },
   edit: (req, res) => {
     console.log("entrando al render de product edit");
-    res.status(200).render("./products/productEdit");
+    res.status(200).render("./products/edit");
   },
   // productList: (req, res) => {
   //   console.log('entrando al render de productList');

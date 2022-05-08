@@ -11,6 +11,7 @@ app.use("/", rutasMain);
 app.use("/products", rutasProducts);
 app.use("/users", rutasUsers);
 
+
 //template engine
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views')

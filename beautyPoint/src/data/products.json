@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Sérum demaquillante de ojos y labios",
+    "image": "/images/products/serumDemaq.png",
+    "price": 2330,
+    "description": "Sérum siliconado que retira facilmente maquillaje waterproof. Es totalmente oil free.",
+    "package": "70 ml",
+    "category": "Cuidados Básicos"
+  },
+  {
+    "id": 2,
+    "name": "Crema de limpieza",
+    "image": "/images/products/cremaLimpieza.png",
+    "price": 1500,
+    " description": "Elimina los restos de maquillaje e impurezas sin necesidad de un excesivo masaje.",
+    "package": "160 g",
+    "category": "Cuidados Básicos"
+  },
+  {
+    "id": 3,
+    "name": "Dermopulido gel",
+    "image": "/images/products/dermopulidoGel.png",
+    "price": 1568,
+    "description": "Micropartículas pulidoras para exfoliar todo tipo de pieles",
+    "package": "70 ml",
+    "category": "Cuidados Básicos"
+  },
+  {
+    "id": 4,
+    "name": "Leche de limpieza",
+    "image": "/images/products/lecheLimpieza.png",
+    "price": 1196,
+    "description": "Libera la piel de impurezas, por su alto poder de arrastre",
+    "package": "100 ml",
+    "category": "Cuidados Básicos"
+  },
+  {
+    "id": 5,
+    "name": "Cellular Diamond",
+    "image": "/images/products/cellularDiamond.png",
+    "price": 3549,
+    "description": "Piel visiblemente más joven y radiante.",
+    "package": "60 ml",
+    "category": "Cuidados Básicos"
+  },
+  {
+    "id": 6,
+    "name": "Filler Diamond",
+    "image": "/images/products/fillerDiamond.png",
+    "price": 2410,
+    "description": "Relleno cosmético de ácido hialurónico de tercera generación, equivalente al inyectable.",
+    "package": "30 ml",
+    "category": "Cuidados Básicos"
+  },
+  {
+    "id": 7,
+    "name": "Retinol Plus",
+    "image": "/images/products/retinolPlus.png",
+    "price": 3904,
+    "description": "Ayuda a frenar y retardar el envejecimiento de la piel. Evita la flaccidez.",
+    "package": "70 g",
+    "category": "Cuidados Básicos"
+  },
+  {
+    "id": 8,
+    "name": "Crema con Oxígeno",
+    "image": "/images/products/cremaOxigeno.png",
+    "price": 2616,
+    "description": "Mejora el metabolismo celular y favorece la formación de colágenpo",
+    "package": "70 g",
+    "category": "Cuidados Básicos"
+  }
+]

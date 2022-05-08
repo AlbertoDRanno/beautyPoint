@@ -367,7 +367,7 @@ input:valid:required {
 @media (min-width: 1280px) {
 }
 
-/*productCart main*/
+/*cart main*/
 .carrito-HeaderCompras {
   color: rgba(0, 0, 0, 0.55);
 }
@@ -388,7 +388,7 @@ input:valid:required {
 .carrito-ProductImage {
   width: 40%;
 }
-.productCart-table {
+.cart-table {
   width: 100%;
 }
 
@@ -406,7 +406,7 @@ input:valid:required {
   }
 }
 
-.productCart-table td h5 {
+.cart-table td h5 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -420,4 +420,4 @@ input:valid:required {
 .carrito-Column input {
   max-width: 3em;
 }
-/*/productCart main*/
+/*/cart main*/
