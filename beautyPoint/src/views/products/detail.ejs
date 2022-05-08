@@ -8,7 +8,7 @@
     <section class="product-section">
       <article class="product-article">
         <img src=<%= theFiltered.image %> alt=<%= theFiltered.name %> />
-        <h3>$ <%= theFiltered.price %></h3>
+        <h3>$ <%= toThousand(theFiltered.price) %></h3>
       </article>
       <article class="product-article">
         <!--Descripción-->

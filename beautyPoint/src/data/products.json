@@ -42,7 +42,7 @@
     "price": 3549,
     "description": "Piel visiblemente más joven y radiante.",
     "package": "60 ml",
-    "category": "Cuidados Básicos"
+    "category": "Antiage"
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@
     "price": 2410,
     "description": "Relleno cosmético de ácido hialurónico de tercera generación, equivalente al inyectable.",
     "package": "30 ml",
-    "category": "Cuidados Básicos"
+    "category": "Antiage"
   },
   {
     "id": 7,
@@ -60,7 +60,7 @@
     "price": 3904,
     "description": "Ayuda a frenar y retardar el envejecimiento de la piel. Evita la flaccidez.",
     "package": "70 g",
-    "category": "Cuidados Básicos"
+    "category": "Antiage"
   },
   {
     "id": 8,
@@ -69,6 +69,6 @@
     "price": 2616,
     "description": "Mejora el metabolismo celular y favorece la formación de colágenpo",
     "package": "70 g",
-    "category": "Cuidados Básicos"
+    "category": "Antiage"
   }
 ]

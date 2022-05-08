@@ -15,15 +15,15 @@
 
       <section>
         <article class="home-products">
-          <% for (let i = 0; i < listOfCuidadosBasicos.length; i++) { %>
+          <% for (let i = 0; i < cuidadosBasicos.length; i++) { %>
             <div class="home-contenedor">
-          <a href="/products/detail/<%= listOfCuidadosBasicos[i].id%>"
+          <a href="/products/detail/<%= cuidadosBasicos[i].id%>"
             ><img
-              src= <%= listOfCuidadosBasicos[i].image%>
-              alt=<%= listOfCuidadosBasicos[i].name%>
+              src= <%= cuidadosBasicos[i].image%>
+              alt=<%= cuidadosBasicos[i].name%>
           /></a>
-          <div><%= listOfCuidadosBasicos[i].name%></div>
-          <div class="home-price">$ <%= listOfCuidadosBasicos[i].price%></div>
+          <div><%= cuidadosBasicos[i].name%></div>
+          <div class="home-price">$ <%= toThousand(cuidadosBasicos[i].price) %></div>
           </div>
           <% } %>
         </article>
@@ -33,19 +33,19 @@
           src="https://www.skinforlife.net/wp-content/uploads/2020/11/spapineda-banner-one-iii.jpg"
           alt="rostro de mujer"
         />
-        <h2><a href="#">Línea Antiage</a></h2> <!--ex MAQUILLAJES-->
+        <h2><a href="#">Línea Antiage</a></h2> 
       </div>
       <section>
         <article class="home-products">
-          <% for (let i = 0; i < listOfMaquillaje.length; i++) { %>
+          <% for (let i = 0; i < antiage.length; i++) { %>
             <div class="home-contenedor">
-          <a href="/products/detail/<%= listOfMaquillaje[i].id%>"
+          <a href="/products/detail/<%= antiage[i].id%>"
             ><img
-              src= <%= listOfMaquillaje[i].image%>
-              alt=<%= listOfMaquillaje[i].name%>
+              src= <%= antiage[i].image%>
+              alt=<%= antiage[i].name%>
           /></a>
-          <div><%= listOfMaquillaje[i].name%></div>
-          <div class="home-price">$ <%= listOfMaquillaje[i].price%></div>
+          <div><%= antiage[i].name%></div>
+          <div class="home-price">$ <%= toThousand(antiage[i].price) %></div>
           </div>
           <% } %>
         </article>
