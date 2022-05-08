@@ -12,6 +12,7 @@ const mainController = {
     let cuidadosBasicos = products.filter((product) => product.category == "Cuidados Básicos");
     let antiage = products.filter((product) => product.category == "Antiage");
     res.status(200).render("index", { cuidadosBasicos, antiage, toThousand });
-  }}
+  },
+}
       
 module.exports = mainController;

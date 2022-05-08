@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head.ejs')%>
+<%- include('../partials/head.ejs', {title: theFiltered.name})%>
+
 <body>
   <%- include('../partials/header.ejs')%>
   <main class="product-main">
