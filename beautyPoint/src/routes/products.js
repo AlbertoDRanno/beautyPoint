@@ -1,15 +1,29 @@
-const express = require("express");
+// ************ Require's ************
+const express = require('express');
 const router = express.Router();
 
-const productsController = require("../controllers/productsController.js");
+// ************ Controller Require ************
+const productsController = require('../controllers/productsController.js');
 
-router.get("/detail/:id", productsController.detail);
+// ************ WRITE YOUR CODE FROM HERE ************
+// ************ methods() ************
 
-router.get("/cart", productsController.cart);
+/*** GET ONE PRODUCT ***/
+router.get('/detail/:id', productsController.detail);
 
-router.get("/create", productsController.create);
-//router.post("/create", productsController.store);
+/*** CREATE ONE PRODUCT ***/
+router.get('/create', productsController.create);
+router.post('/create', productsController.store);
 
-router.get("/edit/:id", productsController.edit);
+/*** EDIT ONE PRODUCT ***/
+router.get('/edit/:id', productsController.edit);
+router.put('/edit/:id', productsController.update);
 
+/*** DELETE ONE PRODUCT***/
+router.delete('/delete/:id', productsController.destroy);
+
+/*** GET PRODUCTS FROM CART ***/
+router.get('/cart', productsController.cart);
+
+// ************ exports - (no tocar) ************
 module.exports = router;
