@@ -30,7 +30,7 @@ const productsController = {
     console.log('Entró al método store del productController.js');
 
     // Calculo id del producto a crear (será 1 más que el último en base de datos)
-    // Obs: Version tempo hasta implementar base de datos.
+    // Obs: Version temporal hasta implementar base de datos. Solo crea el proximo.
     let idCalculadoDelProductoNuevo = products.reduce(
       (idNuevo, producto) =>
         (idNuevo =
@@ -49,10 +49,14 @@ const productsController = {
       category: req.body.product_category,
     };
 
+    console.log(productoNuevo);
     products.push(productoNuevo);
-    // res.send(productoNuevo);
+
+    res.send(productoNuevo);
     console.log('Producto creado OK!');
-    res.redirect('/');
+    console.log('Productos actualizados: ');
+    console.log(products);
+    // res.redirect('/');
   },
 
   // Edit - Render del formulario de edición de un producto
