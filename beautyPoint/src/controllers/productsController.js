@@ -23,7 +23,7 @@ const productsController = {
   // Create - Render del formulario de creación de un producto
   create: (req, res) => {
     console.log('entrando al método create del productController.js');
-    res.status(200).render('./products/create');
+    res.status(200).render('./products/create', { products: products });
   },
   // Create -  Método que persiste la data del formulario de creación de un producto
   store: (req, res) => {
@@ -34,6 +34,7 @@ const productsController = {
   edit: (req, res) => {
     console.log('Entró al método edit del productController.js');
     res.status(200).render('./products/edit');
+    // res.status(200).render('./products/edit', { products: productoEditable[0] });
   },
   // Update - Method to update
   update: (req, res) => {
