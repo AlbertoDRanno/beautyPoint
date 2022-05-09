@@ -1,26 +1,39 @@
-const express = require("express");
+// ************ Require's ************
+const express = require('express');
+const path = require('path');
+const methodOverride = require('method-override');
+
+// ************ express() - (no tocar) ************
 const app = express();
-const path = require("path");
-app.use(express.static("public"));
 
-//routes imports
-const rutasMain = require("./routes/main.js");
-const rutasProducts = require("./routes/products.js");
-const rutasUsers = require("./routes/users.js");
+// ************ Middlewares - (no tocar) ************
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false })); // Para capturar datos desde un formulario como un obj literal
+app.use(express.json());
+app.use(methodOverride('_method')); // Pasar poder pisar el method="POST" en el formulario por PUT y DELETE
 
-app.use("/", rutasMain);
-app.use("/products", rutasProducts);
-app.use("/users", rutasUsers);
+// ************ Template Engine - (no tocar) ************
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views'); // Define la ubicación de la carpeta de las Vistas
 
-//template engine
-app.set("view engine", "ejs");
-app.set("views", __dirname + "/views");
+// ************ WRITE YOUR CODE FROM HERE ************
+// ************ Route System require and use() ************
+//ruteos
+const rutasMain = require('./routes/main.js');
+const rutasProducts = require('./routes/products.js');
+const rutasUsers = require('./routes/users.js');
 
-//error 404
-app.use((req,res) => {
-  res.status(404).render("not-found")
-}) 
+app.use('/', rutasMain);
+app.use('/products', rutasProducts);
+app.use('/users', rutasUsers);
 
+// ************ DON'T TOUCH FROM HERE ************
+// ************ catch 404 and forward to error handler ************
+app.use((req, res) => {
+  res.status(404).render('not-found'); //error 404
+});
+
+// Server escuchando
 app.listen(process.env.PORT || 3000, () => {
-  console.log("Servidor corriendo en el puerto 3000");
+  console.log('Servidor corriendo en el puerto 3000');
 });
