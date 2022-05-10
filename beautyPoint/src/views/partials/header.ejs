@@ -51,7 +51,14 @@
         <a href="/products/cart"><i class="fa-solid fa-cart-shopping"></i></a>
       </div>
       <div class="header-elements header-search">
-        <div class="input-father">
+	<form action="/search" method="GET" class="input-father">
+					<input type="text" name="keywords" placeholder="Encontrá eso que querés" class="input">
+					<button type="submit" class="search-form_button"><i class="fas fa-search input-icon"></i></button>
+				</form>
+
+
+
+        <!--<div class="input-father">
           <input
             type="search"
             placeholder="Encontrá eso que querés"
@@ -69,7 +76,7 @@
               clip-rule="evenodd"
             />
           </svg>
-        </div>
+        </div>-->
       </div>
     </section>
   </div>
