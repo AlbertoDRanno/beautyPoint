@@ -7,7 +7,7 @@
       <form
         action="/products/edit/<%= products.id %>?_method=PUT"
         method="POST"
-        class="form-register"
+        class="form-register" enctype="multipart/form-data"
       >
         <h1>Editando producto: <%= products.id %></h1>
 
@@ -65,6 +65,11 @@
             required
           />
           <span class="feedback"></span>
+        </div>
+
+        <div class="form-element">
+          <label for="image">Imagen Producto:</label>
+          <input type="file" id="image" name="image" /> <!--required o enviar mensaje-->
         </div>
 
         <div class="form-element">

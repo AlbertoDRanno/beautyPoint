@@ -25,5 +25,14 @@
   "category": "categoria-3",
   "image": "/images/products/prueba.jpg",
   "id": 3
+ },
+ {
+  "name": "Serum Ramnosa",
+  "price": "1600",
+  "description": "Te deja la piel re piola",
+  "package": "70 ml",
+  "category": "categoria-1",
+  "id": "4",
+  "image": "/images/products/product-1652303206003.png"
  }
 ]

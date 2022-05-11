@@ -4,7 +4,12 @@
   <body>
     <%- include('../partials/header.ejs')%>
     <main class="register-main">
-      <form action="/products/create/" method="POST" class="form-register">
+      <form
+        action="/products/create/"
+        method="POST"
+        class="form-register"
+        enctype="multipart/form-data"
+      >
         <h1>Crear producto</h1>
         <div class="form-element">
           <label for="product_name">Nombre de producto:</label>
@@ -64,6 +69,11 @@
             required
           />
           <span class="feedback"></span>
+        </div>
+
+        <div class="form-element">
+          <label for="image">Imagen Producto:</label>
+          <input type="file" id="image" name="image" /> <!--required o enviar mensaje-->
         </div>
 
         <div class="form-element">
