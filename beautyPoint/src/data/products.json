@@ -5,7 +5,7 @@
   "description": "Esta es la desc del producto de prueba EDITADO otra vez 2",
   "package": "300 g",
   "category": "categoria-2",
-  "id": "1",
+  "id": 1,
   "image": "/images/products/prueba.jpg"
  },
  {
@@ -32,7 +32,25 @@
   "description": "Te deja la piel re piola",
   "package": "70 ml",
   "category": "categoria-1",
-  "id": "4",
+  "id": 4,
   "image": "/images/products/product-1652303206003.png"
+ },
+ {
+  "name": "Este es un producto",
+  "price": "200",
+  "description": "esta es la descripcion del rpod nuevo 19hs\r\nAHORA EDITOOO\r\nLO EDITO DE NUEVOOO\r\n\r\nEDITO CON EL CAMBIO",
+  "package": "20l",
+  "category": "categoria-3",
+  "id": 5,
+  "image": "/images/products/product-1652306715594.jpg"
+ },
+ {
+  "name": "Zapatilla barata editada",
+  "price": "1000",
+  "description": "alta llanta amigo editada",
+  "package": "21g",
+  "category": "categoria-2",
+  "id": 6,
+  "image": "/images/products/product-1652308804194.jpg"
  }
 ]
