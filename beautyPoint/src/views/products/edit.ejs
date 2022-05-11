@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('../partials/head.ejs', {title: "Editando "     })%>
+  <%- include('../partials/head.ejs', {title: "Editando producto:" + products.id })%>
   <body>
     <%- include('../partials/header.ejs')%>
     <main class="register-main">
-      <form action="/registro" method="POST" class="form-register">
-        <h1>Editar producto</h1>
+      <form
+        action="/products/edit/<%= products.id %>?_method=PUT"
+        method="POST"
+        class="form-register"
+      >
+        <h1>Editando producto: <%= products.id %></h1>
 
         <div class="form-element">
-          <label for="idProducto">ID:</label>
-          <input id="idProducto" type="number" size="1" required />
-        </div>
-
-        <div class="form-element">
-          <label for="first_name">Nombre de producto:</label>
+          <label for="product_name">Nombre de producto:</label>
           <input
             type="text"
-            id="product_title"
-            name="product_title"
-            placeholder="Ingresá el título del producto"
+            id="product_name"
+            name="name"
+            value="<%= products.name %>"
             required
           />
           <span class="feedback"></span>
         </div>
 
-        <div class="form-element">
-          <label for="image">Imagen de producto:</label>
-          <input type="file" name="image" id="image" accept=".jpg, .png" />
+        <!-- <div class="form-element">
+          <label for="product_image">Imagen de producto:</label>
+          <input type="file" name="image" id="product_image" accept=".jpg, .png" />
           <span class="feedback"></span>
-        </div>
+        </div> -->
 
         <div class="form-element">
           <label for="product_price">Precio:</label>
           <input
             type="number"
-            name="product_price"
+            name="price"
             id="product_price"
-            placeholder="Ingresá el precio del producto"
+            value="<%= products.price %>"
             required
           />
           <span class="feedback"></span>
@@ -45,13 +44,14 @@
         <div class="form-element">
           <label for="product_description">Descripción del producto:</label>
           <textarea
-            name="product_description"
+            name="description"
             id="product_description"
             cols="30"
             rows="10"
-            placeholder="Ingresá la presentación del producto"
             required
-          ></textarea>
+          >
+<%= products.description %></textarea
+          >
           <span class="feedback"></span>
         </div>
 
@@ -60,8 +60,8 @@
           <input
             type="text"
             id="product_package"
-            name="product_package"
-            placeholder="Ingresá el package del producto"
+            name="package"
+            value="<%= products.package %>"
             required
           />
           <span class="feedback"></span>
@@ -70,10 +70,11 @@
         <div class="form-element">
           <label for="product_category">Categoría:</label>
 
-          <select name="product_category" id="product_category" required>
-            <option value="categoria-1">Cuidados básicos</option>
-            <option value="categoria-2">Maquillaje</option>
-            <option value="categoria-3">Cremas</option>
+          <select name="category" id="product_category" required>
+            <option value="categoria-1" <%= (products.category == "categoria-1") ? "selected" : "";%>>Cuidados básicos</option>
+            <option value="categoria-2" <%= (products.category == "categoria-2") ? "selected" : "";%>>Antiage</option>
+            <option value="categoria-3" <%= (products.category == "categoria-3") ? "selected" : "";%>>Solares</option>
+            <option value="categoria-4" <%= (products.category == "categoria-4") ? "selected" : "";%>>Maquillaje</option>
           </select>
 
           <span class="feedback"></span>
@@ -81,12 +82,8 @@
 
         <div class="form-element">
           <div class="form-botonera">
-            <button type="submit" value="crear" class="form-boton">
+            <button type="submit" value="updetear" class="form-boton">
               Guardar cambios
-            </button>
-
-            <button type="reset" value="LIMPIAR" class="form-boton">
-              Cancelar
             </button>
           </div>
         </div>
