@@ -61,5 +61,14 @@
   "category": "categoria-1",
   "image": "/images/products/product-1652366135977.png",
   "id": 7
+ },
+ {
+  "name": "LaGranCrema",
+  "price": "123",
+  "description": "holaaaaaaaaaaaaaaaa",
+  "package": "123",
+  "category": "categoria-1",
+  "image": "/images/products/product-1652393125072.png",
+  "id": 8
  }
 ]

@@ -30,7 +30,10 @@ const productsController = {
       let productId = productsModel.save(req.body);
       res.redirect("/products/detail/" + productId);
     } else {
-      res.render("./products/create");
+      res.render("./products/create", {
+        errors: errors.array(), // envío los errores en un array, sino se crean conflictos
+        old: req.body, // envío los datos anteriores para que no tengan que volver a cargar todo
+      });
     }
   },
 

@@ -9,19 +9,19 @@ const { body } = require("express-validator"); // Mediante la destructuración d
 const validateCreateForm = [
   body("name")
     .notEmpty()
-    .withMessage("Debes completar este campo")
+    .withMessage("Debes completar el campo Nombre del producto")
     .bail() // si no se corta la validación el usuario recibirá todos los errores juntos
     .isLength({ min: 5, max: 50 })
     .withMessage("El nombre debe tener entre 5 y 50 caracteres"),
   body("price")
     .notEmpty()
-    .withMessage("Debes completar este campo")
+    .withMessage("Debes completar el campo Precio")
     .bail()
     .isInt() //Nro. entero
     .withMessage("El precio debe ser un valor entero"),
-  body("description").notEmpty().withMessage("Debes completar este campo"),
-  body("package").notEmpty().withMessage("Debes completar este campo"),
-  body("category").notEmpty().withMessage("Debes completar este campo"),
+  body("description").notEmpty().withMessage("Debes completar el campo Descripción"),
+  body("package").notEmpty().withMessage("Debes completar el campo Package"),
+  //body("category").notEmpty().withMessage("Debes completar este campo"),
   //body("image").notEmpty().withMessage("Debes completar este campo"),
 ];
 
@@ -49,7 +49,7 @@ const productsController = require("../controllers/productsController.js");
 router.get("/detail/:id", productsController.detail);
 
 /*** CREATE ONE PRODUCT ***/
-router.get("/create", productsController.create);
+router.get("/create",validateCreateForm, productsController.create);
 router.post(
   "/create",
   uploadFile.single("image"),

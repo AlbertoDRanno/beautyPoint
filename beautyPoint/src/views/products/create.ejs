@@ -11,6 +11,12 @@
         enctype="multipart/form-data"
       >
         <h1>Crear producto</h1>
+        <% if (locals.errors) { %>
+        <!--OBS! Artilugio: errors = locals.errors -->
+        <% errors.forEach(error => { %>
+        <p class="feedback"><%= error.msg %></p>
+        <% })} %>
+
         <div class="form-element">
           <label for="product_name">Nombre de producto:</label>
           <input
@@ -18,7 +24,7 @@
             id="product_name"
             name="name"
             placeholder="Ingresá el título del producto"
-         
+            
           />
           <span class="feedback"></span>
         </div>
@@ -30,7 +36,6 @@
             name="price"
             id="product_price"
             placeholder="Ingresá el precio del producto"
-        
           />
           <span class="feedback"></span>
         </div>
@@ -43,7 +48,6 @@
             cols="30"
             rows="10"
             placeholder="Ingresá la presentación del producto"
-   
           ></textarea>
           <span class="feedback"></span>
         </div>
@@ -55,20 +59,19 @@
             id="product_package"
             name="package"
             placeholder="Ingresá el package del producto"
-  
           />
           <span class="feedback"></span>
         </div>
 
         <div class="form-element">
           <label for="image">Imagen Producto:</label>
-          <input type="file" id="image" name="image" accept=".jpg, .png"  />
+          <input type="file" id="image" name="image" accept=".jpg, .png" />
         </div>
 
         <div class="form-element">
           <label for="product_category">Categoría:</label>
 
-          <select name="category" id="product_category" >
+          <select name="category" id="product_category">
             <option value="categoria-1">Cuidados básicos</option>
             <option value="categoria-2">Antiage</option>
             <option value="categoria-3">Solares</option>
