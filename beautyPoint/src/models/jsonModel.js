@@ -74,10 +74,11 @@ class JsonModel {
       return currentItem;
     });
 
-    updatedItems = updatedItems.map((currentItem) => {
-      currentItem.id = parseInt(currentItem.id);
-      return currentItem;
-    });
+  //   updatedItems = updatedItems.map((currentItem) => {
+  //   currentItem.id = parseInt(currentItem.id);
+  //   return currentItem;
+  //  }
+  //  );
 
     this.writeJsonFile(updatedItems);
 

@@ -21,16 +21,11 @@ const productsController = {
   // Create -  Método que persiste la data del formulario de creación de un producto
   store: (req, res) => {
     console.log("Entró al método store del productController.js");
-    let imageFile = req.file;
-    if (imageFile !== undefined) {
       console.log(req.file);
       req.body.image = "/images/products/" + req.file.filename;
-      //req.body.image = "/images/products/prueba.jpg";
       let productId = productsModel.save(req.body);
       res.redirect("/products/detail/" + productId);
-    } else {
-      return res.send("No enviaste ninguna imagen para tu producto");
-    }},
+    },
 
   // Edit - Render del formulario de edición de un producto
   edit: (req, res) => {
@@ -47,12 +42,10 @@ const productsController = {
   // Update - Method to update
   update: (req, res) => {
     console.log("Entró al método update del productController.js");
-
-    let productoAeditar = productsModel.buscar(req.params.id);
     req.body.id = req.params.id;
-    req.body.image = productoAeditar.image;
-    // console.log(req.body);
-    productsModel.update(req.body);
+    req.body.image = "/images/products/" + req.file.filename;
+      // console.log(req.body);
+      productsModel.update(req.body);
     res.redirect("/");
   },
   cart: (req, res) => {
