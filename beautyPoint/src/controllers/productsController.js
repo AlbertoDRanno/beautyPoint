@@ -1,5 +1,6 @@
 const JsonModel = require("../models/jsonModel");
 const productsModel = new JsonModel("products");
+const { validationResult } = require("express-validator");
 
 const productsController = {
   // Detail - Detalle de un producto a partir de su id
@@ -20,19 +21,24 @@ const productsController = {
   },
   // Create -  Método que persiste la data del formulario de creación de un producto
   store: (req, res) => {
-    console.log("Entró al método store del productController.js");
+    let errors = validationResult(req);
+    //res.send(errors);
+    if (errors.isEmpty()) {
+      console.log("Entró al método store del productController.js");
       console.log(req.file);
       req.body.image = "/images/products/" + req.file.filename;
       let productId = productsModel.save(req.body);
       res.redirect("/products/detail/" + productId);
-    },
+    } else {
+      res.render("./products/create");
+    }
+  },
 
   // Edit - Render del formulario de edición de un producto
   edit: (req, res) => {
     console.log("Entró al método edit del productController.js");
     let product = productsModel.buscar(req.params.id);
     if (product) {
-      
       res.render("./products/edit", { products: product });
       console.log(product);
     } else {
@@ -44,8 +50,8 @@ const productsController = {
     console.log("Entró al método update del productController.js");
     req.body.id = req.params.id;
     req.body.image = "/images/products/" + req.file.filename;
-      // console.log(req.body);
-      productsModel.update(req.body);
+    // console.log(req.body);
+    productsModel.update(req.body);
     res.redirect("/");
   },
   cart: (req, res) => {

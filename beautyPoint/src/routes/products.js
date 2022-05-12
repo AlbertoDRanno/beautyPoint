@@ -9,18 +9,20 @@ const { body } = require("express-validator"); // Mediante la destructuración d
 const validateCreateForm = [
   body("name")
     .notEmpty()
+    .withMessage("Debes completar este campo")
     .bail() // si no se corta la validación el usuario recibirá todos los errores juntos
     .isLength({ min: 5, max: 50 })
     .withMessage("El nombre debe tener entre 5 y 50 caracteres"),
   body("price")
     .notEmpty()
+    .withMessage("Debes completar este campo")
     .bail()
     .isInt() //Nro. entero
     .withMessage("El precio debe ser un valor entero"),
   body("description").notEmpty().withMessage("Debes completar este campo"),
   body("package").notEmpty().withMessage("Debes completar este campo"),
   body("category").notEmpty().withMessage("Debes completar este campo"),
-  body("image").notEmpty().withMessage("Debes completar este campo"),
+  //body("image").notEmpty().withMessage("Debes completar este campo"),
 ];
 
 // ************ Multer - Middleware a nivel ruta ************
