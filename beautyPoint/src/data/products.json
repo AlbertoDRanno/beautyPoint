@@ -52,5 +52,14 @@
   "category": "categoria-2",
   "id": 6,
   "image": "/images/products/product-1652308804194.jpg"
+ },
+ {
+  "name": "123",
+  "price": "234",
+  "description": "sfda",
+  "package": "12",
+  "category": "categoria-1",
+  "image": "/images/products/product-1652366135977.png",
+  "id": 7
  }
 ]
