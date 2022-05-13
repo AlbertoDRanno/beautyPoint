@@ -1,0 +1,26 @@
+[
+ {
+  "first_name": "hola",
+  "last_name": "corneta lindo",
+  "dni": "32090",
+  "email": "asdads@mbvn",
+  "phone": "123123154",
+  "genere": "Masculino",
+  "password": "123123123",
+  "repeatPassword": "",
+  "image": "/images/avatars/undefined",
+  "id": 1
+ },
+ {
+  "first_name": "hola",
+  "last_name": "corneta lindo",
+  "dni": "32090",
+  "email": "asdads@mbvn",
+  "phone": "123123154",
+  "genere": "Masculino",
+  "password": "123123123",
+  "repeatPassword": "originalname",
+  "image": "/images/avatars/1652479109018_img.png",
+  "id": 2
+ }
+]

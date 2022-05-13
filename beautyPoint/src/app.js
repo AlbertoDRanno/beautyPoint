@@ -9,7 +9,7 @@ const app = express();
 
 // ************ Middlewares a Nivel Aplicación (sin importar la ruta a la que ingresen) ************
 app.use(express.static("public")); // Configuración de carpeta de archivos estáticos
-app.use(express.urlencoded({ extended: false })); // Para capturar datos desde un formulario como un obj literal
+app.use(express.urlencoded({ extended: false })); // Para capturar datos desde un formulario como un obj literal (req.body)
 app.use(express.json()); // Para que en el body puedan viajar datos en formato JSON
 app.use(methodOverride("_method")); // Para poder pisar el method="POST" en el formulario por PUT y DELETE
 app.use(logMiddleware); // Para llevar un registro en text de las URL visitadas - Reemplaza a los console.log???

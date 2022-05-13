@@ -4,7 +4,7 @@
   <body>
 <%- include('../partials/header.ejs')%>
     <main class="register-main">
-      <form action="/registro" method="POST" class="form-register">
+      <form action="/users/register" method="POST" class="form-register" enctype="multipart/form-data">
         <h1>Crear cuenta</h1>
 
         <div class="form-element">
@@ -14,7 +14,7 @@
             id="first_name"
             name="first_name"
             placeholder="Ingresá tu nombre"
-            required
+          
           />
           <span class="feedback"></span>
         </div>
@@ -26,7 +26,7 @@
             id="last_name"
             name="last_name"
             placeholder="Ingresá tu apellido"
-            required
+        
           />
           <span class="feedback"></span>
         </div>
@@ -38,7 +38,7 @@
             name="dni"
             id="dni"
             placeholder="Ingresá tu DNI (sin puntos. Ej. 12345678)"
-            required
+        
           />
           <span class="feedback"></span>
         </div>
@@ -50,7 +50,7 @@
             id="email"
             name="email"
             placeholder="Ingresá tu correo"
-            required
+        
           /><span class="feedback"></span>
         </div>
 
@@ -61,7 +61,7 @@
             name="phone"
             id="phone"
             placeholder="Ingresá tu celular (sólo números)"
-            required
+      
           /><span class="feedback"></span>
         </div>
 
@@ -105,7 +105,7 @@
             name="password"
             id="password"
             placeholder="Elegí una contraseña"
-            required
+            
           /><span class="feedback"></span>
         </div>
         <div class="form-element">
@@ -115,7 +115,7 @@
             name="repeatPassword"
             id="repeatPassword"
             placeholder="Repetí tu contraseña"
-            required
+           
           /><span class="feedback"></span>
         </div>
 
