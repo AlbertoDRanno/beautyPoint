@@ -24,7 +24,7 @@
             id="product_name"
             name="name"
             placeholder="Ingresá el título del producto"
-            
+            value="<%= locals.old && old.name ? old.name : "" %> "
           />
           <span class="feedback"></span>
         </div>
@@ -36,6 +36,7 @@
             name="price"
             id="product_price"
             placeholder="Ingresá el precio del producto"
+            value="<%= locals.old && old.price %> "
           />
           <span class="feedback"></span>
         </div>
@@ -48,6 +49,7 @@
             cols="30"
             rows="10"
             placeholder="Ingresá la presentación del producto"
+            value="<%= locals.old && old.description? old.description : "" %> "
           ></textarea>
           <span class="feedback"></span>
         </div>
@@ -72,10 +74,10 @@
           <label for="product_category">Categoría:</label>
 
           <select name="category" id="product_category">
-            <option value="categoria-1">Cuidados básicos</option>
-            <option value="categoria-2">Antiage</option>
-            <option value="categoria-3">Solares</option>
-            <option value="categoria-4">Maquillaje</option>
+            <option value="categoria-1" <%= locals.old && old.category === "categoria-1" ? "selected" : " " ; %> >Cuidados básicos</option>
+            <option value="categoria-2" <%= locals.old && old.category === "categoria-2" ? "selected" : " " ; %>>Antiage</option>
+            <option value="categoria-3" <%= locals.old && old.category === "categoria-3" ? "selected" : " " ; %>>Solares</option>
+            <option value="categoria-4" <%= locals.old && old.category === "categoria-4" ? "selected" : " " ; %>>Maquillaje</option>
           </select>
 
           <span class="feedback"></span>

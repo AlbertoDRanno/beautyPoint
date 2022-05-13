@@ -23,7 +23,7 @@ const productsController = {
   store: (req, res) => {
     let errors = validationResult(req);
     //res.send(errors);
-    if (errors.isEmpty()) {
+    if (errors.isEmpty()) { //hay errores en la validación??
       console.log("Entró al método store del productController.js");
       console.log(req.file);
       req.body.image = "/images/products/" + req.file.filename;
@@ -32,7 +32,7 @@ const productsController = {
     } else {
       res.render("./products/create", {
         errors: errors.array(), // envío los errores en un array, sino se crean conflictos
-        old: req.body, // envío los datos anteriores para que no tengan que volver a cargar todo
+        old: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
       });
     }
   },

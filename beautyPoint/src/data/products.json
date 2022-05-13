@@ -70,5 +70,14 @@
   "category": "categoria-1",
   "image": "/images/products/product-1652393125072.png",
   "id": 8
+ },
+ {
+  "name": "sdfsdf",
+  "price": "123",
+  "description": "sdgsg",
+  "package": "12",
+  "category": "categoria-1",
+  "image": "/images/products/product-1652414494110.png",
+  "id": 9
  }
 ]
