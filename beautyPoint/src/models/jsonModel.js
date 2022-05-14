@@ -56,6 +56,12 @@ class JsonModel {
   save(item) {
     let items = this.readJsonFile();
     item.id = this.generatePk();
+
+    // Se hace esto para setear como enteros campos id, price y discount. Sino quedan como strings en BD.
+    item.id = parseInt(item.id);
+    item.price = parseInt(item.price);
+    item.discount = parseInt(item.discount);
+
     items.push(item);
 
     this.writeJsonFile(items);
@@ -74,11 +80,14 @@ class JsonModel {
       return currentItem;
     });
 
-  //   updatedItems = updatedItems.map((currentItem) => {
-  //   currentItem.id = parseInt(currentItem.id);
-  //   return currentItem;
-  //  }
-  //  );
+    // Se hace esto para setear como enteros campos id, price y discount. Sino quedan como strings en BD.
+    updatedItems = updatedItems.map((currentItem) => {
+      currentItem.id = parseInt(currentItem.id);
+      currentItem.price = parseInt(currentItem.price);
+      currentItem.discount = parseInt(currentItem.discount);
+
+      return currentItem;
+    });
 
     this.writeJsonFile(updatedItems);
 
