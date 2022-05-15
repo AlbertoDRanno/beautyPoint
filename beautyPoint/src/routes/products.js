@@ -4,7 +4,7 @@ const router = express.Router();
 const path = require("path");
 const logDBMiddleware = require("../middlewares/logDBMiddleware");
 const { body } = require("express-validator"); // Mediante la destructuración de objetos, no traemos toda la librería, sino solamente la función body
-// BODY O CHECK???
+// BODY O CHECK son similares
 //Validaciones previas al controlador - Middleware a nivel ruta
 const validateCreateForm = [
   body("name")

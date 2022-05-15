@@ -457,5 +457,15 @@
   "category": "categoria-1",
   "id": "51",
   "image": "/images/products/product-1652538772537.png"
+ },
+ {
+  "name": "Nuevo Producto de prueba 2",
+  "price": 2345,
+  "description": "Otro ree producto para vos",
+  "package": "234",
+  "category": "categoria-4",
+  "image": "/images/products/product-1652569758005.png",
+  "id": 52,
+  "discount": null
  }
 ]

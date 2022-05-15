@@ -1,6 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const { body } = require("express-validator"); // body() === check()
+
+const validations = [
+  body("first_name").notEmpty().withMessage("Tienes que escribir tu nombre"),
+  body("last_name").notEmpty().withMessage("Tienes que escribir tu apellido"),
+  body("dni").notEmpty().withMessage("Tienes que escribir tu DNI"),
+  body("email")
+    .notEmpty()
+    .withMessage("Tienes que escribir tu correo electrónico"),
+  body("phone")
+    .notEmpty()
+    .withMessage("Tienes que escribir tu número de celular"),
+  //body("genere").notEmpty(),
+  body("birthDate")
+    .notEmpty()
+    .withMessage("Tienes que completar tu fecha de nacimiento"),
+  //body("image").notEmpty(),
+  body("password").notEmpty().withMessage("Tienes que escribir una contraseña"),
+  body("repeatPassword")
+    .notEmpty()
+    .withMessage("Tienes que escribir repetir la contraseña")
+];
 
 // ************ Multer - Middleware a nivel ruta ************
 const multer = require("multer");
@@ -26,6 +48,7 @@ router.get("/register", usersController.register);
 router.post(
   "/register",
   uploadFile.single("image"),
+  validations,
   usersController.processRegister
 );
 

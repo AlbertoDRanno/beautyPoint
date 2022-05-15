@@ -11,7 +11,7 @@
         enctype="multipart/form-data"
       >
         <h1>Crear producto</h1>
-        <% if (locals.errors) { %>
+        <% if (locals.errors) { %> <!--locals es un obj. lit que tienen todas las vistas, y es undefined, a menos que mande algo-->
         <!--OBS! Artilugio: errors = locals.errors -->
         <% errors.forEach(error => { %>
         <p class="feedback"><%= error.msg %></p>
