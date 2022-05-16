@@ -19,6 +19,8 @@
             id="first_name"
             name="first_name"
             placeholder="Ingresá tu nombre"
+            class="<%= (locals.errors && errors.first_name) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.first_name : null %>"
           />
           <% if (locals.errors && errors.first_name) { %>
           <span class="feedback"> <%= errors.first_name.msg %> </span>
@@ -32,6 +34,8 @@
             id="last_name"
             name="last_name"
             placeholder="Ingresá tu apellido"
+            class="<%= (locals.errors && errors.last_name) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.last_name : null %>"
           />
           <% if (locals.errors && errors.last_name) { %>
           <span class="feedback"> <%= errors.last_name.msg %> </span>
@@ -45,6 +49,8 @@
             name="dni"
             id="dni"
             placeholder="Ingresá tu DNI (sin puntos. Ej. 12345678)"
+            class="<%= (locals.errors && errors.dni) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.dni : null %>"
           />
           <% if (locals.errors && errors.dni) { %>
           <span class="feedback"> <%= errors.dni.msg %> </span>
@@ -58,6 +64,8 @@
             id="email"
             name="email"
             placeholder="Ingresá tu correo"
+            class="<%= (locals.errors && errors.email) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.email : null %>"
           />
           <% if (locals.errors && errors.email) { %>
           <span class="feedback"> <%= errors.email.msg %> </span>
@@ -67,16 +75,41 @@
         <div class="form-element">
           <label for="phone">Celular:</label>
           <input
-            type="number"
+            type="text"
             name="phone"
             id="phone"
             placeholder="Ingresá tu celular (sólo números)"
+            class="<%= (locals.errors && errors.phone) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.phone : null %>"
           />
           <% if (locals.errors && errors.phone) { %>
           <span class="feedback"> <%= errors.phone.msg %> </span>
           <% } %>
         </div>
 
+        <div class="form-element">
+          <div>
+            <label for="genero">Género:</label>
+          </div>
+          <select
+            name="genero"
+          >
+            <option value="">Seleccioná tu Género:</option>
+
+            <% let generos = ["Femenino", "Masculino", "Otro"] %>
+             <% for (const unGenero of generos) { %>
+            <option
+             value="<%= unGenero %>"
+             <%= (locals.oldData && (oldData.genero === unGenero)) ? "selected" : null %> 
+             ><%= unGenero %></option>
+            <% } %>
+          </select>
+          <% if (locals.errors && errors.genero) { %>
+          <span class="feedback"> <%= errors.genero.msg %> </span>
+          <% } %>
+        </div>
+
+        <!--
         <div class="form-element">
           <div>
             <label>Género:</label>
@@ -98,6 +131,7 @@
             <label for="Otro" id="label-radiobutton">Otro</label>
           </div>
         </div>
+        -->
 
         <div class="form-element">
           <label for="birthDate">Fecha de nacimiento:</label>
@@ -107,7 +141,9 @@
         <div class="form-element">
           <label for="image">Foto de perfil:</label>
           <input type="file" name="image" id="image" accept=".jpg, .png" />
-          <span class="feedback"></span>
+          <% if (locals.errors && errors.image) { %>
+          <span class="feedback"> <%= errors.image.msg %> </span>
+          <% } %>
         </div>
 
         <div class="form-element">
@@ -117,7 +153,11 @@
             name="password"
             id="password"
             placeholder="Elegí una contraseña"
-          /><span class="feedback"></span>
+            class="<%= (locals.errors && errors.password) ? 'is-invalid' : null %>"
+          />
+          <% if (locals.errors && errors.password) { %>
+          <span class="feedback"> <%= errors.password.msg %> </span>
+          <% } %>
         </div>
         <div class="form-element">
           <label for="repeatPassword">Repetir contraseña:</label>
@@ -126,7 +166,11 @@
             name="repeatPassword"
             id="repeatPassword"
             placeholder="Repetí tu contraseña"
-          /><span class="feedback"></span>
+            class="<%= (locals.errors && errors.repeatPassword) ? 'is-invalid' : null %>"
+          />
+          <% if (locals.errors && errors.repeatPassword) { %>
+          <span class="feedback"> <%= errors.repeatPassword.msg %> </span>
+          <% } %>
         </div>
 
         <div class="form-element">

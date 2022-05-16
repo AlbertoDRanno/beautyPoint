@@ -15,10 +15,7 @@ const validateCreateForm = [
     .withMessage("El nombre debe tener entre 5 y 50 caracteres"),
   body("price")
     .notEmpty()
-    .withMessage("Debes completar el campo Precio")
-    .bail()
-    .isInt() //Nro. entero
-    .withMessage("El precio debe ser un valor entero"),
+    .withMessage("Debes completar el campo Precio"),
   body("description").notEmpty().withMessage("Debes completar el campo Descripción"),
   body("package").notEmpty().withMessage("Debes completar el campo Package"),
   //body("category").notEmpty().withMessage("Debes completar este campo"),
