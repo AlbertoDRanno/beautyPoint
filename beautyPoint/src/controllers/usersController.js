@@ -14,7 +14,7 @@ const usersController = {
     //res.send(resultValidation.mapped());
     //res.send(resultValidation.errors.length > 0)
 
-    if (resultValidation.errors.length < 1) {
+    if (resultValidation.isEmpty()) {
       console.log("Entró al método processRegister del usersController.js");
       console.log(req.file);
       req.body.image = "/images/avatars/" + req.file.filename;

@@ -24,7 +24,7 @@ const validations = [
     .bail()
     .isNumeric()
     .withMessage("Completar solamente con números"),
-  body("genere").notEmpty(),
+  body("genero").notEmpty(),
   body("image").custom((value, { req }) => {
     let file = req.file;
     let acceptedExtensions = [".jpg", ".png", ".gif"];
