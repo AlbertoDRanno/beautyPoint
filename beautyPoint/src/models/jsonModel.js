@@ -1,16 +1,16 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 class JsonModel {
   constructor(name) {
     this.name = name;
-    this.dataDir = '../data/';
-    this.dataPath = path.resolve(__dirname, this.dataDir, this.name + '.json');
+    this.dataDir = "../data/";
+    this.dataPath = path.resolve(__dirname, this.dataDir, this.name + ".json");
   }
 
   /** Lee el archivo JSON */
   readJsonFile() {
-    let fileContents = fs.readFileSync(this.dataPath, 'utf-8');
+    let fileContents = fs.readFileSync(this.dataPath, "utf-8");
     if (fileContents) {
       return JSON.parse(fileContents);
     }
@@ -19,11 +19,11 @@ class JsonModel {
 
   /** Escribe el archivo JSON */
   writeJsonFile(data) {
-    let jsonData = JSON.stringify(data, null, ' ');
+    let jsonData = JSON.stringify(data, null, " ");
     fs.writeFileSync(this.dataPath, jsonData);
   }
 
-  /** Genera el próximo valor para la pk */
+  /** Genera el próximo valor para la pk (primary key) */
   generatePk() {
     let items = this.readJsonFile();
     let lastItem = items.pop();
@@ -42,20 +42,23 @@ class JsonModel {
 
   /** Trae un registro por su valor de pk */
   buscar(id) {
-    let items = this.readJsonFile();
+    let items = this.readJsonFile(); // array con todos los items (usuarios o productos)
     return items.find((item) => item.id == id);
+    //va a iterar todos los items, y va a retornar a aquel cuyo id sea al que tomé por parámetro
+    //si no lo encuentra, devuelve undefined
   }
 
   /** Filtra registros por su clave y valor */
   filtrarPorCampoValor(campo, valor) {
     let items = this.readJsonFile();
-    return items.filter((item) => item[campo] == valor);
+    return items.filter((item) => item[campo] == valor); 
+    //a diferencia del anterior, acá puedo traer varios (en el anterior solo el primero que encuentre)
   }
 
   /** Guarda el registro en la colección */
   save(item) {
     let items = this.readJsonFile();
-    item.id = this.generatePk();
+    item.id = this.generatePk(); // el id NO va a venir del formulario, lo tiene que crear este modelo
 
     // Se hace esto para setear como enteros campos id, price y discount. Sino quedan como strings en BD.
     item.id = parseInt(item.id);
