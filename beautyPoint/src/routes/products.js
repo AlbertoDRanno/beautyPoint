@@ -1,43 +1,16 @@
 // ************ Require's ************
 const express = require("express");
 const router = express.Router();
-const path = require("path");
+
 const logDBMiddleware = require("../middlewares/logDBMiddleware");
-const { body } = require("express-validator"); // Mediante la destructuración de objetos, no traemos toda la librería, sino solamente la función body
-// BODY O CHECK son similares
-//Validaciones previas al controlador - Middleware a nivel ruta
-const validateCreateForm = [
-  body("name")
-    .notEmpty()
-    .withMessage("Debes completar el campo Nombre del producto")
-    .bail() // si no se corta la validación el usuario recibirá todos los errores juntos
-    .isLength({ min: 5, max: 50 })
-    .withMessage("El nombre debe tener entre 5 y 50 caracteres"),
-  body("price")
-    .notEmpty()
-    .withMessage("Debes completar el campo Precio"),
-  body("description").notEmpty().withMessage("Debes completar el campo Descripción"),
-  body("package").notEmpty().withMessage("Debes completar el campo Package"),
-  //body("category").notEmpty().withMessage("Debes completar este campo"),
-  //body("image").notEmpty().withMessage("Debes completar este campo"),
-];
 
-// ************ Multer - Middleware a nivel ruta ************
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    let folder = path.join(__dirname, "../../public/images/products");
-    cb(null, folder);
-  },
-  filename: function (req, file, cb) {
-    console.log(file);
-    let imageName = "product-" + Date.now() + path.extname(file.originalname);
-    cb(null, imageName);
-  },
-});
-const uploadFile = multer({ storage });
+//validaciones
+const validateCreateForm = require("../middlewares/validationsCreate")
 
-// ************ Controller Require ************
+//carga de archivos
+const uploadFile = require("../middlewares/multerProducts")
+
+//controlador
 const productsController = require("../controllers/productsController.js");
 
 // ************ methods() ************
@@ -65,5 +38,4 @@ router.delete("/delete/:id", productsController.destroy);
 /*** GET PRODUCTS FROM CART ***/
 router.get("/cart", productsController.cart);
 
-// ************ exports - (no tocar) ************
 module.exports = router;
