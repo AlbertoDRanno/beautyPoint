@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require("path");
 const { body } = require("express-validator"); // body() === check()
 
-const validations = [
+const registerValidations = [
   body("first_name").notEmpty().withMessage("Tienes que escribir tu nombre"),
   body("last_name").notEmpty().withMessage("Tienes que escribir tu apellido"),
   body("dni")
@@ -25,6 +25,7 @@ const validations = [
     .isNumeric()
     .withMessage("Completar solamente con números"),
   body("genero").notEmpty(),
+  body("birthDate").notEmpty().withMessage("Debes seleccionar tu fecha de nacimiento"),
   body("image").custom((value, { req }) => {
     let file = req.file;
     let acceptedExtensions = [".jpg", ".png", ".gif"];
@@ -55,11 +56,19 @@ const validations = [
     .custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error("Las contraseñas no coinciden");
-      } 
+      }
       return true;
     }),
 ];
 
+const loginValidations = [
+  body("email")
+    .isEmail()
+    .withMessage("Debes escribir un formato de correo válido"),
+  body("password")
+    .isLength({ min: 5, max: 15 })
+    .withMessage("La contraseña debe tener entre 5 y 15 caracteres"),
+];
 // ************ Multer - Middleware a nivel ruta ************
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -84,12 +93,15 @@ router.get("/register", usersController.register);
 router.post(
   "/register",
   uploadFile.single("image"),
-  validations,
+  registerValidations,
   usersController.processRegister
 );
 
 // Formulario de login
 router.get("/login", usersController.login);
+
+// Registro de login
+router.post("/login", loginValidations, usersController.processLogin);
 
 // Perfil de usuario
 router.get("/profile/:userdId", usersController.profile);

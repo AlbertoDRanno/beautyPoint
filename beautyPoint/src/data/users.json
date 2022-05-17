@@ -381,5 +381,20 @@
   "id": 30,
   "price": null,
   "discount": null
+ },
+ {
+  "first_name": "Alberto",
+  "last_name": "Ranno",
+  "dni": "32090754333333333333333333333333333333333",
+  "email": "albertoranno@gmail.com",
+  "phone": "12312414",
+  "genero": "Masculino",
+  "birthDate": "2022-05-11",
+  "password": "nacimiento",
+  "repeatPassword": "nacimiento",
+  "image": "/images/avatars/1652809892203_img.png",
+  "id": 31,
+  "price": null,
+  "discount": null
  }
 ]

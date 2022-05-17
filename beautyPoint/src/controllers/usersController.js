@@ -1,6 +1,8 @@
 const JsonModel = require("../models/jsonModel");
 const usersModel = new JsonModel("users");
 const { validationResult } = require("express-validator");
+const req = require("express/lib/request");
+const res = require("express/lib/response");
 
 const usersController = {
   register: (req, res) => {
@@ -30,6 +32,17 @@ const usersController = {
   },
   login: (req, res) => {
     return res.status(200).render("users/login");
+  },
+  processLogin: (req, res) => {
+    const resultValidation = validationResult(req);
+    if (resultValidation.isEmpty()) {
+      
+    } else {
+      res.render("users/login", {
+        errors: resultValidation.mapped(),
+        oldData: req.body,
+      });
+    }
   },
   profile: (req, res) => {
     return res.status(200).render("users/profile");
