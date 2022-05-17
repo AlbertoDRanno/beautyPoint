@@ -367,5 +367,19 @@
   "id": 29,
   "price": null,
   "discount": null
+ },
+ {
+  "first_name": "Alberto",
+  "last_name": "Ranno",
+  "dni": "32059576",
+  "email": "albertoranno@gmail.com",
+  "phone": "1509876655",
+  "genero": "Femenino",
+  "password": "nacimiento",
+  "repeatPassword": "nacimiento",
+  "image": "/images/avatars/1652742492154_img.png",
+  "id": 30,
+  "price": null,
+  "discount": null
  }
 ]

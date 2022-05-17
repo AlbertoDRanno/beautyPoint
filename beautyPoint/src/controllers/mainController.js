@@ -20,11 +20,21 @@ const mainController = {
     let antiage = products.filter(
       (product) => product.category == "categoria-2"
     );
-let solares = products.filter((product) => product.category == "categoria-3");
-let maquillajes = products.filter(
-  (product) => product.category == "categoria-4"
-);
-    res.status(200).render("index", { cuidadosBasicos, antiage, solares, maquillajes, toThousand });
+    let solares = products.filter(
+      (product) => product.category == "categoria-3"
+    );
+    let maquillajes = products.filter(
+      (product) => product.category == "categoria-4"
+    );
+    res
+      .status(200)
+      .render("index", {
+        cuidadosBasicos,
+        antiage,
+        solares,
+        maquillajes,
+        toThousand,
+      });
   },
   search: (req, res) => {
     let loQueBuscoElUsuario = req.query.keywords.toLowerCase();
@@ -42,5 +52,5 @@ let maquillajes = products.filter(
     });
   },
 };
-      
+
 module.exports = mainController;

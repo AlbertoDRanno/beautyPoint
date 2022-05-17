@@ -13,7 +13,6 @@ const usersController = {
     //res.send(resultValidation);
     //res.send(resultValidation.mapped());
     //res.send(resultValidation.errors.length > 0)
-
     if (resultValidation.isEmpty()) {
       console.log("Entró al método processRegister del usersController.js");
       console.log(req.file);

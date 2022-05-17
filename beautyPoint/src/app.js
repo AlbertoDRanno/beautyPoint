@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const methodOverride = require("method-override");
 const logMiddleware = require("./middlewares/logMiddleware");
+const session = require("express-session");
 
 // ************ express() ************
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: false })); // Para capturar datos desde u
 app.use(express.json()); // Para que en el body puedan viajar datos en formato JSON
 app.use(methodOverride("_method")); // Para poder pisar el method="POST" en el formulario por PUT y DELETE
 app.use(logMiddleware); // Para llevar un registro en text de las URL visitadas - Reemplaza a los console.log???
+app.use(session({secret: "secreto"})) // Para evitar que otras páginas web utilicen la información que guardamos en la PC del usuario
 
 //************ Mantenimiento ************
 let enMantenimiento = false; // Pasar a true para poner en modo "Página en Mantenimiento"
