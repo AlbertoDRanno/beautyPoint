@@ -26,10 +26,10 @@ class JsonModel {
   /** Genera el próximo valor para la pk (primary key) */
   generatePk() {
     let items = this.readJsonFile();
-    let lastItem = items.pop();
+    let lastItem = items.pop(); // extraigo al último usuario
 
     if (lastItem) {
-      return ++lastItem.id;
+      return ++lastItem.id; // es lo mismo a hacer: "lastItem.id + 1"
     }
 
     return 1;
@@ -51,7 +51,7 @@ class JsonModel {
   /** Filtra registros por su clave y valor */
   filtrarPorCampoValor(campo, valor) {
     let items = this.readJsonFile();
-    return items.filter((item) => item[campo] == valor); 
+    return items.filter((item) => item[campo] == valor);
     //a diferencia del anterior, acá puedo traer varios (en el anterior solo el primero que encuentre)
   }
 
@@ -102,8 +102,8 @@ class JsonModel {
     let items = this.readJsonFile();
 
     let filteredItems = items.filter((currentItem) => currentItem.id != id);
-
-    this.writeJsonFile(filteredItems);
+    //recorre el array de usuarios de a 1, y devuelve todos aquellos cuyos id NO coinciden con el indicado
+    this.writeJsonFile(filteredItems); // y sobreescribe ese nuevo array en el json
   }
 }
 

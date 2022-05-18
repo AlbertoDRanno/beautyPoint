@@ -3,7 +3,7 @@ const usersModel = new JsonModel("users");
 const { validationResult } = require("express-validator");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
-const bcrypt = require("bcryptjs/dist/bcrypt");
+const bcryptjs = require("bcryptjs");
 
 const usersController = {
   register: (req, res) => {
@@ -16,10 +16,22 @@ const usersController = {
     //res.send(resultValidation);
     //res.send(resultValidation.mapped());
     //res.send(resultValidation.errors.length > 0)
-    if (resultValidation.isEmpty()) {
+    //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
+    let userInDB = usersModel.filtrarPorCampoValor("email", req.body.email);
+    console.log(userInDB);
+    if (userInDB.length >= 1) {
+       res.render("users/register", {
+        errors: { email: { msg: "Mensaje" } },
+        oldData: req.body,
+      });
+    } else if (resultValidation.isEmpty()) {
       console.log("Entró al método processRegister del usersController.js");
       console.log(req.file);
-      req.body.image = "/images/avatars/" + req.file.filename;
+
+      //Ahora piso las propiedades password e image:
+      (req.body.password = bcryptjs.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
+        (req.body.image = "/images/avatars/" + req.file.filename);
+
       let userId = usersModel.save(req.body);
       res.redirect("/users/profile/" + userId);
     } else {
@@ -61,7 +73,7 @@ const usersController = {
         });
       }
       req.session.usuarioLogueado = usuarioALoguearse; // si cumple con todas las condiciones, lo guardo en session, es decir, finalmente será un usuarioLogueado
-      console.log(req.session.usuarioLogueado)
+      console.log(req.session.usuarioLogueado);
       res.send("success");
     } else {
       res.render("users/login", {

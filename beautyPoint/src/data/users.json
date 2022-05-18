@@ -652,14 +652,14 @@
  {
   "first_name": "Alberto Daniel",
   "last_name": "Ranno",
-  "dni": "66227146",
+  "dni": "37247227",
   "email": "albertoranno@hotmail.com",
   "phone": "01564293691",
   "genero": "Masculino",
-  "birthDate": "1985-11-27",
-  "password": "nacimiento",
+  "birthDate": "1884-11-05",
+  "password": "$2a$10$BGe5TWIXwPjH.5ELWHSEJe04n34LvrsLDYDG/rxj3yHTi//d5QMoi",
   "repeatPassword": "nacimiento",
-  "image": "/images/avatars/1652822297278_img.png",
+  "image": "/images/avatars/1652852786109_img.png",
   "id": 51,
   "price": null,
   "discount": null

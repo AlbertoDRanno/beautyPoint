@@ -5,3 +5,82 @@ router.get("/pruebaSession", function (req, res) {
   req.session.numeroVisitas++;
   res.send("Session tiene el nro: " + req.session.numeroVisitas);
 });
+
+/*
+
+let userId = usersModel.save(req.body);
+    res.redirect("/users/profile/" + userId);
+
+
+    //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
+    let userInDB = usersModel.filtrarPorCampoValor("email", req.body.email);
+    console.log(userInDB)
+    if (userInDB) {
+      return res.render("users/register", {
+        errors: { email: { msg: "Este email ya está registrado " } },
+        oldData: req.body,
+      });
+    }
+
+
+
+ processRegister: (req, res) => {
+    //res.send({ body: req.body, file: req.file });
+    const resultValidation = validationResult(req);
+    //res.send(resultValidation);
+    //res.send(resultValidation.mapped());
+    //res.send(resultValidation.errors.length > 0)
+    if (resultValidation.isEmpty()) {
+      console.log("Entró al método processRegister del usersController.js");
+      console.log(req.file);
+
+      //Ahora piso las propiedades password e image:
+      (req.body.password = bcryptjs.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
+        (req.body.image = "/images/avatars/" + req.file.filename);
+
+      let userId = usersModel.save(req.body);
+      res.redirect("/users/profile/" + userId);
+    } else {
+      //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
+      res.render("users/register", {
+        errors: resultValidation.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
+        oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+      });
+    }
+    //return res.send("Ok, las validaciones se pasaron, no hay errores");
+  },
+
+  processRegister: (req, res) => {
+    //res.send({ body: req.body, file: req.file });
+    const resultValidation = validationResult(req);
+    //res.send(resultValidation);
+    //res.send(resultValidation.mapped());
+    //res.send(resultValidation.errors.length > 0)
+
+    //si hay errores de carga:
+    if (resultValidation.errors.length > 0) {
+      return res.render("users/register", {
+        errors: resultValidation.mapped(),
+        oldData: req.body,
+      });
+    }
+
+    //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
+    let userInDB = usersModel.filtrarPorCampoValor("email", req.body.email);
+    if (userInDB) {
+      return res.render("users/register", {
+        errors: { email: { msg: "Este email ya está registrado " } },
+        oldData: req.body,
+      });
+    }
+
+    // si se cumplen las validaciones del form, y el usuario no estaba cargado, genero la información del usuario:
+    let userToCreate = {
+      ...req.body, //Ahora piso las propiedades password e image:
+      password: bcryptjs.hashSync(req.body.password, 10), // encripto password con la librería bcryptjs
+      image: "/images/avatars/" + req.file.filename,
+    };
+
+    let userCreated = usersModel.save(userToCreate); // lo guardo en una variable que después servirá
+    return res.redirect("users/login");
+  },*/
