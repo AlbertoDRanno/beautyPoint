@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+//registro de creaciones
+const logDBMiddleware = require("../middlewares/logDBMiddleware");
+
 //validaciones
 const registerValidations = require("../middlewares/validationsRegister");
 const loginValidations = require("../middlewares/validationsLogin")
@@ -13,22 +16,22 @@ const usersController = require("../controllers/usersController.js");
 
 // ************ methods() ************
 
-// Formulario de registro
+// Envía el formulario de registro
 router.get("/register", usersController.register);
 
-// Procesar el registro
+// Procesa el registro
 router.post(
   "/register",
-  uploadFile.single("image"),
+  uploadFile.single("image"), logDBMiddleware,
   registerValidations,
   usersController.processRegister
 );
 
-// Formulario de login
+// Envía el formulario de login
 router.get("/login", usersController.login);
 
-// Procesar el login
-router.post("/login", usersController.processLogin); //, loginValidations
+// Procesa el login
+router.post("/login", usersController.processLogin, loginValidations); //, loginValidations
 
 // Perfil de usuario
 router.get("/profile/:userdId", usersController.profile);

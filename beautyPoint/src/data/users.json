@@ -693,5 +693,20 @@
   "id": 53,
   "price": null,
   "discount": null
+ },
+ {
+  "first_name": "CARLOS HORACIO",
+  "last_name": "ORSI",
+  "dni": "10829059",
+  "email": "albertoranno23@hotmail.com",
+  "phone": "01564293691",
+  "genero": "Masculino",
+  "birthDate": "1963-11-25",
+  "password": "$2a$10$rvJTZsPfdFRICN0n3Q8vx.p00AlAcd57dx58zruhtF2WjDhBvESl.",
+  "repeatPassword": "asdfg",
+  "image": "/images/avatars/1652981376402_img.png",
+  "id": 54,
+  "price": null,
+  "discount": null
  }
 ]

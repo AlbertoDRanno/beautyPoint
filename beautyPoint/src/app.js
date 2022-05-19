@@ -1,7 +1,7 @@
 // ************ Require's ************
 const express = require("express");
 //const path = require("path");
-const methodOverride = require("method-override");
+const methodOverride = require("method-override"); // Para poder pisar el method="POST" en el formulario por PUT y DELETE
 const logMiddleware = require("./middlewares/logMiddleware");
 const session = require("express-session");
 
@@ -9,14 +9,16 @@ const session = require("express-session");
 const app = express();
 
 // ************ Middlewares a Nivel Aplicación (sin importar la ruta a la que ingresen) ************
+//la petición tiene que cumplir con estos, antes de que el servidor la derive a la ruta correspondiente
+//app.use() hace referencia a que toda la app usará ese middleware
 app.use(express.static("public")); // Configuración de carpeta de archivos estáticos
 app.use(express.urlencoded({ extended: false })); // Para capturar datos desde un formulario como un obj literal (req.body)
 app.use(express.json()); // Para que en el body puedan viajar datos en formato JSON
 app.use(methodOverride("_method")); // Para poder pisar el method="POST" en el formulario por PUT y DELETE
-app.use(logMiddleware); // Para llevar un registro en text de las URL visitadas - Reemplaza a los console.log???
+app.use(logMiddleware); // Para llevar un registro en txt de las URL visitadas - Reemplaza a los console.log
 app.use(
   session({
-    secret: "texto único aleatorio para identificar nuestro sitio web",
+    secret: "texto único aleatorio para identificar nuestro sitio web", //tendría que ir cifrada (googlear)
     resave: false,
     saveUninitialized: false, //https://github.com/expressjs/session#options
   })
@@ -47,6 +49,7 @@ app.use("/products", rutasProducts);
 app.use("/users", rutasUsers);
 
 // ************ Middleware Error 404 - Siempre último! ************
+//Se ejecuta en caso de que una ruta no exista
 app.use((req, res, next) => {
   res.status(404).render("not-found");
   next();

@@ -19,7 +19,7 @@ const usersController = {
     console.log(userInDB);
     if (userInDB.length >= 1) {
       res.render("users/register", {
-        errors: { email: { msg: "Mensaje" } },
+        errors: { email: { msg: "Un usuario ya se registró con este mail" } },
         oldData: req.body,
       });
     } else if (resultValidation.isEmpty()) {
@@ -27,7 +27,7 @@ const usersController = {
       console.log(req.file);
 
       //Ahora piso las propiedades password e image:
-      (req.body.password = bcryptjs.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
+      (req.body.password = bcrypt.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
         (req.body.image = "/images/avatars/" + req.file.filename);
 
       let userId = usersModel.save(req.body);

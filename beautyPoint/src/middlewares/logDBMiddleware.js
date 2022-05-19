@@ -1,8 +1,12 @@
 const fs = require("fs");
+const path = require("path");
 
-// Registro de creación en base de datos
+const folder = path.join(__dirname, "../logs/logueo.text");
+
+// Para llevar un registro en txt de las creaciones en la base de datos
+// Como se ejecuta solo en ciertas rutas, en ellas se requiere, y ejecuta
 function logDBMiddleware(req, res, next) {
-  fs.appendFileSync("logDB.txt", "se creó un registro al ingresar en la página" + req.url);
+  fs.appendFileSync(folder, "se creó un registro al ingresar en la página" + req.url);
   next();
 }
 
