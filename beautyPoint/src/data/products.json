@@ -210,13 +210,13 @@
   "discount": null
  },
  {
-  "name": "Crema de limpieza",
+  "name": "Crema de limpieza DD",
   "price": 1875,
   "description": "morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in",
-  "package": 1,
+  "package": "1",
   "category": "categoria-1",
-  "image": "/images/products/dermopulidoGel.png",
   "id": 23,
+  "image": "/images/products/dermopulidoGel.png",
   "discount": null
  },
  {
@@ -547,6 +547,16 @@
   "category": "categoria-3",
   "image": "/images/products/product-1652993974146.png",
   "id": 56,
+  "discount": null
+ },
+ {
+  "name": "VICTOR TABOADA",
+  "price": 23425,
+  "description": "asdasfasfasf",
+  "package": "2134",
+  "category": "categoria-3",
+  "image": "/images/products/product-1652996455120.png",
+  "id": 57,
   "discount": null
  }
 ]

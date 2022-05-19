@@ -38,6 +38,7 @@ const mainController = {
   },
   search: (req, res) => {
     let loQueBuscoElUsuario = req.query.keywords.toLowerCase();
+    let products = productsModel.readJsonFile();
     console.log(loQueBuscoElUsuario);
     let productsResults = [];
     for (let i = 0; i < products.length; i++) {

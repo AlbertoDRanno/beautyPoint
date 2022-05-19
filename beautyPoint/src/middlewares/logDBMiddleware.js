@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const folder = path.join(__dirname, "../logs/logueo.text");
+const folder = path.join(__dirname, "../logs/logDB.text");
 
 // Para llevar un registro en txt de las creaciones en la base de datos
 // Como se ejecuta solo en ciertas rutas, en ellas se requiere, y ejecuta

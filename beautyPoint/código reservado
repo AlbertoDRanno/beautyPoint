@@ -7,12 +7,14 @@ router.get("/pruebaSession", function (req, res) {
 });
 
 
+const bcryptjs = require("bcryptjs");
 
-<!--<% if (locals.errors) { %>--> <!--locals es un obj. lit que tienen todas las vistas, y es undefined, a menos que el controlador mande algo-->
-        <!--si, dentro del obj locals, existe la propiedad errors, es porque el resultado de la validacion arrojó que hubo errores -->
-        <!--<% errors.forEach(error => { %>-->
-        <!--<p class="feedback"><%= error.msg %></p>-->
-        <!--<% })} %>-->
+let hash = bcryptjs.hashSync("abc123", 10); // encripta el texto con el agregado de sal (+ encriptado), siempre "10"
+console.log(hash);
+console.log(bcryptjs.compareSync("abc123", hash));
+// compara encriptado con texto plano (el texto "hash" debe haber sido encriptado previamente)
+
+
 /*
   processLogin: (req, res) => {
     let errors = validationResult(req);
