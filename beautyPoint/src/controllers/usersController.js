@@ -1,6 +1,6 @@
 const JsonModel = require("../models/jsonModel");
 const usersModel = new JsonModel("users");
-const { validationResult } = require("express-validator");
+const { validationResult } = require("express-validator"); // trae el resultados de las validaciones que hicimos
 const bcrypt = require("bcryptjs");
 
 const usersController = {
@@ -10,7 +10,7 @@ const usersController = {
   },
   processRegister: (req, res) => {
     //res.send({ body: req.body, file: req.file });
-    const resultValidation = validationResult(req);
+    const resultValidation = validationResult(req); // esta variable es un objeto con varias propiedades, una de ellas es is Empty
     //res.send(resultValidation);
     //res.send(resultValidation.mapped());
     //res.send(resultValidation.errors.length > 0)

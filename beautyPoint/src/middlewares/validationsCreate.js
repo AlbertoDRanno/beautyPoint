@@ -3,6 +3,7 @@
 const { body } = require("express-validator"); // body() === check()
 // Mediante la destructuración de objetos, no traemos toda la librería, sino solamente la función body
 
+//Validaciones
 const validateCreateForm = [
   body("name")
     .notEmpty()
