@@ -1,6 +1,6 @@
 // ************ Require's ************
 const express = require("express");
-const path = require("path");
+//const path = require("path");
 const methodOverride = require("method-override");
 const logMiddleware = require("./middlewares/logMiddleware");
 const session = require("express-session");

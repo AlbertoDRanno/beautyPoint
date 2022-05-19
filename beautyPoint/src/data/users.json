@@ -663,5 +663,35 @@
   "id": 51,
   "price": null,
   "discount": null
+ },
+ {
+  "first_name": "Romina Gisela",
+  "last_name": "Taboada",
+  "dni": "37247227",
+  "email": "marinovelera@hotmail.com",
+  "phone": "01564293691",
+  "genero": "Femenino",
+  "birthDate": "1990-11-15",
+  "password": "$2a$10$sS/4dbQkJ6HOFoyUPAYzxenOgCOnYI1CPNXdhWCIVU3T5duvvujDq",
+  "repeatPassword": "contras",
+  "image": "/images/avatars/1652887179209_img.png",
+  "id": 52,
+  "price": null,
+  "discount": null
+ },
+ {
+  "first_name": "CARLOS HORACIO",
+  "last_name": "ORSI",
+  "dni": "66227146",
+  "email": "termoplasticosvictoria@gmail.com",
+  "phone": "01564293691",
+  "genero": "Masculino",
+  "birthDate": "1929-09-19",
+  "password": "$2a$10$5PDXCxGcEXODZkLsfykYp.sLVFzIFv5cCvrr9/3yISyh9QeIsdNzO",
+  "repeatPassword": "contrase",
+  "image": "/images/avatars/1652903178592_img.png",
+  "id": 53,
+  "price": null,
+  "discount": null
  }
 ]

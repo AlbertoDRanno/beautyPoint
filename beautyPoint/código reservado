@@ -7,6 +7,99 @@ router.get("/pruebaSession", function (req, res) {
 });
 
 /*
+  processLogin: (req, res) => {
+    let errors = validationResult(req);
+    if (errors.isEmpty()) {
+      let users = usersModel.readJsonFile(); // traigo base de usuarios
+      let usuarioALoguearse;
+      for (let i = 0; i < users.length; i++) {
+        // recorro base de usuarios
+        if (users[i].email == req.body.email) {
+          // Si el mail que viene en el body del form coincide con el de algún usuario
+          if (bcryptjs.compareSync(req.body.password, users[i].password)) {
+            // compara la contraseña que viene en el body, con la almacenada encriptada para ese usuario
+            let usuarioALoguearse = users[i]; // si se dan ambos casos, es un usuario a loguearse
+            console.log(usuarioALoguearse);
+            break;
+          }
+        }
+      }
+      if (usuarioALoguearse == undefined) {
+        // no lo encontré en la base de usuarios, devuelvo la vista login, con el array de errores (objetos con la prop. "msg")
+        res.render("users/login", {
+          errors: { email: { msg: "Credenciales Inválidas" } },
+        });
+      }
+      req.session.usuarioLogueado = usuarioALoguearse; // si cumple con todas las condiciones, lo guardo en session para tener a este usuario logueado disponible por toda la app
+      console.log(req.session.usuarioLogueado);
+      res.send("success");
+    } else {
+      res.render("users/login", {
+        errors: errors.mapped(),
+        oldData: req.body,
+      });
+    }
+  },
+
+
+
+
+processLogin: (req, res) => {
+    let userToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
+
+    if (userToLogin) {
+      //res.send(userToLogin)
+      //si existe el mail, comparo la contraseña, de texto plano que vino en el body, con la encriptada de mi base de datos
+      let isOkThePassword = bcryptjs.compareSync(req.body.password,userToLogin.password);
+      if (isOkThePassword) {
+        return res.send("ok puedes ingresar");
+      }
+    }
+
+    return res.render("users/login", {
+      errors: { email: { msg: "email no registrado" } },
+    });
+  },
+
+
+
+
+
+
+  const errors = validationResult(req);
+    if (errors.isEmpty()) {
+      let users = usersModel.readJsonFile(); // traigo base de usuarios
+      let usuarioALoguearse;
+      for (let i = 0; i < users.length; i++) {
+        // recorro base de usuarios
+        if (users[i].email == req.body.email) {
+          // Si el mail que viene en el body del form coincide con el de algún usuario
+          if (bcrypt.compareSync(req.body.password, users[i].password)) {
+            // compara la contraseña encriptada que viene en el body, con la almacenada para ese usuario
+            let usuarioALoguearse = users[i]; // si se dan ambos casos, es un usuario a loguearse
+            break;
+          }
+        }
+      }
+      if (usuarioALoguearse == undefined) {
+        // no lo encontré en la base de usuarios, devuelvo la vista login, con el array de errores (objetos con la prop. "msg")
+        return res.render("users/login", {
+          errors: [
+            {
+              msg: "Credenciales inválidas",
+            },
+          ],
+        });
+      }
+      req.session.usuarioLogueado = usuarioALoguearse; // si cumple con todas las condiciones, lo guardo en session, es decir, finalmente será un usuarioLogueado
+      console.log(req.session.usuarioLogueado);
+      res.send("success");
+    } else {
+      res.render("users/login", {
+        errors: errors.mapped(),
+        oldData: req.body,
+      });
+    }
 
 let userId = usersModel.save(req.body);
     res.redirect("/users/profile/" + userId);

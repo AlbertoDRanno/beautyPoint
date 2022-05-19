@@ -1,9 +1,7 @@
 const JsonModel = require("../models/jsonModel");
 const usersModel = new JsonModel("users");
 const { validationResult } = require("express-validator");
-const req = require("express/lib/request");
-const res = require("express/lib/response");
-const bcryptjs = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 
 const usersController = {
   register: (req, res) => {
@@ -20,7 +18,7 @@ const usersController = {
     let userInDB = usersModel.filtrarPorCampoValor("email", req.body.email);
     console.log(userInDB);
     if (userInDB.length >= 1) {
-       res.render("users/register", {
+      res.render("users/register", {
         errors: { email: { msg: "Mensaje" } },
         oldData: req.body,
       });
@@ -47,43 +45,37 @@ const usersController = {
     return res.status(200).render("users/login");
   },
   processLogin: (req, res) => {
-    const errors = validationResult(req);
-    if (errors.isEmpty()) {
-      let users = usersModel.readJsonFile(); // traigo base de usuarios
-      let usuarioALoguearse;
-      for (let i = 0; i < users.length; i++) {
-        // recorro base de usuarios
-        if (users[i].email == req.body.email) {
-          // Si el mail que viene en el body del form coincide con el de algún usuario
-          if (bcrypt.compareSync(req.body.password, users[i].password)) {
-            // compara la contraseña encriptada que viene en el body, con la almacenada para ese usuario
-            let usuarioALoguearse = users[i]; // si se dan ambos casos, es un usuario a loguearse
-            break;
-          }
-        }
+    let userToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
+
+    if (userToLogin) {
+      let isOkThePassword = bcrypt.compareSync(
+        req.body.password,
+        userToLogin.password
+      );
+      if (isOkThePassword) {
+        req.session.userLogged = userToLogin;
+
+        return res.redirect("/users/profile");
       }
-      if (usuarioALoguearse == undefined) {
-        // no lo encontré en la base de usuarios, devuelvo la vista login, con el array de errores (objetos con la prop. "msg")
-        return res.render("users/login", {
-          errors: [
-            {
-              msg: "Credenciales inválidas",
-            },
-          ],
-        });
-      }
-      req.session.usuarioLogueado = usuarioALoguearse; // si cumple con todas las condiciones, lo guardo en session, es decir, finalmente será un usuarioLogueado
-      console.log(req.session.usuarioLogueado);
-      res.send("success");
-    } else {
-      res.render("users/login", {
-        errors: errors.mapped(),
-        oldData: req.body,
+      return res.render("/users/login", {
+        errors: {
+          email: {
+            msg: "Las credenciales son inválidas",
+          },
+        },
       });
     }
+
+    return res.render("/users/login", {
+      errors: {
+        email: {
+          msg: "No se encuentra este email en nuestra base de datos",
+        },
+      },
+    });
   },
   profile: (req, res) => {
-    return res.status(200).render("users/profile");
+    res.render("users/profile");
   },
 };
 
