@@ -44,16 +44,18 @@
         </div>
 
         <div class="form-element">
-          <label for="product_description">Descripción del producto:</label>
+          <label for="description">Descripción del producto:</label>
           <textarea
             name="description"
-            id="product_description"
+            id="description"
             cols="30"
             rows="10"
             placeholder="Ingresá la presentación del producto"
-            value="<%= locals.old && old.description? old.description : "" %> "
-          ></textarea>
-          <span class="feedback"></span>
+            class="<%= (locals.errors && errors.description) ? 'is-invalid' : null %>"
+          ><%= (locals.oldData) ? oldData.description : null %></textarea>
+          <% if (locals.errors && errors.description) { %>
+          <span class="feedback"> <%= errors.description.msg %> </span>
+          <% } %>
         </div>
 
         <div class="form-element">
@@ -74,19 +76,26 @@
         <div class="form-element">
           <label for="image">Imagen Producto:</label>
           <input type="file" id="image" name="image" accept=".jpg, .png" />
+          <% if (locals.errors && errors.image) { %>
+          <span class="feedback"> <%= errors.image.msg %> </span>
+          <% } %>
         </div>
 
         <div class="form-element">
-          <label for="product_category">Categoría:</label>
+          <label for="category">Categoría:</label>
 
-          <select name="category" id="product_category">
-            <option value="categoria-1" <%= locals.old && old.category === "categoria-1" ? "selected" : " " ; %> >Cuidados básicos</option>
-            <option value="categoria-2" <%= locals.old && old.category === "categoria-2" ? "selected" : " " ; %>>Antiage</option>
-            <option value="categoria-3" <%= locals.old && old.category === "categoria-3" ? "selected" : " " ; %>>Solares</option>
-            <option value="categoria-4" <%= locals.old && old.category === "categoria-4" ? "selected" : " " ; %>>Maquillaje</option>
+          <select name="category" id="category">
+            <option value="" <%= locals.oldData && oldData.category === "" ? "selected" : " " ; %>>Seleccioná la categoría:</option>
+
+            <option value="categoria-1" <%= locals.oldData && oldData.category === "categoria-1" ? "selected" : " " ; %>>Cuidados básicos</option>
+            <option value="categoria-2" <%= locals.oldData && oldData.category === "categoria-2" ? "selected" : " " ; %>>Antiage</option>
+            <option value="categoria-3" <%= locals.oldData && oldData.category === "categoria-3" ? "selected" : " " ; %>>Solares</option>
+            <option value="categoria-4" <%= locals.oldData && oldData.category === "categoria-4" ? "selected" : " " ; %>>Maquillaje</option>
           </select>
 
-          <span class="feedback"></span>
+          <% if (locals.errors && errors.category) { %>
+          <span class="feedback"> <%= errors.category.msg %> </span>
+          <% } %>
         </div>
 
         <div class="form-element">
