@@ -708,5 +708,35 @@
   "id": 54,
   "price": null,
   "discount": null
+ },
+ {
+  "first_name": "Alberto Daniel",
+  "last_name": "Ranno",
+  "dni": "00007994",
+  "email": "albertorannyyo@hotmail.com",
+  "phone": "01564293691",
+  "genero": "Masculino",
+  "birthDate": "1985-11-25",
+  "password": "$2a$10$QQtgPQ0u7jdeQW6nONchOOgmL52HNCR2mOeoKOSz1PXf8ERk/Ur0S",
+  "repeatPassword": "admin",
+  "image": "/images/avatars/1652993323794_img.png",
+  "id": 55,
+  "price": null,
+  "discount": null
+ },
+ {
+  "first_name": "Alberto Daniel",
+  "last_name": "Ranno",
+  "dni": "00007994",
+  "email": "albertorannyssyo@hotmail.com",
+  "phone": "01564293691",
+  "genero": "Masculino",
+  "birthDate": "1985-11-25",
+  "password": "$2a$10$XSAa1A9lcMx4LBinX2REVOa2EWiTm4ppGVbyf4JTmaTbHeLYyzete",
+  "repeatPassword": "admin",
+  "image": "/images/avatars/1652993490974_img.png",
+  "id": 56,
+  "price": null,
+  "discount": null
  }
 ]

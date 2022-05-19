@@ -11,34 +11,36 @@
         enctype="multipart/form-data"
       >
         <h1>Crear producto</h1>
-        <% if (locals.errors) { %> <!--locals es un obj. lit que tienen todas las vistas, y es undefined, a menos que el controlador mande algo-->
-        <!--si, dentro del obj locals, existe la propiedad errors, es porque el resultado de la validacion arrojó que hubo errores -->
-        <% errors.forEach(error => { %>
-        <p class="feedback"><%= error.msg %></p>
-        <% })} %>
+        
 
         <div class="form-element">
-          <label for="product_name">Nombre de producto:</label>
+          <label for="name">Nombre de producto:</label>
           <input
             type="text"
-            id="product_name"
+            id="name"
             name="name"
             placeholder="Ingresá el título del producto"
-            value="<%= locals.old && old.name ? old.name : "" %> "
+            class="<%= (locals.errors && errors.name) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.name : null %>"
           />
-          <span class="feedback"></span>
+          <% if (locals.errors && errors.name) { %>
+          <span class="feedback"> <%= errors.name.msg %> </span>
+          <% } %>
         </div>
 
         <div class="form-element">
-          <label for="product_price">Precio:</label>
+          <label for="price">Precio:</label>
           <input
             type="number"
             name="price"
-            id="product_price"
+            id="price"
             placeholder="Ingresá el precio del producto"
-            value="<%= locals.old && old.price %> "
+            class="<%= (locals.errors && errors.price) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.price : null %>"
           />
-          <span class="feedback"></span>
+          <% if (locals.errors && errors.price) { %>
+          <span class="feedback"> <%= errors.price.msg %> </span>
+          <% } %>
         </div>
 
         <div class="form-element">
@@ -55,19 +57,23 @@
         </div>
 
         <div class="form-element">
-          <label for="product_package">Package:</label>
+          <label for="package">Package:</label>
           <input
             type="text"
-            id="product_package"
+            id="package"
             name="package"
             placeholder="Ingresá el package del producto"
+            class="<%= (locals.errors && errors.package) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.package : null %>"
           />
-          <span class="feedback"></span>
+          <% if (locals.errors && errors.package) { %>
+          <span class="feedback"> <%= errors.package.msg %> </span>
+          <% } %>
         </div>
 
         <div class="form-element">
           <label for="image">Imagen Producto:</label>
-          <input type="file" id="image" name="image" required accept=".jpg, .png" />
+          <input type="file" id="image" name="image" accept=".jpg, .png" />
         </div>
 
         <div class="form-element">
