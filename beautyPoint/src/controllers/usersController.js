@@ -46,16 +46,18 @@ const usersController = {
   },
   processLogin: (req, res) => {
     let userToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
-
+    console.log(userToLogin);
+    console.log(userToLogin[0].password);
+    console.log(req.body.password);
     if (userToLogin) {
       let isOkThePassword = bcrypt.compareSync(
         req.body.password,
-        userToLogin.password
+        userToLogin[0].password
       );
       if (isOkThePassword) {
-        req.session.userLogged = userToLogin;
+        req.session.userLogged = userToLogin[0];
 
-        return res.redirect("/users/profile");
+        return res.render("users/profile/" + req.session.userLogged.id);
       }
       return res.render("/users/login", {
         errors: {

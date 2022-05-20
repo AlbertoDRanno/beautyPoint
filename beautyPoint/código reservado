@@ -1,11 +1,13 @@
 router.get("/pruebaSession", function (req, res) {
   if (req.session.numeroVisitas === undefined) {
-    req.session.numeroVisitas = 0;
+    req.session.numeroVisitas = 0; //si no existe lo inica en 0
   }
   req.session.numeroVisitas++;
   res.send("Session tiene el nro: " + req.session.numeroVisitas);
 });
-
+router.get("/mostrarNumeroSession", function (req, res) {
+  res.send("Session tiene el nro: " + req.session.numeroVisitas);
+});
 
 const bcryptjs = require("bcryptjs");
 
@@ -13,6 +15,8 @@ let hash = bcryptjs.hashSync("abc123", 10); // encripta el texto con el agregado
 console.log(hash);
 console.log(bcryptjs.compareSync("abc123", hash));
 // compara encriptado con texto plano (el texto "hash" debe haber sido encriptado previamente)
+
+
 
 
 /*

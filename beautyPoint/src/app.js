@@ -18,7 +18,8 @@ app.use(methodOverride("_method")); // Para poder pisar el method="POST" en el f
 app.use(logMiddleware); // Para llevar un registro en txt de las URL visitadas - Reemplaza a los console.log
 app.use(
   session({
-    secret: "texto único aleatorio para identificar nuestro sitio web", //tendría que ir cifrada (googlear)
+    secret: "texto único aleatorio para identificar nuestro sitio web y evitar que otras páginas usen lo que guardamos en session", 
+    //tendría que ir cifrada (googlear)
     resave: false,
     saveUninitialized: false, //https://github.com/expressjs/session#options
   })

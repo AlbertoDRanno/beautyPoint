@@ -23,7 +23,7 @@ const registerValidations = [
     .bail()
     .isNumeric()
     .withMessage("Completar solamente con números"),
-  body("genero").notEmpty(),
+  body("genero").notEmpty().withMessage("Debes seleccionar un género"),
   body("birthDate")
     .notEmpty()
     .withMessage("Debes seleccionar tu fecha de nacimiento"),
