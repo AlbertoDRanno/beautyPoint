@@ -89,7 +89,9 @@ const usersController = {
   profile: (req, res) => {
     console.log("Entrando a Profile");
     console.log(req.session);
-    res.render("users/profile");
+    res.render("users/profile", {
+      user: req.session.userLogged // le comparto la info a la vista
+    });
   },
 };
 

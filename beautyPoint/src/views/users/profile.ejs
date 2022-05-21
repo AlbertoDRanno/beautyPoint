@@ -1,1 +1,14 @@
-<h1>Estas en Profile</h1>
+<!DOCTYPE html>
+<html lang="es">
+  <%- include('../partials/head.ejs', {title: "Profile"})%>
+  <body>
+    <%- include('../partials/header.ejs')%>
+    <main class="home-main">
+    <h1>Estas en Profile</h1>
+    <h2>Hola <%= user.first_name %></h2>
+    <img src="<%= user.image %>  " alt="">
+    <%= user.email %> 
+    </main>
+  </body>
+  <%- include('../partials/footer') %>
+</html>
