@@ -1,7 +1,7 @@
 const JsonModel = require("../models/jsonModel");
 const usersModel = new JsonModel("users");
 const { validationResult } = require("express-validator"); // trae el resultados de las validaciones que hicimos
-const bcrypt = require("bcryptjs");
+const bcryptjs = require("bcryptjs");
 
 const usersController = {
   register: (req, res) => {
@@ -28,6 +28,7 @@ const usersController = {
 
       //Ahora piso las propiedades password e image:
       (req.body.password = bcrypt.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
+        //el ", 10" es la cantidad de "sal", un dato añadido que hace que los hash sean mucho más difíciles de romper. Para contraseñas se suele usar 10 o 12
         (req.body.image = "/images/avatars/" + req.file.filename);
 
       let userId = usersModel.save(req.body);
@@ -42,24 +43,32 @@ const usersController = {
     //return res.send("Ok, las validaciones se pasaron, no hay errores");
   },
   login: (req, res) => {
+    console.log(req.session); //obj. lit. con la prop. cookie
     return res.status(200).render("users/login");
   },
   processLogin: (req, res) => {
-    let userToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
-    console.log(userToLogin);
-    console.log(userToLogin[0].password);
-    console.log(req.body.password);
-    if (userToLogin) {
-      let isOkThePassword = bcrypt.compareSync(
-        req.body.password,
-        userToLogin[0].password
-      );
-      if (isOkThePassword) {
-        req.session.userLogged = userToLogin[0];
+    let usersToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
+    //devuelve el objeto usuario a loguearse, dentro de un array
+    let userToLogin = usersToLogin[0];
+    //devuelve el objeto usuario en sí
 
-        return res.render("users/profile/" + req.session.userLogged.id);
+    if (userToLogin) {
+      // si el mail existe en mi base de datos, compara las contraseñas
+      let isOkThePassword = bcryptjs.compareSync(
+        req.body.password,
+        userToLogin.password
+      );
+
+      if (isOkThePassword) {
+        // si el password tmb está ok, permite el ingreso
+        //quiero guardar al usuario en session. Pero no me interesa, y es más seguro, eliminar antes el password.
+        delete userToLogin.password;
+        req.session.userLogged = userToLogin;
+        //ahora el obj session, tiene otra propiedad: userLogged (además de cookie), que guarda toda la info de userToLogin
+        return res.redirect("/users/profile/" + userToLogin.id);
       }
-      return res.render("/users/login", {
+      return res.render("users/login", {
+        // si el password no está ok
         errors: {
           email: {
             msg: "Las credenciales son inválidas",
@@ -68,7 +77,8 @@ const usersController = {
       });
     }
 
-    return res.render("/users/login", {
+    return res.render("users/login", {
+      // si el mail no está ok
       errors: {
         email: {
           msg: "No se encuentra este email en nuestra base de datos",
@@ -77,6 +87,8 @@ const usersController = {
     });
   },
   profile: (req, res) => {
+    console.log("Entrando a Profile");
+    console.log(req.session);
     res.render("users/profile");
   },
 };

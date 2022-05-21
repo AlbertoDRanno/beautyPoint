@@ -1,10 +1,51 @@
-router.get("/pruebaSession", function (req, res) {
-  if (req.session.numeroVisitas === undefined) {
-    req.session.numeroVisitas = 0; //si no existe lo inica en 0
+processLogin: (req, res) => {
+  let userToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
+  //console.log(userToLogin);
+  //console.log(userToLogin[0].password);
+  //console.log(req.body.password);
+  if (userToLogin) {
+    let isOkThePassword = bcrypt.compareSync(
+      req.body.password,
+      userToLogin[0].password
+    );
+    if (isOkThePassword) {
+      req.session.userLogged = userToLogin[0];
+
+      res.redirect("/users/profile/" + req.session.userLogged.id); //return
+
+      if (req.body.recordame != undefined) {
+        // si no está tildado es undefined
+        res.cookie("recordame", userLogged.email, { maxAge: 60000 });
+      }
+    }
+    return res.redirect("/users/login", {
+      errors: {
+        email: {
+          msg: "Las credenciales son inválidas",
+        },
+      },
+    });
   }
-  req.session.numeroVisitas++;
-  res.send("Session tiene el nro: " + req.session.numeroVisitas);
-});
+
+  return res.render("/users/login", {
+    errors: {
+      email: {
+        msg: "No se encuentra este email en nuestra base de datos",
+      },
+    },
+  });
+},
+
+
+
+
+  router.get("/pruebaSession", function (req, res) {
+    if (req.session.numeroVisitas === undefined) {
+      req.session.numeroVisitas = 0; //si no existe lo inica en 0
+    }
+    req.session.numeroVisitas++;
+    res.send("Session tiene el nro: " + req.session.numeroVisitas);
+  });
 router.get("/mostrarNumeroSession", function (req, res) {
   res.send("Session tiene el nro: " + req.session.numeroVisitas);
 });
@@ -15,9 +56,6 @@ let hash = bcryptjs.hashSync("abc123", 10); // encripta el texto con el agregado
 console.log(hash);
 console.log(bcryptjs.compareSync("abc123", hash));
 // compara encriptado con texto plano (el texto "hash" debe haber sido encriptado previamente)
-
-
-
 
 /*
   processLogin: (req, res) => {
