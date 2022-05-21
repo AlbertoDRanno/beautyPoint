@@ -7,12 +7,14 @@ const session = require("express-session"); // Obj. Lit. que vive en el req (req
 // acceder a todo lo que tenga en el request. Muere al cerrar el navegador
 const cookieParser = require("cookie-parser");
 const recordameMiddleware = require("./middlewares/recordameMiddleware");
+const userLoggedMiddleware = require ("./middlewares/userLoggedMiddleware")
 
 // ************ express() ************
 const app = express();
 
 // ************ Middlewares a Nivel Aplicación (sin importar la ruta a la que ingresen) ************
 //la petición tiene que cumplir con estos, antes de que el servidor la derive a la ruta correspondiente
+//IMP! El orden de ponerlos es el orden en que se ejecutarán!
 //app.use() hace referencia a que toda la app usará ese middleware
 app.use(express.static("public")); // Configuración de carpeta de archivos estáticos
 app.use(express.urlencoded({ extended: false })); // Para capturar datos desde un formulario como un obj literal (req.body)
@@ -30,6 +32,7 @@ app.use(
 ); // Para evitar que otras páginas web utilicen la información que guardamos en la PC del usuario
 app.use(cookieParser());
 app.use(recordameMiddleware);
+app.use(userLoggedMiddleware); // no se ejecutan, porque al no recibir parámetros, se ejecutan cuando lo necesiten
 
 //************ Mantenimiento ************
 let enMantenimiento = false; // Pasar a true para poner en modo "Página en Mantenimiento"

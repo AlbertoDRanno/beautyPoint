@@ -90,8 +90,13 @@ const usersController = {
     console.log("Entrando a Profile");
     console.log(req.session);
     res.render("users/profile", {
-      user: req.session.userLogged // le comparto la info a la vista
+      user: req.session.userLogged, // le comparto la info a la vista
     });
+  },
+  logout: (req, res) => {
+    req.session.destroy(); // directamente borra todo lo que está en session
+    console.log(req.session);
+    return res.redirect("/");
   },
 };
 
