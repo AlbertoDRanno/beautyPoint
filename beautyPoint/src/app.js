@@ -5,8 +5,7 @@ const methodOverride = require("method-override"); // Para poder pisar el method
 const logMiddleware = require("./middlewares/logMiddleware");
 const session = require("express-session"); // Obj. Lit. que vive en el req (req.sesion), que cruza toda la app. Desde él puedo
 // acceder a todo lo que tenga en el request. Muere al cerrar el navegador
-const cookieParser = require("cookie-parser");
-const recordameMiddleware = require("./middlewares/recordameMiddleware");
+const cookies = require("cookie-parser"); // Para guardar del lado del cliente - por navegador (lo que guarda en chrome, no lo tendrá Firefox)
 const userLoggedMiddleware = require ("./middlewares/userLoggedMiddleware")
 
 // ************ express() ************
@@ -30,8 +29,7 @@ app.use(
     saveUninitialized: false, //https://github.com/expressjs/session#options
   })
 ); // Para evitar que otras páginas web utilicen la información que guardamos en la PC del usuario
-app.use(cookieParser());
-app.use(recordameMiddleware);
+app.use(cookies()); //va a permitir trabajar en req y res con otro objeto literal
 app.use(userLoggedMiddleware); // no se ejecutan, porque al no recibir parámetros, se ejecutan cuando lo necesiten
 
 //************ Mantenimiento ************

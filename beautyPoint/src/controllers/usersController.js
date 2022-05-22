@@ -43,10 +43,11 @@ const usersController = {
     //return res.send("Ok, las validaciones se pasaron, no hay errores");
   },
   login: (req, res) => {
-    console.log(req.session); //obj. lit. con la prop. cookie
+    console.log(req.cookies); //obj. lit. "cookies" - trae todas las cookies del navegador
     return res.status(200).render("users/login");
   },
   processLogin: (req, res) => {
+    
     let usersToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
     //devuelve el objeto usuario a loguearse, dentro de un array
     let userToLogin = usersToLogin[0];
@@ -65,6 +66,13 @@ const usersController = {
         delete userToLogin.password;
         req.session.userLogged = userToLogin;
         //ahora el obj session, tiene otra propiedad: userLogged (además de cookie), que guarda toda la info de userToLogin
+
+        //cuando ya tengo los datos de la persona a loguear, pregunto si tmb viajó el rememberUser:
+        if (req.body.rememberUser) {
+          // si viajó, quiero que la cookie se llame userEmail y guarde el email, * 1 seg * 60 * 60 = 1 hora
+          res.cookie("userEmail", req.body.email, { maxAge: 1000 * 60 * 60 });
+        }
+
         return res.redirect("/users/profile/" + userToLogin.id);
       }
       return res.render("users/login", {
@@ -89,11 +97,14 @@ const usersController = {
   profile: (req, res) => {
     console.log("Entrando a Profile");
     console.log(req.session);
+    console.log(req.cookies.userEmail); // si, No tildé recordar, saldrá undefined, porque no se grabó niguna cookie
+    //si tildó recordar, veré el mail con el que se logueó, el cual usaré para loguear a la persona automáticamente
     res.render("users/profile", {
       user: req.session.userLogged, // le comparto la info a la vista
     });
   },
   logout: (req, res) => {
+    res.clearCookie("userEmail") // borra la cookie, sino, mientras dure esta, estoy en un bucle, y no puedo desloguearme
     req.session.destroy(); // directamente borra todo lo que está en session
     console.log(req.session);
     return res.redirect("/");
