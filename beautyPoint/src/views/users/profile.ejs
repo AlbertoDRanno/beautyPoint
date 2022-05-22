@@ -4,10 +4,14 @@
   <body>
     <%- include('../partials/header.ejs')%>
     <main class="home-main">
-    <h1>Estas en Profile</h1>
-    <h2>Hola <%= user.first_name %></h2>
-    <img src="<%= user.image %>  " alt="">
-    <%= user.email %> 
+      <h1>Estas en Profile</h1>
+      <h2>Hola <%= user.first_name %></h2>
+      <img
+        src="<%= user.image %>  "
+        alt="<%= user.first_name %>"
+        class="profile-image"
+      />
+      <h2><%= user.email %></h2>
     </main>
   </body>
   <%- include('../partials/footer') %>

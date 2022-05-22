@@ -1,7 +1,7 @@
-<!--Encabezado vigente-->
 <header class="header">
   <div class="header-elements">
     <section>
+      <!--Logo-->
       <div class="header-elements-ang header-logo">
         <a href="/"
           ><img
@@ -10,9 +10,10 @@
             class="logo"
         /></a>
       </div>
+      
       <!--<a href="#" class="header-hamburguer-button">
               <i class="fas fa-bars"></i
-            ></a>-->
+            ></a>
 
       <div class="respmenu">
         <input type="checkbox" />
@@ -35,21 +36,24 @@
                 >Crear producto <i class="fa-solid fa-file-circle-plus"></i
               ></a>
             </li>
-            <!-- <li>
+             <li>
               <a href="/products/edit/id"
                 >Editar producto <i class="fa-solid fa-file-pen"></i
               ></a>
-            </li> -->
+            </li> 
             <li>
               <a href="#">Mi cuenta <i class="fa-solid fa-circle-user"></i></a>
             </li>
           </ul>
         </nav>
-      </div>
+      </div>-->
 
+      <!--Carrito-->
       <div class="header-cart header-elements-ang">
         <a href="/products/cart"><i class="fa-solid fa-cart-shopping"></i></a>
       </div>
+
+      <!--Buscador-->
       <div class="header-elements header-search">
         <form action="/search" method="GET" class="input-father">
           <input
@@ -62,7 +66,6 @@
             <i class="fas fa-search input-icon"></i>
           </button>
         </form>
-
         <!--<div class="input-father">
           <input
             type="search"
@@ -112,16 +115,16 @@
         <a href="/products/edit/id"
           >Editar producto <i class="fa-solid fa-file-pen"></i
         ></a>
-      </li> -->
-    </ul>
+      </li> 
+    </ul>-->
 
-    <!--Nueva Barra Logout-->
-    <ul>
+    <!--Nueva Barra-->
+    <ul class="header-elements">
       <% if (locals.isLogged) { %>
       <li>
-        <a href="#">
-          <img src=" <%= locals.userLogged.image %> " class="loguito"/>
-          Hola <%= locals.userLogged.first_name %> 
+        <a href=/users/profile/:id" class="loguito">
+          <img src=" <%= locals.userLogged.image %> " />
+          Hola <%= locals.userLogged.first_name %>
         </a>
         <ul>
           <a href="/users/profile/:id"

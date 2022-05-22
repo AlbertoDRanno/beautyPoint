@@ -109,6 +109,8 @@ input:valid:required {
     transform: scale(1.5);
   }
 }
+
+/*
 .respmenu a {
   text-decoration: none;
   display: block;
@@ -168,6 +170,9 @@ input:valid:required {
 .respmenu input:not(:checked) ~ .fa-times {
   display: none;
 }
+*/
+
+
 .header {
   position: fixed;
   top: 0;
@@ -247,15 +252,15 @@ input:valid:required {
   top: 50%;
   transform: translateY(-50%);
 }
-.header-nav {
+/*.header-nav {
   display: none;
-}
+}*/
 
 /*index*/
 .cart-main,
 .register-main,
 .login-main {
-  margin-top: 180px;
+  margin-top: 280px;
   margin-bottom: 140px;
 }
 
