@@ -55,7 +55,7 @@ const usersController = {
 
     if (userToLogin) {
       // si el mail existe en mi base de datos, compara las contraseñas
-      let isOkThePassword = bcryptjs.compareSync(
+      let isOkThePassword = bcrypt.compareSync(
         req.body.password,
         userToLogin.password
       );
@@ -109,34 +109,6 @@ const usersController = {
     console.log(req.session);
     return res.redirect("/");
   },
-  addProductCart: (req, res) => {
-    const product = productsModel.buscar(req.params.id);
-    let cantidad = 1
-
-    const indexItem = req.session.cart.findIndex(item => item.id == product.id)
-    if (indexItem != -1) {
-      req.session.cart[indexItem].cantidad = req.session.cart[indexItem].cantidad + 1
-
-    } else {
-      req.session.cart.push({ ...product, cantidad })
-
-    }
-    res.redirect("/products/cart")
-  },
-  deleteProductCart:
-    (req, res) => {
-      const product = productsModel.buscar(req.params.id);
-
-
-      const indexItem = req.session.cart.findIndex(item => item.id == product.id)
-      if (indexItem != -1) {
-        req.session.cart.splice(indexItem, 1)
-      }
-
-
-      res.redirect("/products/cart")
-
-    },
 };
 
 module.exports = usersController;

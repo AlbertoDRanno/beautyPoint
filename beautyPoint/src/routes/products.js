@@ -37,5 +37,8 @@ router.delete("/delete/:id", productsController.destroy);
 
 /*** GET PRODUCTS FROM CART ***/
 router.get("/cart", productsController.cart);
+//carrito
+router.put("/cart/:id", productsController.addProductCart)
+router.delete("/cart/:id", productsController.deleteProductCart);
 
 module.exports = router;
