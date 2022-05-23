@@ -11,10 +11,10 @@ function userLoggedMiddleware(req, res, next) {
 
   // si tengo a alguien en una cookie, quiero buscar a esa persona y loguearlo
   let emailInCookie = req.cookies.userEmail;
-  console.log(emailInCookie);
+  //console.log(emailInCookie);
   let usersFromCookie = usersModel.filtrarPorCampoValor("email", emailInCookie);
   let userFromCookie = usersFromCookie[0];
-  console.log(userFromCookie);
+  //console.log(userFromCookie);
   // Por lo tanto, si encuentro a alguien, lo paso a session! (2)
   if (userFromCookie) {
     req.session.userLogged = userFromCookie
