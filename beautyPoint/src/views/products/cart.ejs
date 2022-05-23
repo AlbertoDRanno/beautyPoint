@@ -1,108 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('../partials/head.ejs',  {title: "Tu Carrito"})%>
+<%- include('../partials/head.ejs', {title: "Tu Carrito" })%>
 
   <body>
     <%- include('../partials/header.ejs')%>
-    <main class="cart-main">
-      <table class="cart-table">
-        <thead>
-          <tr class="carrito-HeaderCompras carrito-Row">
-            <td class="carrito-Column First"><span>Producto</span></td>
-            <td class="carrito-Column"><span>Cantidad</span></td>
-            <td class="carrito-Column"><span>Valor</span></td>
-            <td class="carrito-Column"><span>Total</span></td>
-            <td class="carrito-Column"></td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="carrito-Row carrito-BodyCompras">
-            <td class="carrito-Column First">
-              <img
-                class="carrito-ProductImage"
-                src="/images/D_NQ_NP_633251-MLA44725737706_012021-V.png"
-              />
-              <h5>True Match Tinted Serum de L'Oréal</h5>
-            </td>
-            <td class="carrito-Column">
-              <input
-                value="1 "
-                type="number"
-                id="tentacles"
-                name="tentacles"
-                min="1"
-                max="100"
-              />
-            </td>
-            <td class="carrito-Column">
-              <span>$</span>
-            </td>
-            <td class="carrito-Column">
-              <span>$</span>
-            </td>
-            <td class="carrito-Column carrito-Trash">
-              <button><i class="fa-solid fa-trash-can"></i></button>
-            </td>
-          </tr>
-          <tr class="carrito-Row carrito-BodyCompras">
-            <td class="carrito-Column First">
-              <img
-                class="carrito-ProductImage"
-                src="/images/D_NQ_NP_633251-MLA44725737706_012021-V.png"
-              />
-              <h5>True Match Tinted Serum de L'Oréal</h5>
-            </td>
-            <td class="carrito-Column">
-              <input
-                value="1 "
-                type="number"
-                id="tentacles"
-                name="tentacles"
-                min="1"
-                max="100"
-              />
-            </td>
-            <td class="carrito-Column">
-              <span>$</span>
-            </td>
-            <td class="carrito-Column">
-              <span>$</span>
-            </td>
-            <td class="carrito-Column carrito-Trash">
-              <button><i class="fa-solid fa-trash-can"></i></button>
-            </td>
-          </tr>
-          <tr class="carrito-Row carrito-BodyCompras">
-            <td class="carrito-Column First">
-              <img
-                class="carrito-ProductImage"
-                src="/images/D_NQ_NP_633251-MLA44725737706_012021-V.png"
-              />
-              <h5>True Match Tinted Serum de L'Oréal</h5>
-            </td>
-            <td class="carrito-Column">
-              <input
-                value="1 "
-                type="number"
-                id="tentacles"
-                name="tentacles"
-                min="1"
-                max="100"
-              />
-            </td>
-            <td class="carrito-Column">
-              <span>$</span>
-            </td>
-            <td class="carrito-Column">
-              <span>$</span>
-            </td>
-            <td class="carrito-Column carrito-Trash">
-              <button><i class="fa-solid fa-trash-can"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </main>
-    <%- include('../partials/footer.ejs')%>
+      <main class="cart-main">
+        <table class="cart-table">
+          <thead>
+            <tr class="carrito-HeaderCompras carrito-Row">
+              <td class="carrito-Column First"><span>Producto </span></td>
+              <td class="carrito-Column"><span>Cantidad</span></td>
+              <td class="carrito-Column"><span>Valor</span></td>
+              <td class="carrito-Column"><span>Total</span></td>
+              <td class="carrito-Column"></td>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% for (let i=0; i < cart.length; i++) { %>
+              <tr class="carrito-Row carrito-BodyCompras">
+                <td class="carrito-Column First">
+                  <img class="carrito-ProductImage" src="<%=cart[i].image%>" />
+                  <h5>
+                    <%= cart[i].name%>
+                  </h5>
+                </td>
+                <td class="carrito-Column">
+                  <input value="<%=cart[i].cantidad%>" disabled type="number" id="tentacles" name="tentacles" min="1"
+                    max="100" />
+                </td>
+                <td class="carrito-Column">
+                  <span>$<%=cart[i].price%></span>
+                </td>
+                <td class="carrito-Column">
+                  <span>$<%=cart[i].price*cart[i].cantidad%></span>
+                </td>
+
+                <td class="carrito-Column carrito-Trash">
+                  <form action="/users/cart/<%=cart[i].id %>?_method=DELETE" method="POST">
+                    <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+      </main>
+      <%- include('../partials/footer.ejs')%>
   </body>
+
 </html>

@@ -33,12 +33,14 @@ router.post(
 router.get("/login", guestMiddleware, usersController.login);
 
 // Procesa el login
-router.post("/login",  usersController.processLogin); 
+router.post("/login", usersController.processLogin);
 
 // Perfil de usuario
 router.get("/profile/:id", authMiddleware, usersController.profile);
 
 // Logout
 router.get("/logout/", usersController.logout);
-
+//carrito
+router.put("/cart/:id", usersController.addProductCart)
+router.delete("/cart/:id", usersController.deleteProductCart)
 module.exports = router;

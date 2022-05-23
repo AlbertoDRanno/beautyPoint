@@ -6,7 +6,7 @@ const logMiddleware = require("./middlewares/logMiddleware");
 const session = require("express-session"); // Obj. Lit. que vive en el req (req.sesion), que cruza toda la app. Desde él puedo
 // acceder a todo lo que tenga en el request. Muere al cerrar el navegador
 const cookies = require("cookie-parser"); // Para guardar del lado del cliente - por navegador (lo que guarda en chrome, no lo tendrá Firefox)
-const userLoggedMiddleware = require ("./middlewares/userLoggedMiddleware")
+const userLoggedMiddleware = require("./middlewares/userLoggedMiddleware")
 
 // ************ express() ************
 const app = express();
@@ -31,7 +31,11 @@ app.use(
 ); // Para evitar que otras páginas web utilicen la información que guardamos en la PC del usuario
 app.use(cookies()); //va a permitir trabajar en req y res con otro objeto literal
 app.use(userLoggedMiddleware); // no se ejecutan, porque al no recibir parámetros, se ejecutan cuando lo necesiten
-
+app.use(function (req, res, next) {
+  req.session.cart = req.session.cart || []
+  res.locals.cart = req.session.cart;
+  next();
+})
 //************ Mantenimiento ************
 let enMantenimiento = false; // Pasar a true para poner en modo "Página en Mantenimiento"
 if (enMantenimiento == true) {

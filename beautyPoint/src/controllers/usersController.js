@@ -2,6 +2,7 @@ const JsonModel = require("../models/jsonModel");
 const usersModel = new JsonModel("users");
 const { validationResult } = require("express-validator"); // trae el resultados de las validaciones que hicimos
 const bcryptjs = require("bcryptjs");
+const productsModel = new JsonModel('products');
 
 const usersController = {
   register: (req, res) => {
@@ -47,7 +48,7 @@ const usersController = {
     return res.status(200).render("users/login");
   },
   processLogin: (req, res) => {
-    
+
     let usersToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
     //devuelve el objeto usuario a loguearse, dentro de un array
     let userToLogin = usersToLogin[0];
@@ -109,6 +110,34 @@ const usersController = {
     console.log(req.session);
     return res.redirect("/");
   },
+  addProductCart: (req, res) => {
+    const product = productsModel.buscar(req.params.id);
+    let cantidad = 1
+
+    const indexItem = req.session.cart.findIndex(item => item.id == product.id)
+    if (indexItem != -1) {
+      req.session.cart[indexItem].cantidad = req.session.cart[indexItem].cantidad + 1
+
+    } else {
+      req.session.cart.push({ ...product, cantidad })
+
+    }
+    res.redirect("/products/cart")
+  },
+  deleteProductCart:
+    (req, res) => {
+      const product = productsModel.buscar(req.params.id);
+
+
+      const indexItem = req.session.cart.findIndex(item => item.id == product.id)
+      if (indexItem != -1) {
+        req.session.cart.splice(indexItem, 1)
+      }
+
+
+      res.redirect("/products/cart")
+
+    },
 };
 
 module.exports = usersController;
