@@ -2,6 +2,7 @@ const JsonModel = require('../models/jsonModel');
 const productsModel = new JsonModel('products');
 const { validationResult } = require('express-validator');
 
+
 const productsController = {
   // Detail - Detalle de un producto a partir de su id
   detail: (req, res) => {

@@ -1,6 +1,7 @@
 // ************ Require's ************
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middlewares/authMiddleware");
 
 const logDBMiddleware = require("../middlewares/logDBMiddleware");
 
@@ -36,7 +37,7 @@ router.put("/edit/:id", uploadFile.single("image"), productsController.update);
 router.delete("/delete/:id", productsController.destroy);
 
 /*** GET PRODUCTS FROM CART ***/
-router.get("/cart", productsController.cart);
+router.get("/cart", authMiddleware, productsController.cart);
 //carrito
 router.put("/cart/:id", productsController.addProductCart)
 router.delete("/cart/:id", productsController.deleteProductCart);

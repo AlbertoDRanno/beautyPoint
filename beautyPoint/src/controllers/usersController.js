@@ -31,8 +31,9 @@ const usersController = {
         //el ", 10" es la cantidad de "sal", un dato añadido que hace que los hash sean mucho más difíciles de romper. Para contraseñas se suele usar 10 o 12
         (req.body.image = "/images/avatars/" + req.file.filename);
 
-      let userId = usersModel.save(req.body);
-      res.redirect("/users/profile/" + userId);
+      //let userId = usersModel.save(req.body);
+      //res.redirect("/users/profile/" + userId);
+      res.redirect("login")
     } else {
       //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
       res.render("users/register", {

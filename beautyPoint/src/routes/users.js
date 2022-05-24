@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const guestMiddleware = require("../middlewares/guestMiddleware")
-const authMiddleware = require("../middlewares/authMiddleware");
-
 //registro de creaciones
 const logDBMiddleware = require("../middlewares/logDBMiddleware");
 
@@ -36,7 +34,7 @@ router.get("/login", guestMiddleware, usersController.login);
 router.post("/login", usersController.processLogin);
 
 // Perfil de usuario
-router.get("/profile/:id", authMiddleware, usersController.profile);
+router.get("/profile/:id", usersController.profile); //, authMiddleware
 
 // Logout
 router.get("/logout/", usersController.logout);
