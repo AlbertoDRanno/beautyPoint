@@ -31,9 +31,10 @@ const usersController = {
         //el ", 10" es la cantidad de "sal", un dato añadido que hace que los hash sean mucho más difíciles de romper. Para contraseñas se suele usar 10 o 12
         (req.body.image = "/images/avatars/" + req.file.filename);
 
-      //let userId = usersModel.save(req.body);
+      let userId = usersModel.save(req.body);
+      console.log(userId);
       //res.redirect("/users/profile/" + userId);
-      res.redirect("login")
+      res.redirect("login");
     } else {
       //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
       res.render("users/register", {
@@ -48,7 +49,6 @@ const usersController = {
     return res.status(200).render("users/login");
   },
   processLogin: (req, res) => {
-
     let usersToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
     //devuelve el objeto usuario a loguearse, dentro de un array
     let userToLogin = usersToLogin[0];
@@ -105,7 +105,7 @@ const usersController = {
     });
   },
   logout: (req, res) => {
-    res.clearCookie("userEmail") // borra la cookie, sino, mientras dure esta, estoy en un bucle, y no puedo desloguearme
+    res.clearCookie("userEmail"); // borra la cookie, sino, mientras dure esta, estoy en un bucle, y no puedo desloguearme
     req.session.destroy(); // directamente borra todo lo que está en session
     console.log(req.session);
     return res.redirect("/");
