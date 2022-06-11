@@ -85,12 +85,15 @@
           <label for="category">Categoría:</label>
 
           <select name="category" id="category">
+            <!--  <% for (let i=0 ; i < categories.length; i++) { %>  -->
+            <!-- <option value="<%= categories[i].id %> "> <%= categories[i].nombre  %> </option>  -->  
             <option value="" <%= locals.oldData && oldData.category === "" ? "selected" : " " ; %>>Seleccioná la categoría:</option>
 
             <option value="categoria-1" <%= locals.oldData && oldData.category === "categoria-1" ? "selected" : " " ; %>>Cuidados básicos</option>
             <option value="categoria-2" <%= locals.oldData && oldData.category === "categoria-2" ? "selected" : " " ; %>>Antiage</option>
             <option value="categoria-3" <%= locals.oldData && oldData.category === "categoria-3" ? "selected" : " " ; %>>Solares</option>
             <option value="categoria-4" <%= locals.oldData && oldData.category === "categoria-4" ? "selected" : " " ; %>>Maquillaje</option>
+            <!-- <% } %>  -->
           </select>
 
           <% if (locals.errors && errors.category) { %>

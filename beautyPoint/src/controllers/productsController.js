@@ -1,7 +1,7 @@
-const JsonModel = require('../models/jsonModel');
-const productsModel = new JsonModel('products');
-const { validationResult } = require('express-validator');
-
+const JsonModel = require("../modelos/jsonModel");
+const productsModel = new JsonModel("products");
+const { validationResult } = require("express-validator");
+//const db = require("../database/models");
 
 const productsController = {
   // Detail - Detalle de un producto a partir de su id
@@ -118,6 +118,32 @@ const productsController = {
     }
 
     res.redirect("/products/cart");
+  },
+
+  // Base de Datos:
+  crear: (req, res) => {
+    db.Product.findAll().then(function (products) {
+      return res.render("./products/create", { products: products });
+    });
+  },
+  guardado: (req, res) => {
+    db.Product.create({
+      //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del form
+      name: req.body.name,
+      price: req.body.price,
+      description: req.body.description,
+      package_id: req.body.package,
+      category_id: req.body.category,
+      image: req.body.image,
+      discount: req.body.discount,
+      stock: req.body.stock,
+    });
+    res.redirect("./products/create");
+  },
+  listado: (req, res) => {
+    db.Product.findAll().then(function (products) {
+      res.render("index", { products: products });
+    });
   },
 };
 

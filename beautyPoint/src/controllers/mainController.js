@@ -6,7 +6,7 @@ const path = require("path");
 
 const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-const JsonModel = require("../models/jsonModel");
+const JsonModel = require("../modelos/jsonModel");
 const productsModel = new JsonModel("products");
 
 const mainController = {

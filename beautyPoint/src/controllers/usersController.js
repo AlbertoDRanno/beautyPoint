@@ -1,4 +1,4 @@
-const JsonModel = require("../models/jsonModel");
+const JsonModel = require("../modelos/jsonModel");
 const usersModel = new JsonModel("users");
 const { validationResult } = require("express-validator"); // trae el resultados de las validaciones que hicimos
 const bcrypt = require("bcryptjs");

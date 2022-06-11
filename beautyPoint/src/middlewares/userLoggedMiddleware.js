@@ -1,4 +1,4 @@
-const JsonModel = require("../models/jsonModel");
+const JsonModel = require("../modelos/jsonModel");
 const usersModel = new JsonModel("users"); // lo traigo para buscar el usuario de la cookie
 
 // ************ NavBar - Logout - RememberUser - Middleware a nivel app  ************
