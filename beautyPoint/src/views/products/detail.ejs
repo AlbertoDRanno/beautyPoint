@@ -2,53 +2,87 @@
 <html lang="en">
 <%- include('../partials/head.ejs', {title: products.name})%>
 
-  <body>
-    <%- include('../partials/header.ejs')%>
-      <main class="product-main">
-        <h3>
-          <%= products.name %>
+<body>
+  <%- include('../partials/header.ejs')%>
+  <main class="product-main">
+    <h3>
+      <%= products.name %>
+    </h3>
+    <section class="product-section">
+      <article class="product-article">
+        <img src=<%=products.image %> alt=<%= products.name %> />
+        <h3>$ <%= products.price %>
         </h3>
-        <section class="product-section">
-          <article class="product-article">
-            <img src=<%=products.image %> alt=<%= products.name %> />
-              <h3>$ <%= products.price %>
-              </h3>
-          </article>
-          <article class="product-article">
-            <!--Descripción-->
-            <p>
-              <%= products.description %>
-            </p>
-            <!--Presentanción-->
-            <div>
-              <%= products.package %>
-            </div>
-            <!--Línea-->
-            <div>
-              <%= products.class %>
-            </div>
-            <div class="product-cart">
-              <form action="/products/cart/<%=products.id %>?_method=PUT" method="POST">
-                <button type="submit" value="sumarAlCarrito" class="product-cart-button">
-                  Agregar al carrito
-                </button>
-              </form>
-              <input type="number" size="1" />
-              <a href="#" class="buy-now-button">COMPRAR AHORA</a>
-              <hr />
+      </article>
+      <article class="product-article">
+        <!--Descripción-->
+        <p>
+          <%= products.description %>
+        </p>
+        <!--Presentanción-->
+        <div>
+          <%= products.package %>
+        </div>
+        <!--Línea-->
+        <div>
+          <%= products.class %>
+        </div>
+        <div class="product-cart">
+          <form action="/products/cart/<%=products.id %>?_method=PUT" method="POST">
+            <button type="submit" value="sumarAlCarrito" class="product-cart-button">
+              Agregar al carrito
+            </button>
+          </form>
+          <input type="number" size="1" />
+          <a href="#" class="buy-now-button">COMPRAR AHORA</a>
+          <hr />
 
-              <a href="/products/edit/<%= products.id %>" class="action-button edit">EDITAR PRODUCTO</a>
-              <form action="/products/delete/<%= products.id %>?_method=DELETE" method="POST"
-                style="display: inline-flex">
-                <button type="submit" class="action-button delete">
-                  ELIMINAR
-                </button>
-              </form>
+          <a href="/products/edit/<%= products.id %>" class="action-button edit">EDITAR PRODUCTO</a>
+          <form action="/products/delete/<%= products.id %>?_method=DELETE" method="POST" style="display: inline-flex">
+            <button type="submit" class="action-button delete">
+              ELIMINAR
+            </button>
+          </form>
 
-          </article>
-        </section>
-      </main>
-      <%- include('../partials/footer.ejs')%>
-  </body>
+      </article>
+    </section>
+  </main>
+  <%- include('../partials/footer.ejs')%>
+</body>
+
+<!--
+<h1>
+  <%= product.name %>
+</h1>
+<ul>
+  <li>
+    <%= product.price %>
+  </li>
+  <li>
+    <%= product.discount %>
+  </li>
+  <li>
+    <%= product.packages.description %>
+  </li>
+  <li>
+    <%= product.categorias.description %>
+  </li>
+  <li>
+    <%= product.image %>
+  </li>
+  <li>
+    <%= product.stock %>
+  </li>
+</ul>
+ -->
+<!--UPDATE-->
+<a href="/products/edit/<%= product.id %> ">
+<button>Editar</button>
+</a>
+<form action="/products/delete/<%= product.id %>?_method=DELETE" method="POST">
+
+<button type="submit">Borrar</button>
+
+</form>
 
 </html>

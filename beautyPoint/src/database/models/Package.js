@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  let alias = 'Package';
+  let alias = "Package";
   let cols = {
     id: {
       type: DataTypes.INTEGER,
@@ -17,13 +17,22 @@ module.exports = (sequelize, DataTypes) => {
     },*/,
   };
   let config = {
-    tableName: 'packages',
+    tableName: "packages",
     timestamps: true,
   };
 
   const Package = sequelize.define(alias, cols, config);
 
-  /* PENDIENTE: agregar la relacion con modelo Product */
+  Package.associate = function (models) {
+    // recibe todos los modelos que tenemos
+    //aquí defino cómo son esas asociaciones
+    Package.hasMany(models.Product, {
+      // 1 a Muchos
+      //un tipo de paquete tiene muchos productos./ Le digo con que tabla se relaciona
+      as: "productos", // un alias para llamar la relación,
+      foreignKey: "package_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+    });
+  };
 
   return Package;
 };

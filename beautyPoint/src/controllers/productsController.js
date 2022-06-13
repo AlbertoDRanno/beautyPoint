@@ -145,6 +145,57 @@ const productsController = {
       res.render("index", { products: products });
     });
   },
+  detalle: (req, res) => {
+    db.Product.findByPk(req.params.id, {
+      include: [{ association: "categorias" }, { association: "packages" }],
+    }).then(function (product) {
+      res.render("./products/detail", { product: product });
+    });
+  },
+  editar: (req, res) => {
+    //hay que pedir, los datos del producto a editar, pero también los packages y categorias.
+    //Por lo que hay vs pedidos asincrónicos. Los defino por separado:
+    let pedidoProducto = db.Product.findByPk(req.params.id);
+    // aún no pongo el "then", sino que termino de enumerar los pedidos asincrónicos
+    let pedidoPackage = db.Package.findAll();
+
+    let pedidoCategory = db.Category.findAll();
+
+    Promise.all([pedidoProducto, pedidoPackage, pedidoCategory])
+      //cuando obtenga todos los pedidos, recién ahí realiza el "then"
+      .then(function ([product, package, category]) {
+        res.render(
+          "/products/edit",
+          { product: product },
+          { package: package },
+          { category: category }
+        );
+      });
+  },
+  actualizar: (req, res) => {
+    db.Product.update({
+      //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del form
+      name: req.body.name,
+      price: req.body.price,
+      description: req.body.description,
+      package_id: req.body.package,
+      category_id: req.body.category,
+      image: req.body.image,
+      discount: req.body.discount,
+      stock: req.body.stock,
+    }), {
+      where: req.params.id
+    }
+    res.redirect("products/detail/" + req.params.id)
+  },
+  borrar: (req, res) => {
+    db.Product.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.redirect("/")
+  }
 };
 
 // ************ exports - (no tocar) ************

@@ -46,12 +46,18 @@ module.exports = (sequelize, DataTypes) => {
     // recibe todos los modelos que tenemos
     //aquí defino cómo son esas asociaciones:
 
-    /*Pelicula.belongsTo(models.Generos, {
-      // Muchos a 1
-      //la película pertenece a un género que sale de los modelos./ Le digo con que tabla se relaciona
-      as: "generos", // un alias para llamar la relación,
-      foreignKey: "genre_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
-    });*/
+    Product.belongsTo(models.Category, {  // Muchos a 1
+      //cada producto pertenece a usa sola categoria./ Le digo con que tabla se relaciona
+      as: "categorias", // un alias para llamar la relación,
+      foreignKey: "category_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+    });
+
+     Product.belongsTo(models.Package, {
+       // Muchos a 1
+       //cada producto tiene un package específico./ Le digo con que tabla se relaciona
+       as: "packages", // un alias para llamar la relación,
+       foreignKey: "package_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+     });
 
     Product.belongsToMany(models.User, {
       // Muchos a Muchos  // 1er parámetro, el modelo al que asocio

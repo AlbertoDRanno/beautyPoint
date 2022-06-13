@@ -44,9 +44,22 @@ router.delete("/cart/:id", productsController.deleteProductCart);
 
 /*** DDBB ***/
 
+//creación
 //router.get("/crear", productsController.crear);
 //router.post("/crear", productsController.guardado);
 
+//listado
 //router.get("/", productsController.listado);
+
+//detalle
+//router.get("/detail/:id", productsController.detalle);
+
+//actualización
+//router.get("/edit/:id", productsController.editar);
+//router.put("/edit/:id", productsController.actualizar); 
+
+//borrado
+//router.delete("/delete/:id", productsController.borrar);
+
 
 module.exports = router;
