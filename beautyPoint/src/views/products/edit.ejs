@@ -6,32 +6,32 @@
   <%- include('../partials/header.ejs')%>
   <main class="register-main">
     <!--REEMPLAZAR "products" por "product"-->
-    <form action="/products/edit/<%= products.id %>?_method=PUT" method="POST" class="form-register"
+    <form action="/products/edit/<%= product.id %>?_method=PUT" method="POST" class="form-register"
       enctype="multipart/form-data">
-      <h1>Editando producto: <%= products.id %></h1>
+      <h1>Editando producto: <%= product.id %></h1>
 
       <div class="form-element">
         <label for="product_name">Nombre de producto:</label>
-        <input type="text" id="product_name" name="name" value="<%= products.name %>" required />
+        <input type="text" id="product_name" name="name" value="<%= product.name %>" required />
         <span class="feedback"></span>
       </div>
 
       <div class="form-element">
         <label for="product_price">Precio:</label>
-        <input type="number" name="price" id="product_price" value="<%= products.price %>" required />
+        <input type="number" name="price" id="product_price" value="<%= product.price %>" required />
         <span class="feedback"></span>
       </div>
 
       <div class="form-element">
         <label for="product_description">Descripción del producto:</label>
         <textarea name="description" id="product_description" cols="30" rows="10" required>
-<%= products.description %></textarea>
+<%= product.description %></textarea>
         <span class="feedback"></span>
       </div>
 
       <div class="form-element">
         <label for="product_package">Package:</label>
-        <input type="text" id="product_package" name="package" value="<%= products.package %>" required />
+        <input type="text" id="product_package" name="package" value="<%= product.package %>" required />
         <span class="feedback"></span>
       </div>
 
@@ -43,7 +43,7 @@
       <div class="form-element">
         <label for="product_category">Categoría:</label>
 
-        <!-- DDBB
+        
         <% for( let i = 0; i < category.length; i++ ) { %>
         //si la categoria que estoy por imprimir es la misma que ya tiene el producto:
         <% if (category[i].id == product.category_id) { %>
@@ -55,19 +55,9 @@
           <%= category[i].name %>
         </option>
         <% } %>
-        <% } %>
-        -->
+        <% } %> 
 
-
-        <select name="category" id="product_category" required>
-          <option value="categoria-1" <%= (products.category == "categoria-1") ? "selected" : "";%>>Cuidados básicos
-          </option>
-          <option value="categoria-2" <%= (products.category == "categoria-2") ? "selected" : "";%>>Antiage</option>
-          <option value="categoria-3" <%= (products.category == "categoria-3") ? "selected" : "";%>>Solares</option>
-          <option value="categoria-4" <%= (products.category == "categoria-4") ? "selected" : "";%>>Maquillaje</option>
-        </select>
-
-        <span class="feedback"></span>
+        
       </div>
 
       <div class="form-element">

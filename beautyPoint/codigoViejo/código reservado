@@ -1,0 +1,187 @@
+  <main>
+<h1>Listado de Productos</h1>
+<ul>
+  <% for( let i = 0; i < products.length; i++ ) { %>
+  <li>
+    <a href="/products/detail/<%= products[i].id %> "></a>
+    <%= products[i].name %> 
+    <%= products[i].categories.description %> 
+    <%= products[i].packages.description %> 
+
+  </li>
+  <% } %>
+</ul>
+   </main>
+
+
+
+      
+ 
+            <option value="categoria-1" <%= locals.oldData && oldData.category === "categoria-1" ? "selected" : " " ; %>>Cuidados básicos</option>
+            <option value="categoria-2" <%= locals.oldData && oldData.category === "categoria-2" ? "selected" : " " ; %>>Antiage</option>
+            <option value="categoria-3" <%= locals.oldData && oldData.category === "categoria-3" ? "selected" : " " ; %>>Solares</option>
+            <option value="categoria-4" <%= locals.oldData && oldData.category === "categoria-4" ? "selected" : " " ; %>>Maquillaje</option>
+
+
+
+
+  
+    <ul>
+      <% for( let i = 0; i < movies.length; i++ ) { %>
+      <li>
+        <a href="/movies/detail/<%= movies[i].id %>">
+            <% if (movies[i].generos) { %> <!--Solo si la película tiene género.. Si no hay valor en esa columna da error-->
+          <%= movies[i].title %> - <%= movies[i].generos.name %>
+          <!--De la película en cuestión traigo los "generos" porque es el Alias de la asociación con esa otra tabla.
+             Y de ahí puedo pedirle cualquier columna de esa tabla-->
+             <% } %> 
+             <ul>
+               <% for( let j = 0; j < movies[i].actores.length; j++ ) { %> <!--hasta la cantidad de actores-->
+               <li> <!-- Por cada uno de los actores (vinculo) de la película [i]-->
+                 <%= movies[i].actores[j].first_name + " " + movies[i].actores[j].last_name %>
+               </li>                 
+               <% } %>
+             </ul>
+        </a>
+      </li>
+      <% } %>
+    </ul>
+ 
+ <select name="category" id="product_category" required>
+          <option value="categoria-1" <%= (products.category == "categoria-1") ? "selected" : "";%>>Cuidados básicos
+          </option>
+          <option value="categoria-2" <%= (products.category == "categoria-2") ? "selected" : "";%>>Antiage</option>
+          <option value="categoria-3" <%= (products.category == "categoria-3") ? "selected" : "";%>>Solares</option>
+          <option value="categoria-4" <%= (products.category == "categoria-4") ? "selected" : "";%>>Maquillaje</option>
+        </select>
+        <span class="feedback"></span>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ router.get("/pruebaSession", function (req, res) {
+    if (req.session.numeroVisitas === undefined) {
+      req.session.numeroVisitas = 0; //si no existe lo inica en 0
+    }
+    req.session.numeroVisitas++;
+    res.send("Session tiene el nro: " + req.session.numeroVisitas);
+  });
+router.get("/mostrarNumeroSession", function (req, res) {
+  res.send("Session tiene el nro: " + req.session.numeroVisitas);
+});
+
+const bcryptjs = require("bcryptjs");
+
+let hash = bcryptjs.hashSync("abc123", 10); // encripta el texto con el agregado de sal (+ encriptado), siempre "10"
+console.log(hash);
+console.log(bcryptjs.compareSync("abc123", hash));
+// compara encriptado con texto plano (el texto "hash" debe haber sido encriptado previamente)
+
+//Testing the connection sequelize
+try {
+  await sequelize.authenticate();
+  console.log("Connection has been established successfully.");
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}
+
+/*   MAIN INDEX
+ <main class="home-main">
+      <div class="home-banners">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/5e7c10d0cc95f518282dbf0c/1587665808500-FZO4SCXWMMSP5BNMOK1E/apm-dibi-pure-equalizer-line-banner.jpg"
+          alt="rostro de mujer"
+        />
+        <h2><a href="#">Cuidados Básicos</a></h2>
+      </div>
+
+      
+
+      <section>
+        <article class="home-products">
+          <% for (let i = 0; i < cuidadosBasicos.length; i++) { %>
+            <div class="home-contenedor">
+          <a href="/products/detail/<%= cuidadosBasicos[i].id%>"
+            ><img
+              src= <%= cuidadosBasicos[i].image%>
+              alt=<%= cuidadosBasicos[i].name%>
+          /></a>
+          <div><%= cuidadosBasicos[i].name%></div>
+          <div class="home-price">$ <%= toThousand(cuidadosBasicos[i].price) %></div>
+          </div>
+          <% } %>
+        </article>
+      </section>
+      <div class="home-banners">
+        <img
+          src="https://www.skinforlife.net/wp-content/uploads/2020/11/spapineda-banner-one-iii.jpg"
+          alt="rostro de mujer"
+        />
+        <h2><a href="#">Línea Antiage</a></h2> 
+      </div>
+      <section>
+        <article class="home-products">
+          <% for (let i = 0; i < antiage.length; i++) { %>
+            <div class="home-contenedor">
+          <a href="/products/detail/<%= antiage[i].id%>"
+            ><img
+              src= <%= antiage[i].image%>
+              alt=<%= antiage[i].name%>
+          /></a>
+          <div><%= antiage[i].name%></div>
+          <div class="home-price">$ <%= toThousand(antiage[i].price) %></div>
+          </div>
+          <% } %>
+        </article>
+      </section>
+        <div class="home-banners">
+        <img
+          src="https://www.skinforlife.net/wp-content/uploads/2020/11/spapineda-banner-one-iii.jpg"
+          alt="rostro de mujer"
+        />
+        <h2><a href="#">Línea Solares</a></h2> 
+      </div>
+      <section>
+        <article class="home-products">
+          <% for (let i = 0; i < solares.length; i++) { %>
+            <div class="home-contenedor">
+          <a href="/products/detail/<%= solares[i].id%>"
+            ><img
+              src= <%= solares[i].image%>
+              alt=<%= solares[i].name%>
+          /></a>
+          <div><%= solares[i].name%></div>
+          <div class="home-price">$ <%= toThousand(solares[i].price) %></div>
+          </div>
+          <% } %>
+        </article>
+      </section>
+        <div class="home-banners">
+        <img
+          src="https://www.skinforlife.net/wp-content/uploads/2020/11/spapineda-banner-one-iii.jpg"
+          alt="rostro de mujer"
+        />
+        <h2><a href="#">Maquillaje</a></h2> 
+      </div>
+      <section>
+        <article class="home-products">
+          <% for (let i = 0; i < maquillajes.length; i++) { %>
+            <div class="home-contenedor">
+          <a href="/products/detail/<%= maquillajes[i].id%>"
+            ><img
+              src= <%= maquillajes[i].image%>
+              alt=<%= maquillajes[i].name%>
+          /></a>
+          <div><%= maquillajes[i].name%></div>
+          <div class="home-price">$ <%= toThousand(maquillajes[i].price) %></div>
+          </div>
+          <% } %>
+        </article>
+      </section>
+    </main>*/
+<%- include('partials/footer.ejs')%>
+<%- include('partials/header.ejs')%>

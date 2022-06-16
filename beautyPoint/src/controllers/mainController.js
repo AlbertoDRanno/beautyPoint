@@ -1,8 +1,9 @@
-const fs = require("fs");
-const path = require("path");
+const db = require("../database/models");
 
 // const productsFilePath = path.join(__dirname, "../data/products.json");
 // const products = JSON.parse(fs.readFileSync(productsFilePath, "utf-8"));
+//const fs = require("fs");
+//const path = require("path");
 
 const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -12,29 +13,75 @@ const productsModel = new JsonModel("products");
 const mainController = {
   index: (req, res) => {
     console.log("entrando al render de index");
-    let products = productsModel.readJsonFile();
-    //console.log(products)
-    let cuidadosBasicos = products.filter(
-      (product) => product.category == "categoria-1"
-    );
-    let antiage = products.filter(
-      (product) => product.category == "categoria-2"
-    );
-    let solares = products.filter(
-      (product) => product.category == "categoria-3"
-    );
-    let maquillajes = products.filter(
-      (product) => product.category == "categoria-4"
-    );
-    res
-      .status(200)
-      .render("index", {
-        cuidadosBasicos,
-        antiage,
-        solares,
-        maquillajes,
-        toThousand,
-      });
+   /* db.Product.findAll({
+      include: [
+        {
+          association: "categories",
+        },
+        {
+          association: "packages",
+        },
+      ],
+    }).then(function (products) {
+      // console.table(products)
+      // console.log(products)
+      res.status(200).render("index", { products: products, toThousand });
+    });*/
+    
+    db.Category.findAll({
+      include: [
+        {
+          association: "productosC",
+        },
+      ],
+    }).then(function (categories) {
+      // console.table(products)
+      // console.log(products)
+      res.status(200).render("index", { categories: categories, toThousand });
+    });
+/*
+    let pedidoProducto = db.Product.findAll({
+      include: [
+        {
+          association: "categories",
+        },
+        {
+          association: "packages",
+        },
+      ],
+    });
+    
+    let pedidoPackage = db.Package.findAll({
+      include: [
+        {
+          association: "productosP",
+        },
+      ],
+    });
+
+    let pedidoCategory = db.Category.findAll({
+      include: [
+        {
+          association: "productosC",
+        },
+      ],
+    });
+
+    Promise.all([pedidoProducto, pedidoPackage, pedidoCategory])
+     
+      .then(function ([product, package, category]) {
+        res.render(
+          "index",
+          { product: product },
+          { package: package },
+          { category: category }
+        );
+      });*/
+
+
+
+
+
   },
   search: (req, res) => {
     let loQueBuscoElUsuario = req.query.keywords.toLowerCase();

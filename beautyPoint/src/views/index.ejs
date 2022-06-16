@@ -5,110 +5,20 @@
   <body>
     <%- include('partials/header.ejs')%>
     <main class="home-main">
-      <div class="home-banners">
-        <img
-          src="https://images.squarespace-cdn.com/content/v1/5e7c10d0cc95f518282dbf0c/1587665808500-FZO4SCXWMMSP5BNMOK1E/apm-dibi-pure-equalizer-line-banner.jpg"
-          alt="rostro de mujer"
-        />
-        <h2><a href="#">Cuidados Básicos</a></h2>
-      </div>
+      <ul>
+        <% for( let i = 0; i < categories.length; i++ ) { %>
+        <li>
+          <%= categories[i].description %>
 
-      <section>
-        <article class="home-products">
-          <% for (let i = 0; i < cuidadosBasicos.length; i++) { %>
-            <div class="home-contenedor">
-          <a href="/products/detail/<%= cuidadosBasicos[i].id%>"
-            ><img
-              src= <%= cuidadosBasicos[i].image%>
-              alt=<%= cuidadosBasicos[i].name%>
-          /></a>
-          <div><%= cuidadosBasicos[i].name%></div>
-          <div class="home-price">$ <%= toThousand(cuidadosBasicos[i].price) %></div>
-          </div>
-          <% } %>
-        </article>
-      </section>
-      <div class="home-banners">
-        <img
-          src="https://www.skinforlife.net/wp-content/uploads/2020/11/spapineda-banner-one-iii.jpg"
-          alt="rostro de mujer"
-        />
-        <h2><a href="#">Línea Antiage</a></h2> 
-      </div>
-      <section>
-        <article class="home-products">
-          <% for (let i = 0; i < antiage.length; i++) { %>
-            <div class="home-contenedor">
-          <a href="/products/detail/<%= antiage[i].id%>"
-            ><img
-              src= <%= antiage[i].image%>
-              alt=<%= antiage[i].name%>
-          /></a>
-          <div><%= antiage[i].name%></div>
-          <div class="home-price">$ <%= toThousand(antiage[i].price) %></div>
-          </div>
-          <% } %>
-        </article>
-      </section>
-        <div class="home-banners">
-        <img
-          src="https://www.skinforlife.net/wp-content/uploads/2020/11/spapineda-banner-one-iii.jpg"
-          alt="rostro de mujer"
-        />
-        <h2><a href="#">Línea Solares</a></h2> 
-      </div>
-      <section>
-        <article class="home-products">
-          <% for (let i = 0; i < solares.length; i++) { %>
-            <div class="home-contenedor">
-          <a href="/products/detail/<%= solares[i].id%>"
-            ><img
-              src= <%= solares[i].image%>
-              alt=<%= solares[i].name%>
-          /></a>
-          <div><%= solares[i].name%></div>
-          <div class="home-price">$ <%= toThousand(solares[i].price) %></div>
-          </div>
-          <% } %>
-        </article>
-      </section>
-        <div class="home-banners">
-        <img
-          src="https://www.skinforlife.net/wp-content/uploads/2020/11/spapineda-banner-one-iii.jpg"
-          alt="rostro de mujer"
-        />
-        <h2><a href="#">Maquillaje</a></h2> 
-      </div>
-      <section>
-        <article class="home-products">
-          <% for (let i = 0; i < maquillajes.length; i++) { %>
-            <div class="home-contenedor">
-          <a href="/products/detail/<%= maquillajes[i].id%>"
-            ><img
-              src= <%= maquillajes[i].image%>
-              alt=<%= maquillajes[i].name%>
-          /></a>
-          <div><%= maquillajes[i].name%></div>
-          <div class="home-price">$ <%= toThousand(maquillajes[i].price) %></div>
-          </div>
-          <% } %>
-        </article>
-      </section>
+          <ul>
+            <% for( let j = 0; j < categories[i].productosC.length; j++ ) { %>
+
+            <li><%= categories[i].productosC[j].name %></li>
+            <% } %>
+          </ul>
+        </li>
+        <% } %>
+      </ul>
     </main>
-    <%- include('partials/footer.ejs')%>
   </body>
-
-<!--
-<h1>Listado de Productos</h1>
-<ul>
-  <% for( let i = 0; i < products.length; i++ ) { %>
-  <li>
-    <a href="/products/detail/<%= products[i].id %> "></a>
-    <%= products[i].name %> 
-  </li>
-  <% } %>
-</ul>
--->
-
-
 </html>

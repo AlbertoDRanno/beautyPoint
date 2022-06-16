@@ -17,7 +17,7 @@ const productsController = require("../controllers/productsController.js");
 // ************ methods() ************
 
 /*** GET ONE PRODUCT ***/
-router.get("/detail/:id", productsController.detail);
+//router.get("/detail/:id", productsController.detail);
 
 /*** CREATE ONE PRODUCT ***/
 router.get("/create",validateCreateForm, productsController.create);
@@ -30,8 +30,8 @@ router.post(
 );
 
 /*** EDIT ONE PRODUCT ***/
-router.get("/edit/:id", productsController.edit);
-router.put("/edit/:id", uploadFile.single("image"), productsController.update);
+//router.get("/edit/:id", productsController.edit);
+//router.put("/edit/:id", uploadFile.single("image"), productsController.update);
 
 /*** DELETE ONE PRODUCT***/
 router.delete("/delete/:id", productsController.destroy);
@@ -44,15 +44,12 @@ router.delete("/cart/:id", productsController.deleteProductCart);
 
 /*** DDBB ***/
 
-//creación
-//router.get("/crear", productsController.crear);
-//router.post("/crear", productsController.guardado);
 
 //listado
-//router.get("/", productsController.listado);
+router.get("/", productsController.listado);
 
 //detalle
-//router.get("/detail/:id", productsController.detalle);
+router.get("/detail/:id", productsController.detalle);
 
 //actualización
 //router.get("/edit/:id", productsController.editar);

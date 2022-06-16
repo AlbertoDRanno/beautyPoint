@@ -8,13 +8,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING(50),
-    } /*
+    }, /*
     createdAt: {
       type: DataTypes.DATE,
     },
     updatedAt: {
       type: DataTypes.DATE,
-    },*/,
+    },*/
+    status: {
+      type: DataTypes.INTEGER,
+    },
   };
   let config = {
     tableName: "packages",
@@ -29,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     Package.hasMany(models.Product, {
       // 1 a Muchos
       //un tipo de paquete tiene muchos productos./ Le digo con que tabla se relaciona
-      as: "productos", // un alias para llamar la relación,
-      foreignKey: "package_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+      as: "productosP", // un alias para llamar la relación,
+      foreignKey: "id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
     });
   };
 

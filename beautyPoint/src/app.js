@@ -6,7 +6,15 @@ const logMiddleware = require("./middlewares/logMiddleware");
 const session = require("express-session"); // Obj. Lit. que vive en el req (req.sesion), que cruza toda la app. Desde él puedo
 // acceder a todo lo que tenga en el request. Muere al cerrar el navegador
 const cookies = require("cookie-parser"); // Para guardar del lado del cliente - por navegador (lo que guarda en chrome, no lo tendrá Firefox)
-const userLoggedMiddleware = require("./middlewares/userLoggedMiddleware")
+const userLoggedMiddleware = require("./middlewares/userLoggedMiddleware");
+// ************ Sequelize ************
+const { Sequelize } = require("sequelize");
+// Option 3: Passing parameters separately (other dialects)
+const sequelize = new Sequelize("database", "username", "password", {
+  host: "localhost",
+  dialect: "mysql" /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */,
+});
+
 
 // ************ express() ************
 const app = express();

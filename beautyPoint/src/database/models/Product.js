@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-  let alias = 'Product';
+  let alias = "Product"; // apodo de la tabla
   let cols = {
+    // columnas de la base de datos
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -12,14 +13,28 @@ module.exports = (sequelize, DataTypes) => {
     price: {
       type: DataTypes.FLOAT,
     },
+    description: {
+      type: DataTypes.TEXT,
+    },
     discount: {
+      // ESTÁ COMO NO OBLIGATORIO EN LA BASE DE DATOS
       type: DataTypes.FLOAT,
     },
     package_id: {
       type: DataTypes.INTEGER,
+      references: {
+        // IMPORTANTE!!
+        model: "Package",
+        key: "id",
+      },
     },
     category_id: {
       type: DataTypes.INTEGER,
+      references: {
+        // IMPORTANTE!!
+        model: "Category",
+        key: "id",
+      },
     },
     image: {
       type: DataTypes.STRING(50),
@@ -27,15 +42,18 @@ module.exports = (sequelize, DataTypes) => {
     stock: {
       type: DataTypes.INTEGER,
     } /*
-    createdAt: {
+    createdAt: {             // NO HACEN FALTA 
       type: DataTypes.DATE,
     },
     updatedAt: {
       type: DataTypes.DATE,
     },*/,
+    status: {
+      type: DataTypes.INTEGER,
+    },
   };
   let config = {
-    tableName: 'products',
+    tableName: "products", // nombre de la tabla
     timestamps: true,
   };
 
@@ -46,25 +64,26 @@ module.exports = (sequelize, DataTypes) => {
     // recibe todos los modelos que tenemos
     //aquí defino cómo son esas asociaciones:
 
-    Product.belongsTo(models.Category, {  // Muchos a 1
+    Product.belongsTo(models.Category, {
+      // Muchos a 1
       //cada producto pertenece a usa sola categoria./ Le digo con que tabla se relaciona
-      as: "categorias", // un alias para llamar la relación,
+      as: "categories", // un alias para llamar la relación,
       foreignKey: "category_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
     });
 
-     Product.belongsTo(models.Package, {
-       // Muchos a 1
-       //cada producto tiene un package específico./ Le digo con que tabla se relaciona
-       as: "packages", // un alias para llamar la relación,
-       foreignKey: "package_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
-     });
+    Product.belongsTo(models.Package, {
+      // Muchos a 1
+      //cada producto tiene un package específico./ Le digo con que tabla se relaciona
+      as: "packages", // un alias para llamar la relación,
+      foreignKey: "package_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+    });
 
     Product.belongsToMany(models.User, {
       // Muchos a Muchos  // 1er parámetro, el modelo al que asocio
-      as: 'users', //alias
-      through: 'cart', //el nombre de la tabla pivot que une ambos modelos
-      foreignKey: 'product_id', //nombre de la columna en la tabla pivot, que hace referencia al modelo actual (Product)
-      otherKey: 'user_id', //nombre de la columna en la tabla pivot, que hace referencia al modelo con el que se conecta (User)
+      as: "users", //alias
+      through: "cart", //el nombre de la tabla pivot que une ambos modelos
+      foreignKey: "product_id", //nombre de la columna en la tabla pivot, que hace referencia al modelo actual (Product)
+      otherKey: "user_id", //nombre de la columna en la tabla pivot, que hace referencia al modelo con el que se conecta (User)
       timestamps: false, //False en caso de que, la tabla pivot, no tenga createdAt y updatedAt
     });
   };

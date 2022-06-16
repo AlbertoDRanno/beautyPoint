@@ -26,13 +26,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING(400),
-    } /*
+    }, /*
     createdAt: {
       type: DataTypes.DATE,
     },
     updatedAt: {
       type: DataTypes.DATE,
-    },*/,
+    },*/
+    status: {
+      type: DataTypes.INTEGER,
+    },
   };
   let config = {
     tableName: 'users',

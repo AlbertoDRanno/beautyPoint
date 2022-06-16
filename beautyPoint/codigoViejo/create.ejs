@@ -1,0 +1,14 @@
+    <div class="form-element">
+          <label for="package">Package:</label>
+          <input
+            type="text"
+            id="package"
+            name="package"
+            placeholder="Ingresá el package del producto"
+            class="<%= (locals.errors && errors.package) ? 'is-invalid' : null %>"
+            value="<%= (locals.oldData) ? oldData.package : null %>"
+          />
+          <% if (locals.errors && errors.package) { %>
+          <span class="feedback"> <%= errors.package.msg %> </span>
+          <% } %>
+        </div>

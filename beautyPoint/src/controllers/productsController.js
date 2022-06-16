@@ -1,9 +1,10 @@
 const JsonModel = require("../modelos/jsonModel");
 const productsModel = new JsonModel("products");
 const { validationResult } = require("express-validator");
-//const db = require("../database/models");
+const db = require("../database/models");
 
 const productsController = {
+
   // Detail - Detalle de un producto a partir de su id
   detail: (req, res) => {
     console.log("entrando al render detail de productsController.js");
@@ -15,27 +16,71 @@ const productsController = {
       res.render("./not-found");
     }
   },
+
   // Create - Render del formulario de creación de un producto
   create: (req, res) => {
-    console.log("entrando al método create del productController.js");
-    res.status(200).render("./products/create");
+    // console.log("entrando al método create del productController.js");
+    
+    //hay que compartir a la vista los packages y categorias.
+    //Por lo que hay vs pedidos asincrónicos. Los defino por separado:
+    let pedidoPackage = db.Package.findAll();
+    let pedidoCategory = db.Category.findAll();
+    Promise.all([pedidoPackage, pedidoCategory])
+      //cuando obtenga todos los pedidos, recién ahí realiza el "then"
+      .then(function ([package, category]) {
+        return res
+        .status(200)
+        .render("./products/create",
+          { package: package },
+          { category: category }
+        );
+      });
+
+    /*db.Category.findAll().then(function (productos) {
+      //"db.elAlias" que le puse en el modelo
+      // Los datos del producto los van a ingresar, lo que necesito enviarle a la vista son las categorias - desplegable
+      return res
+        .status(200)
+        .render("./products/create", { productos: productos });
+    });*/
   },
-  // Create -  Método que persiste la data del formulario de creación de un producto
+
+  // Store -  Método que persiste la data del formulario de creación de un producto
   store: (req, res) => {
     let errors = validationResult(req);
-    //res.send(errors);
+      //res.send(errors);
     if (errors.isEmpty()) {
       //hay errores en la validación??
-      console.log("Entró al método store del productController.js");
-      console.log(req.file);
-      req.body.image = "/images/products/" + req.file.filename;
-      let productId = productsModel.save(req.body);
-      res.redirect("/products/detail/" + productId);
-    } else {
-      res.render("./products/create", {
-        errors: errors.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
-        oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+      //console.log("Entró al método store del productController.js");
+      //console.log(req.file);
+      db.Product.create({
+        //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        //discount: req.body.discount - Falta agregarlo en la vista
+        package_id: req.body.package,
+        category_id: req.body.category,
+        image: req.body.image,
+        //stock: req.body.stock - Falta agregarlo en la vista
+        //status: req.body.status - tendría que quedar por default en 1 y el delete pasarlo a 0
       });
+      /*let idProducto = db.Product.findByPk(req.params.id)
+      .then(function (idProducto) {
+      res.redirect("/products/detail/" + idProducto)};*/
+
+      res.redirect("/products");
+    } else {
+       db.Category.findAll().then(function (productos) {
+         //"db.elAlias" que le puse en el modelo
+         // Los datos del producto los van a ingresar, lo que necesito enviarle a la vista son las categorias - desplegable
+         return res.status(200).render("./products/create", {
+           productos: productos,
+           errors: errors.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
+           oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+         });
+       });
+     ;
     }
   },
 
@@ -121,34 +166,16 @@ const productsController = {
   },
 
   // Base de Datos:
-  crear: (req, res) => {
-    db.Product.findAll().then(function (products) {
-      return res.render("./products/create", { products: products });
-    });
-  },
-  guardado: (req, res) => {
-    db.Product.create({
-      //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del form
-      name: req.body.name,
-      price: req.body.price,
-      description: req.body.description,
-      package_id: req.body.package,
-      category_id: req.body.category,
-      image: req.body.image,
-      discount: req.body.discount,
-      stock: req.body.stock,
-    });
-    res.redirect("./products/create");
-  },
+
+  guardado: (req, res) => {},
   listado: (req, res) => {
-    db.Product.findAll().then(function (products) {
-      res.render("index", { products: products });
-    });
+    
   },
   detalle: (req, res) => {
     db.Product.findByPk(req.params.id, {
-      include: [{ association: "categorias" }, { association: "packages" }],
+      include: [{ association: "categories" }, { association: "packages" }],
     }).then(function (product) {
+      console.log(product);
       res.render("./products/detail", { product: product });
     });
   },
@@ -183,19 +210,20 @@ const productsController = {
       image: req.body.image,
       discount: req.body.discount,
       stock: req.body.stock,
-    }), {
-      where: req.params.id
-    }
-    res.redirect("products/detail/" + req.params.id)
+    }),
+      {
+        where: req.params.id,
+      };
+    res.redirect("products/detail/" + req.params.id);
   },
   borrar: (req, res) => {
     db.Product.destroy({
       where: {
-        id: req.params.id
-      }
-    })
-    res.redirect("/")
-  }
+        id: req.params.id,
+      },
+    });
+    res.redirect("/");
+  },
 };
 
 // ************ exports - (no tocar) ************
