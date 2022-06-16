@@ -118,10 +118,9 @@ const productsController = {
        image: req.body.image,
        //stock: req.body.stock - Falta agregarlo en la vista
        //status: req.body.status - tendría que quedar por default en 1 ( o el delete pasarlo a 1 = inactivo)
-     }),
-       {
-         where: req.params.id,
-       };
+     },  {
+         where: { id: req.params.id},
+       })
      //return res.render("./products/detail/" + req.params.id);
        res.redirect("/");
 
