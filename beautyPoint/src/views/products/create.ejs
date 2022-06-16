@@ -60,34 +60,32 @@
         </div>
 
         <div class="form-element">
-          <label for="package">Package:</label>
-          <input
-            type="text"
-            id="package"
-            name="package"
-            placeholder="Ingresá el package del producto"
-            class="<%= (locals.errors && errors.package) ? 'is-invalid' : null %>"
-            value="<%= (locals.oldData) ? oldData.package : null %>"
-          />
-          <% if (locals.errors && errors.package) { %>
-          <span class="feedback"> <%= errors.package.msg %> </span>
-          <% } %>
-        </div>
-
-        <div class="form-element">
           <label for="image">Imagen Producto:</label>
           <input type="file" id="image" name="image" accept=".jpg, .png" />
           <% if (locals.errors && errors.image) { %>
           <span class="feedback"> <%= errors.image.msg %> </span>
+          <% } %>
+          
+        <div class="form-element">
+          <label for="package">Package:</label>
+          <select name="package" id="package">
+            <% for( let i = 0; i < packages.length; i++ ) { %>
+            <option value=" <%= packages[i].id %>  ">
+              <%= packages[i].description %>
+            </option>
+            <% } %>
+          </select>
+          <% if (locals.errors && errors.category) { %>
+          <span class="feedback"> <%= errors.category.msg %> </span>
           <% } %>
         </div>
 
         <div class="form-element">
           <label for="category">Categoría:</label>
           <select name="category" id="category">
-            <% for( let i = 0; i < productos.length; i++ ) { %>
-            <option value=" <%= productos[i].id %>  ">
-              <%= productos[i].description %>
+            <% for( let i = 0; i < categories.length; i++ ) { %>
+            <option value=" <%= categories[i].id %>  ">
+              <%= categories[i].description %>
             </option>
             <% } %>
           </select>

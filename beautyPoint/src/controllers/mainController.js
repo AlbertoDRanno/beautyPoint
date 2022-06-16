@@ -13,21 +13,6 @@ const productsModel = new JsonModel("products");
 const mainController = {
   index: (req, res) => {
     console.log("entrando al render de index");
-   /* db.Product.findAll({
-      include: [
-        {
-          association: "categories",
-        },
-        {
-          association: "packages",
-        },
-      ],
-    }).then(function (products) {
-      // console.table(products)
-      // console.log(products)
-      res.status(200).render("index", { products: products, toThousand });
-    });*/
-    
     db.Category.findAll({
       include: [
         {
@@ -35,53 +20,8 @@ const mainController = {
         },
       ],
     }).then(function (categories) {
-      // console.table(products)
-      // console.log(products)
       res.status(200).render("index", { categories: categories, toThousand });
     });
-/*
-    let pedidoProducto = db.Product.findAll({
-      include: [
-        {
-          association: "categories",
-        },
-        {
-          association: "packages",
-        },
-      ],
-    });
-    
-    let pedidoPackage = db.Package.findAll({
-      include: [
-        {
-          association: "productosP",
-        },
-      ],
-    });
-
-    let pedidoCategory = db.Category.findAll({
-      include: [
-        {
-          association: "productosC",
-        },
-      ],
-    });
-
-    Promise.all([pedidoProducto, pedidoPackage, pedidoCategory])
-     
-      .then(function ([product, package, category]) {
-        res.render(
-          "index",
-          { product: product },
-          { package: package },
-          { category: category }
-        );
-      });*/
-
-
-
-
-
   },
   search: (req, res) => {
     let loQueBuscoElUsuario = req.query.keywords.toLowerCase();

@@ -4,7 +4,6 @@ const { validationResult } = require("express-validator");
 const db = require("../database/models");
 
 const productsController = {
-
   // Detail - Detalle de un producto a partir de su id
   detail: (req, res) => {
     console.log("entrando al render detail de productsController.js");
@@ -15,40 +14,51 @@ const productsController = {
     } else {
       res.render("./not-found");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
   },
 
   // Create - Render del formulario de creación de un producto
   create: (req, res) => {
-    // console.log("entrando al método create del productController.js");
-    
-    //hay que compartir a la vista los packages y categorias.
-    //Por lo que hay vs pedidos asincrónicos. Los defino por separado:
-    let pedidoPackage = db.Package.findAll();
-    let pedidoCategory = db.Category.findAll();
+    console.log("entrando al método create del productController.js");
+    //Hay vs pedidos asincrónicos. Los defino por separado:
+    let pedidoPackage = db.Package.findAll({
+      include: [{ association: "productosP" }],
+    });
+    let pedidoCategory = db.Category.findAll({
+      include: [{ association: "productosC" }],
+    });
     Promise.all([pedidoPackage, pedidoCategory])
       //cuando obtenga todos los pedidos, recién ahí realiza el "then"
-      .then(function ([package, category]) {
+      .then(function ([packages, categories]) {
         return res
-        .status(200)
-        .render("./products/create",
-          { package: package },
-          { category: category }
-        );
+          .status(200)
+          .render(
+            "./products/create",
+            { packages: packages, categories: categories }
+          );
       });
-
-    /*db.Category.findAll().then(function (productos) {
-      //"db.elAlias" que le puse en el modelo
-      // Los datos del producto los van a ingresar, lo que necesito enviarle a la vista son las categorias - desplegable
-      return res
-        .status(200)
-        .render("./products/create", { productos: productos });
-    });*/
   },
 
   // Store -  Método que persiste la data del formulario de creación de un producto
   store: (req, res) => {
     let errors = validationResult(req);
-      //res.send(errors);
+    //res.send(errors);
     if (errors.isEmpty()) {
       //hay errores en la validación??
       //console.log("Entró al método store del productController.js");
@@ -63,24 +73,25 @@ const productsController = {
         category_id: req.body.category,
         image: req.body.image,
         //stock: req.body.stock - Falta agregarlo en la vista
-        //status: req.body.status - tendría que quedar por default en 1 y el delete pasarlo a 0
+        //status: req.body.status - tendría que quedar por default en 1 ( o el delete pasarlo a 1 = inactivo)
       });
-      /*let idProducto = db.Product.findByPk(req.params.id)
-      .then(function (idProducto) {
-      res.redirect("/products/detail/" + idProducto)};*/
-
-      res.redirect("/products");
+          res.redirect("/");
     } else {
-       db.Category.findAll().then(function (productos) {
-         //"db.elAlias" que le puse en el modelo
-         // Los datos del producto los van a ingresar, lo que necesito enviarle a la vista son las categorias - desplegable
-         return res.status(200).render("./products/create", {
-           productos: productos,
-           errors: errors.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
-           oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
-         });
-       });
-     ;
+      let pedidoPackage = db.Package.findAll({
+        include: [{ association: "productosP" }],
+      });
+      let pedidoCategory = db.Category.findAll({
+        include: [{ association: "productosC" }],
+      });
+      Promise.all([pedidoPackage, pedidoCategory])
+        .then(function ([packages, categories]) {
+          return res.status(200).render("./products/create", {
+            packages: packages,
+            categories: categories,
+            errors: errors.mapped(), // envío los errores como un obj. lit.
+            oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+          });
+        });
     }
   },
 
@@ -167,10 +178,6 @@ const productsController = {
 
   // Base de Datos:
 
-  guardado: (req, res) => {},
-  listado: (req, res) => {
-    
-  },
   detalle: (req, res) => {
     db.Product.findByPk(req.params.id, {
       include: [{ association: "categories" }, { association: "packages" }],

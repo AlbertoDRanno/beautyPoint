@@ -45,9 +45,6 @@ router.delete("/cart/:id", productsController.deleteProductCart);
 /*** DDBB ***/
 
 
-//listado
-router.get("/", productsController.listado);
-
 //detalle
 router.get("/detail/:id", productsController.detalle);
 

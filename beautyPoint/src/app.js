@@ -64,9 +64,9 @@ const rutasProducts = require("./routes/products.js");
 const rutasUsers = require("./routes/users.js");
 
 //configuración de ruteo
-app.use("/", rutasMain);
 app.use("/products", rutasProducts);
 app.use("/users", rutasUsers);
+app.use("/", rutasMain);
 
 // ************ Middleware Error 404 - Siempre último! ************
 //Se ejecuta en caso de que una ruta no exista
