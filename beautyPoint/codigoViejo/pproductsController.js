@@ -16,5 +16,36 @@ store: (req, res) => {
     }}
 
 
-    
+      edit: (req, res) => {
+    console.log("Entró al método edit del productController.js");
+    let product = productsModel.buscar(req.params.id);
+    if (product) {
+      res.render("./products/edit", { products: product });
+      console.log(product);
+    } else {
+      res.render("./not-found");
+    }
+  }
+
+
+  update: (req, res) => {
+    console.log("Entró al método update del productController.js");
+    let productoAeditar = productsModel.buscar(req.params.id);
+    req.body.id = productoAeditar.id;
+
+    if (!req.file) {
+      console.log(
+        "No se editó la imagen. Traigo la que tenía en base de datos"
+      );
+      req.body.image = productoAeditar.image;
+    } else {
+      console.log("Se editó la imagen. Subo la nueva.");
+      req.body.image = "/images/products/" + req.file.filename;
+    }
+
+    console.log(req.body);
+
+    productsModel.update(req.body);
+    res.redirect("/products/detail/" + req.params.id);
+  }
 

@@ -14,7 +14,11 @@
         </select>
         <span class="feedback"></span>
  
- 
+ <div class="form-element">
+        <label for="product_package">Package:</label>
+        <input type="text" id="product_package" name="package" value="<%= product.package %>" required />
+        <span class="feedback"></span>
+      </div>
  
  
  

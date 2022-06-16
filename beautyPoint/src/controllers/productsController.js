@@ -7,30 +7,13 @@ const productsController = {
   // Detail - Detalle de un producto a partir de su id
   detail: (req, res) => {
     console.log("entrando al render detail de productsController.js");
-    let product = productsModel.buscar(req.params.id);
+        db.Product.findByPk(req.params.id, {
+          include: [{ association: "categories" }, { association: "packages" }],
+        }).then(function (product) {
+          console.log(product);
 
-    if (product) {
-      res.render("./products/detail", { products: product });
-    } else {
-      res.render("./not-found");
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+          res.render("./products/detail", { product: product });
+        });
   },
 
   // Create - Render del formulario de creación de un producto
@@ -61,7 +44,7 @@ const productsController = {
     //res.send(errors);
     if (errors.isEmpty()) {
       //hay errores en la validación??
-      //console.log("Entró al método store del productController.js");
+      console.log("Entró al método store del productController.js");
       //console.log(req.file);
       db.Product.create({
         //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
@@ -98,44 +81,51 @@ const productsController = {
   // Edit - Render del formulario de edición de un producto
   edit: (req, res) => {
     console.log("Entró al método edit del productController.js");
-    let product = productsModel.buscar(req.params.id);
-    if (product) {
-      res.render("./products/edit", { products: product });
-      console.log(product);
-    } else {
-      res.render("./not-found");
-    }
+    //hay que pedir, los datos del producto a editar, pero también los packages y categorias.
+    //Por lo que hay vs pedidos asincrónicos. Los defino por separado:
+    let pedidoProducto = db.Product.findByPk(req.params.id, {
+      include: [{ association: "categories" }, { association: "packages" }],
+    });
+    let pedidoPackage = db.Package.findAll({
+      include: [{ association: "productosP" }],
+    });
+    let pedidoCategory = db.Category.findAll({
+      include: [{ association: "productosC" }],
+    });
+    Promise.all([pedidoProducto, pedidoPackage, pedidoCategory])
+      //cuando obtenga todos los pedidos, recién ahí realiza el "then"
+      .then(function ([product, package, category]) {
+        return res
+          .status(200)
+          .render("./products/edit", {
+          product: product,
+          package: package,
+          category: category,
+        });
+      });
   },
 
   update: (req, res) => {
     console.log("Entró al método update del productController.js");
-    let productoAeditar = productsModel.buscar(req.params.id);
-    req.body.id = productoAeditar.id;
+     db.Product.update({
+       //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
+       name: req.body.name,
+       price: req.body.price,
+       description: req.body.description,
+       //discount: req.body.discount - Falta agregarlo en la vista
+       package_id: req.body.package,
+       category_id: req.body.category,
+       image: req.body.image,
+       //stock: req.body.stock - Falta agregarlo en la vista
+       //status: req.body.status - tendría que quedar por default en 1 ( o el delete pasarlo a 1 = inactivo)
+     }),
+       {
+         where: req.params.id,
+       };
+     //return res.render("./products/detail/" + req.params.id);
+       res.redirect("/");
 
-    if (!req.file) {
-      console.log(
-        "No se editó la imagen. Traigo la que tenía en base de datos"
-      );
-      req.body.image = productoAeditar.image;
-    } else {
-      console.log("Se editó la imagen. Subo la nueva.");
-      req.body.image = "/images/products/" + req.file.filename;
-    }
-
-    console.log(req.body);
-
-    productsModel.update(req.body);
-    res.redirect("/products/detail/" + req.params.id);
   },
-  // Update - Method to update
-  // update: (req, res) => {
-  //   console.log('Entró al método update del productController.js');
-  //   req.body.id = req.params.id;
-  //   req.body.image = '/images/products/' + req.file.filename;
-  //   // console.log(req.body);
-  //   productsModel.update(req.body);
-  //   res.redirect('/');
-  // },
 
   cart: (req, res) => {
     console.log("entrando al render cart");
@@ -177,52 +167,6 @@ const productsController = {
   },
 
   // Base de Datos:
-
-  detalle: (req, res) => {
-    db.Product.findByPk(req.params.id, {
-      include: [{ association: "categories" }, { association: "packages" }],
-    }).then(function (product) {
-      console.log(product);
-      res.render("./products/detail", { product: product });
-    });
-  },
-  editar: (req, res) => {
-    //hay que pedir, los datos del producto a editar, pero también los packages y categorias.
-    //Por lo que hay vs pedidos asincrónicos. Los defino por separado:
-    let pedidoProducto = db.Product.findByPk(req.params.id);
-    // aún no pongo el "then", sino que termino de enumerar los pedidos asincrónicos
-    let pedidoPackage = db.Package.findAll();
-
-    let pedidoCategory = db.Category.findAll();
-
-    Promise.all([pedidoProducto, pedidoPackage, pedidoCategory])
-      //cuando obtenga todos los pedidos, recién ahí realiza el "then"
-      .then(function ([product, package, category]) {
-        res.render(
-          "/products/edit",
-          { product: product },
-          { package: package },
-          { category: category }
-        );
-      });
-  },
-  actualizar: (req, res) => {
-    db.Product.update({
-      //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del form
-      name: req.body.name,
-      price: req.body.price,
-      description: req.body.description,
-      package_id: req.body.package,
-      category_id: req.body.category,
-      image: req.body.image,
-      discount: req.body.discount,
-      stock: req.body.stock,
-    }),
-      {
-        where: req.params.id,
-      };
-    res.redirect("products/detail/" + req.params.id);
-  },
   borrar: (req, res) => {
     db.Product.destroy({
       where: {

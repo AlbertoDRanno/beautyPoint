@@ -51,11 +51,12 @@
 </body>
 
 
-<!--UPDATE-->
+
+<form action="/products/delete/<%= product.id %>?_method=DELETE" method="POST">
+
 <a href="/products/edit/<%= product.id %> ">
 <button>Editar</button>
 </a>
-<form action="/products/delete/<%= product.id %>?_method=DELETE" method="POST">
 
 <button type="submit">Borrar</button>
 
