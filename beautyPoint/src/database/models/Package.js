@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       // 1 a Muchos
       //un tipo de paquete tiene muchos productos./ Le digo con que tabla se relaciona
       as: "productosP", // un alias para llamar la relación,
-      foreignKey: "id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+      foreignKey: "package_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas. No importa donde estamos parados
     });
   };
 

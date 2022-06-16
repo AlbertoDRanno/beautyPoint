@@ -29,11 +29,12 @@ module.exports = (sequelize, DataTypes) => {
   Category.associate = function (models) {
     // recibe todos los modelos que tenemos
     //aquí defino cómo son esas asociaciones
-    Category.hasMany(models.Product, { // Product porque es el apodo de la tabla, que le puse en el modelo
+    Category.hasMany(models.Product, {
+      // Product porque es el apodo de la tabla, que le puse en el modelo
       // 1 a Muchos
       //una categoría tiene muchos productos./ Le digo con que tabla se relaciona
       as: "productosC", // un alias para llamar la relación,
-      foreignKey: "id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+      foreignKey: "category_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas. No importa donde estamos parados
     });
   };
 
