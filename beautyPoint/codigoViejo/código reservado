@@ -1,5 +1,5 @@
      
- 
+ /*
             <option value="categoria-1" <%= locals.oldData && oldData.category === "categoria-1" ? "selected" : " " ; %>>Cuidados básicos</option>
             <option value="categoria-2" <%= locals.oldData && oldData.category === "categoria-2" ? "selected" : " " ; %>>Antiage</option>
             <option value="categoria-3" <%= locals.oldData && oldData.category === "categoria-3" ? "selected" : " " ; %>>Solares</option>
@@ -12,20 +12,25 @@
           <option value="categoria-3" <%= (products.category == "categoria-3") ? "selected" : "";%>>Solares</option>
           <option value="categoria-4" <%= (products.category == "categoria-4") ? "selected" : "";%>>Maquillaje</option>
         </select>
-        <span class="feedback"></span>
- 
- <div class="form-element">
-        <label for="product_package">Package:</label>
-        <input type="text" id="product_package" name="package" value="<%= product.package %>" required />
-        <span class="feedback"></span>
-      </div>
- 
+        <span class="feedback"></span>*/
 
- 
-    productsModel.destroy(req.params.id);
-    res.redirect("/");
- 
- 
+
+      search: (req, res) => {
+    let loQueBuscoElUsuario = req.query.keywords.toLowerCase();
+    let products = productsModel.readJsonFile();
+    console.log(loQueBuscoElUsuario);
+    let productsResults = [];
+    for (let i = 0; i < products.length; i++) {
+      console.log("entró al FOR");
+      if (products[i].name.toLowerCase().includes(loQueBuscoElUsuario)) {
+        productsResults.push(products[i]);
+      }
+    }
+    res.status(200).render("results", {
+      productsResults,
+      toThousand,
+    });
+  }
  
  
  

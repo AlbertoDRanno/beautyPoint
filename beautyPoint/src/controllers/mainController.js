@@ -25,18 +25,21 @@ const mainController = {
   },
   search: (req, res) => {
     let loQueBuscoElUsuario = req.query.keywords.toLowerCase();
-    let products = productsModel.readJsonFile();
-    console.log(loQueBuscoElUsuario);
+    //console.log(loQueBuscoElUsuario);
     let productsResults = [];
-    for (let i = 0; i < products.length; i++) {
-      console.log("entró al FOR");
-      if (products[i].name.toLowerCase().includes(loQueBuscoElUsuario)) {
-        productsResults.push(products[i]);
+    db.Product.findAll({
+      include: [{ association: "categories" }, { association: "packages" }],
+    }).then(function (products) {
+      for (let i = 0; i < products.length; i++) {
+        //console.log("entró al FOR");
+        if (products[i].name.toLowerCase().includes(loQueBuscoElUsuario)) {
+          productsResults.push(products[i]);
+        }
       }
-    }
-    res.status(200).render("results", {
-      productsResults,
-      toThousand,
+      return res.status(200).render("results", {
+        productsResults,
+        toThousand,
+      });
     });
   },
 };
