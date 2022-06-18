@@ -1,15 +1,31 @@
 const db = require('../database/models');
-const Op = db.Sequelize.Op;
+const { Sequelize } = require('sequelize');
 
 const apiController = {
   /* ************************************* USUARIOS */
   listarUsuarios: (req, res) => {
     // api/users/
-    // EN PROCESO: falta tuneo de campos a retornar en json según enunciado
+    // EN PROCESO: falta tuneo de campo "detail:" de users
     console.log('entrando al método listarUsuarios del apiController.js');
 
-    db.User.findAll()
+    db.User.findAll({
+      attributes: [
+        'id',
+        // [sequelize.col('first_name'), 'name'],
+        [
+          Sequelize.fn(
+            'concat',
+            Sequelize.col('last_name'),
+            ' , ',
+            Sequelize.col('first_name')
+          ),
+          'name',
+        ],
+        'email',
+      ],
+    })
       .then((users) => {
+        console.log(users);
         res.status(200).json({
           total: users.length,
           data: users,
