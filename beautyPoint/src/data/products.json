@@ -152,16 +152,6 @@
   "discount": null
  },
  {
-  "name": "Leche de limpieza",
-  "price": 1827,
-  "description": "sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas leo odio condimentum id",
-  "package": 35,
-  "category": "categoria-1",
-  "image": "/images/products/cremaLimpieza.png",
-  "id": 17,
-  "discount": null
- },
- {
   "name": "Loción humectante y tonificante",
   "price": 3056,
   "description": "feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas",

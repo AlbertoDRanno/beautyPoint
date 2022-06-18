@@ -20,6 +20,10 @@
         <span class="feedback"></span>
       </div>
  
+
+ 
+    productsModel.destroy(req.params.id);
+    res.redirect("/");
  
  
  

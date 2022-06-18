@@ -42,14 +42,4 @@ router.get("/cart", authMiddleware, productsController.cart);
 router.put("/cart/:id", productsController.addProductCart)
 router.delete("/cart/:id", productsController.deleteProductCart);
 
-/*** DDBB ***/
-
-//actualización
-//router.get("/edit/:id", productsController.editar);
-//router.put("/edit/:id", productsController.actualizar); 
-
-//borrado
-//router.delete("/delete/:id", productsController.borrar);
-
-
 module.exports = router;
