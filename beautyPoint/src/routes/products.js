@@ -34,7 +34,10 @@ router.get("/edit/:id", productsController.edit);
 router.put("/edit/:id", uploadFile.single("image"), productsController.update);
 
 /*** DELETE ONE PRODUCT***/
+//Hard Delete
 router.delete("/delete/:id", productsController.destroy);
+//Soft Delete
+router.put("/softDelete/:id", productsController.delete);
 
 /*** GET PRODUCTS FROM CART ***/
 router.get("/cart", authMiddleware, productsController.cart);

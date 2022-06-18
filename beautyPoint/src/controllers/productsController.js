@@ -42,7 +42,7 @@ const productsController = {
         category_id: req.body.category,
         image: req.body.image,
         //stock: req.body.stock - Falta agregarlo en la vista
-        //status: req.body.status - tendría que quedar por default en 1 ( o el delete pasarlo a 1 = inactivo)
+        status: 1,
       });
       res.redirect("/");
     } else {
@@ -117,17 +117,15 @@ const productsController = {
         category_id: req.body.category,
         image: req.body.image,
         //stock: req.body.stock - Falta agregarlo en la vista
-        //status: req.body.status - tendría que quedar por default en 1 ( o el delete pasarlo a 1 = inactivo)
       },
       {
         where: { id: req.params.id },
       }
     );
-    //return res.render("./products/detail/" + req.params.id);
     res.redirect("/");
   },
 
-  // Hard Delete - Delete one product from DB
+  // destroy - Hard Delete - Elimina un producto de la base de datos
   destroy: (req, res) => {
     console.log("Entró al método destroy del productController.js");
     db.Product.destroy({
@@ -135,6 +133,19 @@ const productsController = {
         id: req.params.id,
       },
     });
+    res.redirect("/");
+  },
+
+  // Soft Delete - Cambia el status de un producto para que sea o no visible
+  delete: (req, res) => {
+    db.Product.update(
+      {
+        status: 0,
+      },
+      {
+        where: { id: req.params.id },
+      }
+    );
     res.redirect("/");
   },
 

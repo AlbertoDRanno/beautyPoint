@@ -19,6 +19,7 @@
             <article class="home-products">
               <% for( let j = 0; j < categories[i].productosC.length; j++ ) { %>
               <div class="home-contenedor">
+                <% if (categories[i].productosC[j].status != 0) { %>
                 <a href="/products/detail/<%= categories[i].productosC[j].id%>">
                 <img src="<%= categories[i].productosC[j].image%> " alt=<%=categories[i].productosC[j].name%> /></a>
                 <div><%= categories[i].productosC[j].name%></div>
@@ -26,6 +27,7 @@
                   $ <%= toThousand(categories[i].productosC[j].price) %>
               </div>
               </div>
+              <% } %>
               <% } %>
             </article>
           </section>          
