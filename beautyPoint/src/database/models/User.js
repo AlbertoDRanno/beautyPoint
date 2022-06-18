@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING(320),
     },
-    genero: {
-      // Analizar si campo genero deberiamos usarloo para dif tipo de usuario: ej 1 para admin, 0 para user común.
+    categoria: {
+      // valor default 0 para user común. 1 para admin... etc
       type: DataTypes.TINYINT(1),
     },
     avatar: {
