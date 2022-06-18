@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  let alias = "Product"; // apodo de la tabla
+  let alias = 'Product'; // apodo de la tabla
   let cols = {
     // columnas de la base de datos
     id: {
@@ -24,16 +24,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       references: {
         // IMPORTANTE!!
-        model: "Package",
-        key: "id",
+        model: 'Package',
+        key: 'id',
       },
     },
     category_id: {
       type: DataTypes.INTEGER,
       references: {
         // IMPORTANTE!!
-        model: "Category",
-        key: "id",
+        model: 'Category',
+        key: 'id',
       },
     },
     image: {
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   };
   let config = {
-    tableName: "products", // nombre de la tabla
+    tableName: 'products', // nombre de la tabla
     timestamps: true,
   };
 
@@ -65,26 +65,37 @@ module.exports = (sequelize, DataTypes) => {
     //aquí defino cómo son esas asociaciones:
 
     Product.belongsTo(models.Category, {
+      // ok
       // Muchos a 1
       //cada producto pertenece a usa sola categoria./ Le digo con que tabla se relaciona
-      as: "categories", // un alias para llamar la relación,
-      foreignKey: "category_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+      as: 'categories', // un alias para llamar la relación,
+      foreignKey: 'category_id', // Cuál es la columna de la bbdd que une a éstas 2 tablas
     });
 
     Product.belongsTo(models.Package, {
+      // ok
       // Muchos a 1
       //cada producto tiene un package específico./ Le digo con que tabla se relaciona
-      as: "packages", // un alias para llamar la relación,
-      foreignKey: "package_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
+      as: 'packages', // un alias para llamar la relación,
+      foreignKey: 'package_id', // Cuál es la columna de la bbdd que une a éstas 2 tablas
     });
 
     Product.belongsToMany(models.User, {
+      // ok
       // Muchos a Muchos  // 1er parámetro, el modelo al que asocio
-      as: "users", //alias
-      through: "cart", //el nombre de la tabla pivot que une ambos modelos
-      foreignKey: "product_id", //nombre de la columna en la tabla pivot, que hace referencia al modelo actual (Product)
-      otherKey: "user_id", //nombre de la columna en la tabla pivot, que hace referencia al modelo con el que se conecta (User)
-      timestamps: false, //False en caso de que, la tabla pivot, no tenga createdAt y updatedAt
+      as: 'users', //alias
+      through: 'cart', //el nombre de la tabla pivot que une ambos modelos
+      foreignKey: 'product_id', //nombre de la columna en la tabla pivot, que hace referencia al modelo actual (Product)
+      otherKey: 'user_id', //nombre de la columna en la tabla pivot, que hace referencia al modelo con el que se conecta (User)
+      timestamps: true, //False en caso de que, la tabla pivot, no tenga createdAt y updatedAt
+    });
+
+    Product.belongsToMany(models.User, {
+      as: 'publicacionesDelUsuario',
+      through: 'publications',
+      foreignKey: 'product_id',
+      otherKey: 'user_id',
+      timestamps: true,
     });
   };
 

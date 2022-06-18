@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(320),
     },
     genero: {
+      // Analizar si campo genero deberiamos usarloo para dif tipo de usuario: ej 1 para admin, 0 para user común.
       type: DataTypes.TINYINT(1),
     },
     avatar: {
@@ -26,13 +27,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING(400),
-    }, /*
+    } /*
     createdAt: {
       type: DataTypes.DATE,
     },
     updatedAt: {
       type: DataTypes.DATE,
-    },*/
+    },*/,
     status: {
       type: DataTypes.INTEGER,
     },
@@ -63,7 +64,16 @@ module.exports = (sequelize, DataTypes) => {
       through: 'cart', //el nombre de la tabla pivot que une ambos modelos
       foreignKey: 'user_id', //nombre de la columna en la tabla pivot, que hace referencia al modelo actual (Pelicula)
       otherKey: 'product_id', //nombre de la columna en la tabla pivot, que hace referencia al modelo con el que se conecta (Actores)
-      timestamps: false, //False en caso de que, la tabla pivot, no tenga createdAt y updatedAt
+      timestamps: true, //False en caso de que, la tabla pivot, no tenga createdAt y updatedAt
+    });
+
+    User.belongsToMany(models.Product, {
+      // idem relacion products pero para los arts publicados
+      as: 'publicaciones',
+      through: 'publications',
+      foreignKey: 'user_id',
+      otherKey: 'product_id',
+      timestamps: true,
     });
   };
 
