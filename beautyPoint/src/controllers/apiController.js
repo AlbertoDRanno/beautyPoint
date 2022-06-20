@@ -5,16 +5,14 @@ const apiController = {
   /* ************************************* USUARIOS */
   listarUsuarios: (req, res) => {
     // api/users/
-    // EN PROCESO: falta tuneo de campo "detail:" de users
     console.log('entrando al método listarUsuarios del apiController.js');
 
     db.User.findAll({
       attributes: [
         'id',
-        // [sequelize.col('first_name'), 'name'],
         [
           Sequelize.fn(
-            'concat',
+            'CONCAT',
             Sequelize.col('last_name'),
             ' , ',
             Sequelize.col('first_name')
@@ -22,6 +20,7 @@ const apiController = {
           'name',
         ],
         'email',
+        [Sequelize.fn('CONCAT', '/api/users/', Sequelize.col('id')), 'detail'],
       ],
     })
       .then((users) => {
