@@ -29,7 +29,7 @@ const apiController = {
       .then((users) => {
         console.log(users);
         res.status(200).json({
-          total: users.length,
+          count: users.length,
           data: users,
           status: 200,
         });
@@ -70,10 +70,21 @@ const apiController = {
   /* ************************************* PRODUCTOS */
   listarProductos: (req, res) => {
     // api/products/
-    // EN PROCESO: falta tuneo de campos a retornar en json según enunciado
     console.log('entrando al método listarProductos del apiController.js');
 
-    db.Product.findAll({
+    let promesaCategorias = db.Category.findAll({
+      include: [{ association: 'productosC', attributes: [] }],
+      attributes: [
+        'description',
+        [
+          Sequelize.fn('COUNT', Sequelize.col('category.id')),
+          'totalDeProductos',
+        ],
+      ],
+      group: 'category.id',
+    });
+
+    let promesaProductos = db.Product.findAll({
       include: [
         { association: 'categories', attributes: ['id', 'description'] },
       ],
@@ -86,11 +97,13 @@ const apiController = {
           'detail',
         ],
       ],
-    })
-      .then((productos) => {
+    });
+
+    Promise.all([promesaCategorias, promesaProductos])
+      .then(function ([categorias, productos]) {
         res.status(200).json({
           count: productos.length,
-          // countByCategory: ,
+          countByCategory: categorias,
           data: productos,
           status: 200,
         });
@@ -98,6 +111,33 @@ const apiController = {
       .catch((err) => {
         res.send(err);
       });
+
+    // Versión tranqui... sin la magia para resolver el countByCategory
+    // db.Product.findAll({
+    //   include: [
+    //     { association: 'categories', attributes: ['id', 'description'] },
+    //   ],
+    //   attributes: [
+    //     'id',
+    //     'name',
+    //     'description',
+    //     [
+    //       Sequelize.fn('CONCAT', '/api/products/', Sequelize.col('product.id')),
+    //       'detail',
+    //     ],
+    //   ],
+    // })
+    //   .then((productos) => {
+    //     res.status(200).json({
+    //       count: productos.length,
+    //       // countByCategory: ,
+    //       data: productos,
+    //       status: 200,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     res.send(err);
+    //   });
   },
   mostrarDetalleDeProducto: (req, res) => {
     // /api/products/:id
