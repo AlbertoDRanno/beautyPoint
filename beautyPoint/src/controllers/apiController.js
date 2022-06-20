@@ -37,11 +37,27 @@ const apiController = {
   },
   mostrarDetalleDeUsuario: (req, res) => {
     // api/users/:id
-    // EN PROCESO: falta tuneo de campos a retornar en json según enunciado
     console.log(
       'entrando al método mostrarDetalleDeUsuario del apiController.js'
     );
-    db.User.findByPk(req.params.id)
+    db.User.findOne({
+      where: { id: req.params.id },
+      attributes: [
+        'id',
+        [
+          Sequelize.fn(
+            'CONCAT',
+            Sequelize.col('last_name'),
+            ' , ',
+            Sequelize.col('first_name')
+          ),
+          'name',
+        ],
+        'dni',
+        'email',
+        'avatar',
+      ],
+    })
       .then((usuario) => {
         res.status(200).json({ data: usuario, status: 200 });
       })
