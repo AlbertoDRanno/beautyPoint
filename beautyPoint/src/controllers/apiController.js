@@ -20,7 +20,10 @@ const apiController = {
           'name',
         ],
         'email',
-        [Sequelize.fn('CONCAT', '/api/users/', Sequelize.col('id')), 'detail'],
+        [
+          Sequelize.fn('CONCAT', '/api/users/', Sequelize.col('User.id')),
+          'detail',
+        ],
       ],
     })
       .then((users) => {
@@ -69,7 +72,21 @@ const apiController = {
     // api/products/
     // EN PROCESO: falta tuneo de campos a retornar en json según enunciado
     console.log('entrando al método listarProductos del apiController.js');
-    db.Product.findAll()
+
+    db.Product.findAll({
+      include: [
+        { association: 'categories', attributes: ['id', 'description'] },
+      ],
+      attributes: [
+        'id',
+        'name',
+        'description',
+        [
+          Sequelize.fn('CONCAT', '/api/products/', Sequelize.col('product.id')),
+          'detail',
+        ],
+      ],
+    })
       .then((productos) => {
         res.status(200).json({
           count: productos.length,
