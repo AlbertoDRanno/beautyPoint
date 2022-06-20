@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 const apiController = {
   /* ************************************* USUARIOS */
   listarUsuarios: (req, res) => {
-    // api/users/
+    // /api/users/
     console.log('entrando al método listarUsuarios del apiController.js');
 
     db.User.findAll({
@@ -36,12 +36,11 @@ const apiController = {
       });
   },
   mostrarDetalleDeUsuario: (req, res) => {
-    // api/users/:id
+    // /api/users/:id
     console.log(
       'entrando al método mostrarDetalleDeUsuario del apiController.js'
     );
-    db.User.findOne({
-      where: { id: req.params.id },
+    db.User.findByPk(req.params.id, {
       attributes: [
         'id',
         [
@@ -84,12 +83,25 @@ const apiController = {
       });
   },
   mostrarDetalleDeProducto: (req, res) => {
-    // api/products/:id
-    // EN PROCESO: falta tuneo de campos a retornar en json según enunciado
+    // /api/products/:id
     console.log(
       'entrando al método mostrarDetalleDeProducto del apiController.js'
     );
-    db.Product.findByPk(req.params.id)
+    db.Product.findByPk(req.params.id, {
+      include: [
+        { association: 'categories', attributes: ['description'] },
+        { association: 'packages', attributes: ['description'] },
+      ],
+      attributes: [
+        'id',
+        'name',
+        'price',
+        'description',
+        'discount',
+        'image',
+        'stock',
+      ],
+    })
       .then((producto) => {
         res.status(200).json({ data: producto, status: 200 });
       })
