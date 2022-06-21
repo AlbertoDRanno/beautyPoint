@@ -21,7 +21,7 @@ Como referencia para los wireframes de nuestro proyecto, nos gustaron las siguie
 * Alberto Ranno
 * Augusto Serra
 * Mauro Carvajal de Sousa
-* Mateo Volpe
+* ~~Mateo Volpe~~
 
 #### Tablero Trello del equipo
 https://trello.com/b/2tFnzpXC/tablero-equipo-04
