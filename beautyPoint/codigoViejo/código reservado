@@ -1,4 +1,8 @@
-     
+    //  ctrl + k    luego   ctrl + c
+    //  ctrl + u para descomentaar
+
+
+
  /*
             <option value="categoria-1" <%= locals.oldData && oldData.category === "categoria-1" ? "selected" : " " ; %>>Cuidados básicos</option>
             <option value="categoria-2" <%= locals.oldData && oldData.category === "categoria-2" ? "selected" : " " ; %>>Antiage</option>

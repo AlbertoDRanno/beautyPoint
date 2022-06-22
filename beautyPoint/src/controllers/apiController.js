@@ -1,34 +1,37 @@
-const db = require('../database/models');
-const { Sequelize } = require('sequelize');
+const db = require("../database/models");
+const { Sequelize } = require("sequelize");
+const { response } = require("express");
+const Op = db.Sequelize.Op;
 
 const apiController = {
   /* ************************************* USUARIOS */
   listarUsuarios: (req, res) => {
     // /api/users/
-    console.log('entrando al método listarUsuarios del apiController.js');
+    console.log("entrando al método listarUsuarios del apiController.js");
 
     db.User.findAll({
       attributes: [
-        'id',
+        "id",
         [
           Sequelize.fn(
-            'CONCAT',
-            Sequelize.col('last_name'),
-            ' , ',
-            Sequelize.col('first_name')
+            "CONCAT",
+            Sequelize.col("last_name"),
+            " , ",
+            Sequelize.col("first_name")
           ),
-          'name',
+          "name",
         ],
-        'email',
+        "email",
         [
-          Sequelize.fn('CONCAT', '/api/users/', Sequelize.col('User.id')),
-          'detail',
+          Sequelize.fn("CONCAT", "/api/users/", Sequelize.col("User.id")),
+          "detail",
         ],
       ],
     })
       .then((users) => {
         console.log(users);
         res.status(200).json({
+          //envío info en formato JSON
           count: users.length,
           data: users,
           status: 200,
@@ -41,23 +44,23 @@ const apiController = {
   mostrarDetalleDeUsuario: (req, res) => {
     // /api/users/:id
     console.log(
-      'entrando al método mostrarDetalleDeUsuario del apiController.js'
+      "entrando al método mostrarDetalleDeUsuario del apiController.js"
     );
     db.User.findByPk(req.params.id, {
       attributes: [
-        'id',
+        "id",
         [
           Sequelize.fn(
-            'CONCAT',
-            Sequelize.col('last_name'),
-            ' , ',
-            Sequelize.col('first_name')
+            "CONCAT",
+            Sequelize.col("last_name"),
+            " , ",
+            Sequelize.col("first_name")
           ),
-          'name',
+          "name",
         ],
-        'dni',
-        'email',
-        'avatar',
+        "dni",
+        "email",
+        "avatar",
       ],
     })
       .then((usuario) => {
@@ -70,31 +73,31 @@ const apiController = {
   /* ************************************* PRODUCTOS */
   listarProductos: (req, res) => {
     // api/products/
-    console.log('entrando al método listarProductos del apiController.js');
+    console.log("entrando al método listarProductos del apiController.js");
 
     let promesaCategorias = db.Category.findAll({
-      include: [{ association: 'productosC', attributes: [] }],
+      include: [{ association: "productosC", attributes: [] }],
       attributes: [
-        'description',
+        "description",
         [
-          Sequelize.fn('COUNT', Sequelize.col('category.id')),
-          'totalDeProductos',
+          Sequelize.fn("COUNT", Sequelize.col("category.id")),
+          "totalDeProductos",
         ],
       ],
-      group: 'category.id',
+      group: "category.id",
     });
 
     let promesaProductos = db.Product.findAll({
       include: [
-        { association: 'categories', attributes: ['id', 'description'] },
+        { association: "categories", attributes: ["id", "description"] },
       ],
       attributes: [
-        'id',
-        'name',
-        'description',
+        "id",
+        "name",
+        "description",
         [
-          Sequelize.fn('CONCAT', '/api/products/', Sequelize.col('product.id')),
-          'detail',
+          Sequelize.fn("CONCAT", "/api/products/", Sequelize.col("product.id")),
+          "detail",
         ],
       ],
     });
@@ -142,21 +145,21 @@ const apiController = {
   mostrarDetalleDeProducto: (req, res) => {
     // /api/products/:id
     console.log(
-      'entrando al método mostrarDetalleDeProducto del apiController.js'
+      "entrando al método mostrarDetalleDeProducto del apiController.js"
     );
     db.Product.findByPk(req.params.id, {
       include: [
-        { association: 'categories', attributes: ['description'] },
-        { association: 'packages', attributes: ['description'] },
+        { association: "categories", attributes: ["description"] },
+        { association: "packages", attributes: ["description"] },
       ],
       attributes: [
-        'id',
-        'name',
-        'price',
-        'description',
-        'discount',
-        'image',
-        'stock',
+        "id",
+        "name",
+        "price",
+        "description",
+        "discount",
+        "image",
+        "stock",
       ],
     })
       .then((producto) => {
@@ -165,6 +168,39 @@ const apiController = {
       .catch((err) => {
         res.send(err);
       });
+  },
+
+  store: (req, res) => {
+    db.Product.create(req.body).then((producto) => {
+      return res.status(200).json({
+        data: producto,
+        status: 200,
+        created: "ok",
+      });
+    });
+  },
+
+  delete: (req, res) => {
+    db.Product.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+  },
+
+  search: (req, res) => {
+    db.Product.findAll({
+      where: {
+        name: { [Op.like]: "%" + req.query.keyword + "%" },
+      },
+    })
+    .then(productos => {
+      if (productos.length > 0) {
+        return res.status(200).json(productos);
+      }
+      return res.status(200).json("No existen productos con ese nombre");
+    })
+
   },
 };
 

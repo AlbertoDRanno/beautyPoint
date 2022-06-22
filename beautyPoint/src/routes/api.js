@@ -15,4 +15,9 @@ router.get('/users/:id', apiController.mostrarDetalleDeUsuario);
 router.get('/products', apiController.listarProductos);
 router.get('/products/:id', apiController.mostrarDetalleDeProducto);
 
+/*** API PRUEBAS PROODUCTOS ***/
+router.post("/productsStore", apiController.store);
+router.delete("/productsDelete/:id", apiController.delete);
+router.get("/productsSearch", apiController.search);
+
 module.exports = router;
