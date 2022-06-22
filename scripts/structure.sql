@@ -7,7 +7,7 @@ CREATE TABLE `categories` (
   `updatedAt` timestamp NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `packages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -31,12 +31,16 @@ CREATE TABLE `products` (
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_productCategory_idx` (`category_id`),
   KEY `fk_productPackage_idx` (`package_id`),
+  KEY `fk_userId_idx` (`user_id`),
+  KEY `fk_productUserId_idx` (`user_id`),
   CONSTRAINT `fk_productCategory` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
-  CONSTRAINT `fk_productPackage` FOREIGN KEY (`package_id`) REFERENCES `packages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `fk_productPackage` FOREIGN KEY (`package_id`) REFERENCES `packages` (`id`),
+  CONSTRAINT `fk_productUserId` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -51,7 +55,7 @@ CREATE TABLE `users` (
   `updatedAt` timestamp NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `cart` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -67,20 +71,4 @@ CREATE TABLE `cart` (
   KEY `fk_productCart_idx` (`product_id`),
   CONSTRAINT `fk_productCart` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `fk_userCart` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `publications` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL,
-  `product_id` int(10) unsigned NOT NULL,
-  `price` float unsigned NOT NULL,
-  `quantity` decimal(7,0) unsigned NOT NULL,
-  `createdAt` timestamp NULL DEFAULT NULL,
-  `updatedAt` timestamp NULL DEFAULT NULL,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_productPublication_idx` (`product_id`),
-  KEY `fk_userPublication_idx` (`user_id`),
-  CONSTRAINT `fk_productPublication` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  CONSTRAINT `fk_userPublication` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
