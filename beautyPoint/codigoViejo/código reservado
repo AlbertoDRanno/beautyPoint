@@ -2,7 +2,43 @@
     //  ctrl + u para descomentaar
 
 
+ processRegister: (req, res) => {
+    //res.send({ body: req.body, file: req.file });
+    const resultValidation = validationResult(req); // esta variable es un objeto con varias propiedades, una de ellas es is Empty
+    //res.send(resultValidation);
+    //res.send(resultValidation.mapped());
+    //res.send(resultValidation.errors.length > 0)
+    //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
+    
+    let userInDB = usersModel.filtrarPorCampoValor("email", req.body.email);
+    console.log(userInDB);
+    if (userInDB.length >= 1) {
+      res.render("users/register", {
+        errors: { email: { msg: "Un usuario ya se registró con este mail" } },
+        oldData: req.body,
+      });
+    } else if (resultValidation.isEmpty()) {
+      console.log("Entró al método processRegister del usersController.js");
+      console.log(req.file);
 
+      //Ahora piso las propiedades password e image:
+      (req.body.password = bcrypt.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
+        //el ", 10" es la cantidad de "sal", un dato añadido que hace que los hash sean mucho más difíciles de romper. Para contraseñas se suele usar 10 o 12
+        (req.body.image = "/images/avatars/" + req.file.filename);
+
+      let userId = usersModel.save(req.body);
+      console.log(userId);
+      //res.redirect("/users/profile/" + userId);
+      res.redirect("login");
+    } else {
+      //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
+      res.render("users/register", {
+        errors: resultValidation.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
+        oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+      });
+    }
+    //return res.send("Ok, las validaciones se pasaron, no hay errores");
+  }
  /*
             <option value="categoria-1" <%= locals.oldData && oldData.category === "categoria-1" ? "selected" : " " ; %>>Cuidados básicos</option>
             <option value="categoria-2" <%= locals.oldData && oldData.category === "categoria-2" ? "selected" : " " ; %>>Antiage</option>
@@ -17,7 +53,7 @@
           <option value="categoria-4" <%= (products.category == "categoria-4") ? "selected" : "";%>>Maquillaje</option>
         </select>
         <span class="feedback"></span>*/
-
+/*
 
       search: (req, res) => {
     let loQueBuscoElUsuario = req.query.keywords.toLowerCase();
@@ -64,3 +100,4 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
+*/

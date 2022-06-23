@@ -2,6 +2,7 @@ const db = require("../database/models");
 const { Sequelize } = require("sequelize");
 const { response } = require("express");
 const Op = db.Sequelize.Op;
+const fetch = require("node-fetch"); //Permite consumir APIs de 3ros
 
 const apiController = {
   /* ************************************* USUARIOS */
@@ -170,6 +171,7 @@ const apiController = {
       });
   },
 
+  //Pruebas
   store: (req, res) => {
     db.Product.create(req.body).then((producto) => {
       return res.status(200).json({
@@ -193,15 +195,43 @@ const apiController = {
       where: {
         name: { [Op.like]: "%" + req.query.keyword + "%" },
       },
-    })
-    .then(productos => {
+    }).then((productos) => {
       if (productos.length > 0) {
         return res.status(200).json(productos);
       }
       return res.status(200).json("No existen productos con ese nombre");
-    })
-
+    });
   },
+  consumirAPI: async (req, res) => {
+    //realizo un pedido asincrónico, y fetch es un método que tiene 2 promesas:
+    //la 1era, es la consulta al endpoint - entre los ( ), paso la URL de la API que quiero cosumir
+    fetch("http://www.omdbapi.com/?apikey=d4e35e92&t=Doctor+Strange")
+      //la 2da, es la promesa que devuelve ese endpoint, que aún se tiene que resolver - y pido que la entregue en formato JSON
+      .then((response) => response.json())
+      //una vez se resuelva esta promesa, voy a obtener la info
+      .then((pelicula) => {
+        //a partir de aquí es donde puedo trabajar con lo que me llega de la API
+        //return res.json(pelicula) - si quisiera enviar a un endpoint la info de la API
+        //si quiero enviarla a una vista:
+        return res.render("api.ejs", { pelicula: pelicula });
+      });
+  },
+  consumirDosAPIs: async (req, res) => {
+    //cuando consumo más de una API, defino las promesas por separado 
+    //En cada caso, le estoy diciendo: de manera asincrónica, quiero que leas estas líneas de código y que esperes,
+    //a que el .then se resuelva, y que guardes, lo que devuelva, en cada variable correspondiente
+    let pelicula = await fetch("http://www.omdbapi.com/?apikey=d4e35e92&t=Doctor+Strange")
+      .then((response) => response.json())
+    let provinces = await fetch("https://apis.datos.gob.ar/georef/api/provincias")
+      .then((response) => response.json())
+
+   // return res.json({pelicula, provincias})
+   return res.render("apiDos.ejs", {
+     pelicula: pelicula,
+     provinces: provinces,
+   });
+  },
+    
 };
 
 module.exports = apiController;

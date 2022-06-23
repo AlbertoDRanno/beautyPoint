@@ -19,5 +19,7 @@ router.get('/products/:id', apiController.mostrarDetalleDeProducto);
 router.post("/productsStore", apiController.store);
 router.delete("/productsDelete/:id", apiController.delete);
 router.get("/productsSearch", apiController.search);
+router.get("/productsConsumirAPI", apiController.consumirAPI);
+router.get("/productsConsumirDosAPIs", apiController.consumirDosAPIs);
 
 module.exports = router;

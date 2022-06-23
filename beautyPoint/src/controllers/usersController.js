@@ -2,46 +2,63 @@ const JsonModel = require("../modelos/jsonModel");
 const usersModel = new JsonModel("users");
 const { validationResult } = require("express-validator"); // trae el resultados de las validaciones que hicimos
 const bcrypt = require("bcryptjs");
+const db = require("../database/models");
 
 const usersController = {
   register: (req, res) => {
     console.log("entrando al método register del userController.js");
     return res.status(200).render("users/register");
-  },
+  },     
   processRegister: (req, res) => {
-    //res.send({ body: req.body, file: req.file });
     const resultValidation = validationResult(req); // esta variable es un objeto con varias propiedades, una de ellas es is Empty
     //res.send(resultValidation);
     //res.send(resultValidation.mapped());
     //res.send(resultValidation.errors.length > 0)
+
     //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
-    let userInDB = usersModel.filtrarPorCampoValor("email", req.body.email);
-    console.log(userInDB);
-    if (userInDB.length >= 1) {
-      res.render("users/register", {
-        errors: { email: { msg: "Un usuario ya se registró con este mail" } },
-        oldData: req.body,
-      });
-    } else if (resultValidation.isEmpty()) {
-      console.log("Entró al método processRegister del usersController.js");
-      console.log(req.file);
+    let usuarioExiste = db.User.findAll({
+      where: {
+        email: req.body.email,
+      },
+    }) //{include: [{ association: "productosU" }] para no hacerlo pesada}
+      .then(function () {
+        if (usuarioExiste) {
+          res.status(200).render("users/register", {
+            errors: {
+              email: { msg: "Un usuario ya se registró con este mail" },
+            },
+            oldData: req.body,
+          });
+        } else if (resultValidation.isEmpty()) {
+          console.log("Entró al método processRegister del usersController.js");
+          console.log(req.file);
+          //Ahora piso las propiedades password e image:
+          (req.body.password = bcrypt.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
+            //el ", 10" es la cantidad de "sal", un dato añadido que hace que los hash sean mucho más difíciles de romper. Para contraseñas se suele usar 10 o 12
+            (req.body.image = "/images/avatars/" + req.file.filename);
 
-      //Ahora piso las propiedades password e image:
-      (req.body.password = bcrypt.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
-        //el ", 10" es la cantidad de "sal", un dato añadido que hace que los hash sean mucho más difíciles de romper. Para contraseñas se suele usar 10 o 12
-        (req.body.image = "/images/avatars/" + req.file.filename);
-
-      let userId = usersModel.save(req.body);
-      console.log(userId);
-      //res.redirect("/users/profile/" + userId);
-      res.redirect("login");
-    } else {
-      //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
-      res.render("users/register", {
-        errors: resultValidation.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
-        oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+          db.User.create({
+            //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            dni: req.body.dni,
+            email: req.body.email,
+            phone: req.body.phone,
+            categoria: 1, // 0-Admin / 1-Comprador
+            avatar: req.body.image,
+            password: req.body.password,
+            status: 1,
+          });
+          res.redirect("/");
+        } else {
+          //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
+          res.render("users/register", {
+            errors: resultValidation.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
+            oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+          });
+        }
       });
-    }
+
     //return res.send("Ok, las validaciones se pasaron, no hay errores");
   },
   login: (req, res) => {
@@ -71,7 +88,9 @@ const usersController = {
         //cuando ya tengo los datos de la persona a loguear, pregunto si tmb viajó el rememberUser:
         if (req.body.rememberUser) {
           // si viajó, quiero que la cookie se llame userEmail y guarde el email, * 1 seg * 60 * 60 = 1 hora
-          res.cookie("userEmail", req.body.email, { maxAge: 1000 * 60 * 60 });
+          res.cookie("userEmail", req.body.email, {
+            maxAge: 1000 * 60 * 60,
+          });
         }
 
         return res.redirect("/users/profile/" + userToLogin.id);

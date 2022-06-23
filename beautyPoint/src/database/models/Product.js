@@ -24,16 +24,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       references: {
         // IMPORTANTE!!
-        model: 'Package',
-        key: 'id',
+        model: "Package",
+        key: "id",
       },
     },
     category_id: {
       type: DataTypes.INTEGER,
       references: {
         // IMPORTANTE!!
-        model: 'Category',
-        key: 'id',
+        model: "Category",
+        key: "id",
       },
     },
     image: {
@@ -49,6 +49,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
     },*/,
     status: {
+      type: DataTypes.INTEGER,
+    },
+    vendedor_id: {
       type: DataTypes.INTEGER,
     },
   };
@@ -80,22 +83,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'package_id', // Cuál es la columna de la bbdd que une a éstas 2 tablas
     });
 
-    Product.belongsToMany(models.User, {
+    Product.belongsTo(models.User, {
       // ok
-      // Muchos a Muchos  // 1er parámetro, el modelo al que asocio
-      as: 'users', //alias
-      through: 'cart', //el nombre de la tabla pivot que une ambos modelos
-      foreignKey: 'product_id', //nombre de la columna en la tabla pivot, que hace referencia al modelo actual (Product)
-      otherKey: 'user_id', //nombre de la columna en la tabla pivot, que hace referencia al modelo con el que se conecta (User)
-      timestamps: true, //False en caso de que, la tabla pivot, no tenga createdAt y updatedAt
-    });
-
-    Product.belongsToMany(models.User, {
-      as: 'publicacionesDelUsuario',
-      through: 'publications',
-      foreignKey: 'product_id',
-      otherKey: 'user_id',
-      timestamps: true,
+      // Muchos a 1 (el admin)  // 1er parámetro, el modelo al que asocio
+      as: "users", //alias
+      foreignKey: "vendedor_id", //Cuál es la columna de la bbdd que une a éstas 2 tablas
+      //timestamps: true, //False en caso de que, la tabla pivot, no tenga createdAt y updatedAt
     });
   };
 
