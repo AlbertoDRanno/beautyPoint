@@ -32,6 +32,7 @@ const productsController = {
       //hay errores en la validación??
       console.log("Entró al método store del productController.js");
       //console.log(req.file);
+      req.body.image = "/images/products/" + req.file.filename;
       db.Product.create({
         //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
         name: req.body.name,

@@ -10,26 +10,26 @@ const usersController = {
     return res.status(200).render("users/register");
   },     
   processRegister: (req, res) => {
-    const resultValidation = validationResult(req); // esta variable es un objeto con varias propiedades, una de ellas es is Empty
-    //res.send(resultValidation);
-    //res.send(resultValidation.mapped());
-    //res.send(resultValidation.errors.length > 0)
+    // const resultValidation = validationResult(req); // esta variable es un objeto con varias propiedades, una de ellas es is Empty
+    // //res.send(resultValidation);
+    // //res.send(resultValidation.mapped());
+    // //res.send(resultValidation.errors.length > 0)
 
-    //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
-    db.User.findAll({
-      where: {
-        email: req.body.email,
-      },
-    }) //{include: [{ association: "productosU" }] para no hacerlo pesada}
-      .then(function (usuarioExiste) {
-        if (usuarioExiste.length > 0) {
-          res.status(200).render("users/register", {
-            errors: {
-              email: { msg: "Un usuario ya se registró con este mail" },
-            },
-            oldData: req.body,
-          });
-        } else if (resultValidation.isEmpty()) {
+    // //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
+    // db.User.findAll({
+    //   where: {
+    //     email: req.body.email,
+    //   },
+    // }) //{include: [{ association: "productosU" }] para no hacerlo pesada}
+    //   .then(function (usuarioExiste) {
+    //     if (usuarioExiste.length > 0) {
+    //       res.status(200).render("users/register", {
+    //         errors: {
+    //           email: { msg: "Un usuario ya se registró con este mail" },
+    //         },
+    //         oldData: req.body,
+    //       });
+    //     } else if (resultValidation.isEmpty()) {
           console.log("Entró al método processRegister del usersController.js");
           console.log(req.file);
           //Ahora piso las propiedades password e image:
@@ -50,14 +50,14 @@ const usersController = {
             status: 1,
           });
           res.redirect("/");
-        } else {
-          //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
-          res.render("users/register", {
-            errors: resultValidation.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
-            oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
-          });
-        }
-      });
+      //   } else {
+      //     //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
+      //     res.render("users/register", {
+      //       errors: resultValidation.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
+      //       oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+      //     });
+      //   }
+      // });
 
     //return res.send("Ok, las validaciones se pasaron, no hay errores");
   },
