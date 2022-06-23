@@ -16,13 +16,13 @@ const usersController = {
     //res.send(resultValidation.errors.length > 0)
 
     //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
-    let usuarioExiste = db.User.findAll({
+    db.User.findAll({
       where: {
         email: req.body.email,
       },
     }) //{include: [{ association: "productosU" }] para no hacerlo pesada}
-      .then(function () {
-        if (usuarioExiste) {
+      .then(function (usuarioExiste) {
+        if (usuarioExiste.length > 0) {
           res.status(200).render("users/register", {
             errors: {
               email: { msg: "Un usuario ya se registró con este mail" },
