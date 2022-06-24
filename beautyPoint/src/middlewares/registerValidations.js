@@ -3,8 +3,18 @@ const path = require("path");
 const { body } = require("express-validator"); // body() === check()
 
 const registerValidations = [
-  body("first_name").notEmpty().withMessage("Tienes que escribir tu nombre"),
-  body("last_name").notEmpty().withMessage("Tienes que escribir tu apellido"),
+  body("first_name")
+    .notEmpty()
+    .withMessage("Tienes que escribir tu nombre")
+    .bail() // si no se corta la validación el usuario recibirá todos los errores juntos
+    .isLength({ min: 2 })
+    .withMessage("El nombre debe tener al menos 2 caracteres"),
+  body("last_name")
+    .notEmpty()
+    .withMessage("Tienes que escribir tu apellido")
+    .bail() 
+    .isLength({ min: 2 })
+    .withMessage("El apellido debe tener al menos 2 caracteres"),
   body("dni")
     .notEmpty()
     .withMessage("Tienes que escribir tu DNI")
@@ -58,9 +68,9 @@ const registerValidations = [
   body("password")
     .notEmpty()
     .withMessage("Tienes que escribir una contraseña")
-    .bail() // si no se corta la validación el usuario recibirá todos los errores juntos
-    .isLength({ min: 5, max: 15 })
-    .withMessage("La contraseña debe tener entre 5 y 15 caracteres"),
+    .bail() 
+    .isLength({ min: 8, max: 15 })
+    .withMessage("La contraseña debe tener entre 8 y 15 caracteres"),
   body("repeatPassword")
     .notEmpty()
     .withMessage("Tienes que repetir la contraseña elegida")

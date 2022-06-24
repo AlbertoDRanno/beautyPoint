@@ -1,5 +1,5 @@
-const JsonModel = require("../modelos/jsonModel");
-const usersModel = new JsonModel("users");
+// const JsonModel = require("../modelos/jsonModel");
+// const usersModel = new JsonModel("users");
 const { validationResult } = require("express-validator"); // trae el resultados de las validaciones que hicimos
 const bcrypt = require("bcryptjs");
 const db = require("../database/models");
@@ -57,53 +57,59 @@ const usersController = {
     return res.status(200).render("users/login");
   },
   processLogin: (req, res) => {
-    let usersToLogin = usersModel.filtrarPorCampoValor("email", req.body.email);
-    //devuelve el objeto usuario a loguearse, dentro de un array
-    let userToLogin = usersToLogin[0];
-    //devuelve el objeto usuario en sí
+    db.User.findAll()
+      .then((users) => {
+        let usersToLogin = users.filter(function (user) {
+          return user.email === req.body.email;
+        });
+        //devuelve el objeto usuario a loguearse, dentro de un array
+        let userToLogin = usersToLogin[0];
+        //devuelve el objeto usuario en sí
 
-    if (userToLogin) {
-      // si el mail existe en mi base de datos, compara las contraseñas
-      let isOkThePassword = bcrypt.compareSync(
-        req.body.password,
-        userToLogin.password
-      );
+        if (userToLogin) {
+          // si el mail existe en mi base de datos, compara las contraseñas
+          let isOkThePassword = bcrypt.compareSync(
+            req.body.password,
+            userToLogin.password
+          );
 
-      if (isOkThePassword) {
-        // si el password tmb está ok, permite el ingreso
-        //quiero guardar al usuario en session. Pero no me interesa, y es más seguro, eliminar antes el password.
-        delete userToLogin.password;
-        req.session.userLogged = userToLogin;
-        //ahora el obj session, tiene otra propiedad: userLogged (además de cookie), que guarda toda la info de userToLogin
+          if (isOkThePassword) {
+            // si el password tmb está ok, permite el ingreso
+            //quiero guardar al usuario en session. Pero no me interesa, y es más seguro, eliminar antes el password.
+            delete userToLogin.password;
+            req.session.userLogged = userToLogin;
+            //ahora el obj session, tiene otra propiedad: userLogged (además de cookie), que guarda toda la info de userToLogin
 
-        //cuando ya tengo los datos de la persona a loguear, pregunto si tmb viajó el rememberUser:
-        if (req.body.rememberUser) {
-          // si viajó, quiero que la cookie se llame userEmail y guarde el email, * 1 seg * 60 * 60 = 1 hora
-          res.cookie("userEmail", req.body.email, {
-            maxAge: 1000 * 60 * 60,
+            //cuando ya tengo los datos de la persona a loguear, pregunto si tmb viajó el rememberUser:
+            if (req.body.rememberUser) {
+              // si viajó, quiero que la cookie se llame userEmail y guarde el email, * 1 seg * 60 * 60 = 1 hora
+              res.cookie("userEmail", req.body.email, {
+                maxAge: 1000 * 60 * 60 * 72,
+              });
+            }
+
+            return res.redirect("/users/profile/" + userToLogin.id);
+          }
+          return res.render("users/login", {
+            // si el password no está ok
+            errors: {
+              email: {
+                msg: "Las credenciales son inválidas",
+              },
+            },
           });
         }
 
-        return res.redirect("/users/profile/" + userToLogin.id);
-      }
-      return res.render("users/login", {
-        // si el password no está ok
-        errors: {
-          email: {
-            msg: "Las credenciales son inválidas",
+        return res.render("users/login", {
+          // si el mail no está ok
+          errors: {
+            email: {
+              msg: "No se encuentra este email en nuestra base de datos",
+            },
           },
-        },
-      });
-    }
-
-    return res.render("users/login", {
-      // si el mail no está ok
-      errors: {
-        email: {
-          msg: "No se encuentra este email en nuestra base de datos",
-        },
-      },
-    });
+        });
+      })
+      .catch((error) => console.log(error));
   },
   profile: (req, res) => {
     console.log("Entrando a Profile");

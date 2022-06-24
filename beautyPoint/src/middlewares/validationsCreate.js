@@ -15,12 +15,15 @@ const validateCreateForm = [
   body("price").notEmpty().withMessage("Debes completar el campo Precio"),
   body("description")
     .notEmpty()
-    .withMessage("Debes completar el campo Descripción"),
+    .withMessage("Debes completar el campo descripción")
+    .bail()
+    .isLength({ min: 20 })
+    .withMessage("La descripción debe tener al menos 20 caracteres"),
   body("package").notEmpty().withMessage("Debes completar el campo Package"),
   body("category").notEmpty().withMessage("Debes elegir una categoría"),
   body("image").custom((value, { req }) => {
     let file = req.file;
-    let acceptedExtensions = [".jpg", ".png", ".gif"];
+    let acceptedExtensions = [".jpg", ".jpeg", ".png", ".gif"];
 
     if (!file) {
       throw new Error("Tienes que subir una imagen");
