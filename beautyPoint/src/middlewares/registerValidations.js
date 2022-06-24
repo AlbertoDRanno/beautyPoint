@@ -16,17 +16,28 @@ const registerValidations = [
     .withMessage("Tienes que escribir tu correo electrónico")
     .bail()
     .isEmail()
-    .withMessage("Debes escribir un formato de correo válido"),
+    .withMessage("Debes escribir un formato de correo válido")
+    //Aquí valido si el usuario existe o no en la tabla de usuarios Por el campo email)
+    .custom(function (value) {
+      let contador = 0;
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].email == value) {
+          contador++;
+        }
+      }
+      if (contador > 0) {
+        return false; // Si retorno falso no aparece el mensaje de error
+      } else {
+        return true; //Si retorno true, aparece el mensaje de error
+      }
+    })
+    .withMessage("Usuario ya se encuentra registrado"),
   body("phone")
     .notEmpty()
     .withMessage("Tienes que escribir tu número de celular")
     .bail()
     .isNumeric()
     .withMessage("Completar solamente con números"),
-  body("genero").notEmpty().withMessage("Debes seleccionar un género"),
-  body("birthDate")
-    .notEmpty()
-    .withMessage("Debes seleccionar tu fecha de nacimiento"),
   body("image").custom((value, { req }) => {
     let file = req.file;
     let acceptedExtensions = [".jpg", ".png", ".gif"];
