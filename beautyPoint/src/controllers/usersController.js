@@ -7,57 +7,56 @@ const db = require("../database/models");
 const usersController = {
   register: (req, res) => {
     console.log("entrando al método register del userController.js");
-    return res.status(200).render("users/register");
-  },     
+    res.status(200).render("users/register");
+  },
   processRegister: (req, res) => {
-    // const resultValidation = validationResult(req); // esta variable es un objeto con varias propiedades, una de ellas es is Empty
-    // //res.send(resultValidation);
-    // //res.send(resultValidation.mapped());
-    // //res.send(resultValidation.errors.length > 0)
+    const resultValidation = validationResult(req); // esta variable es un objeto con varias propiedades, una de ellas es is Empty. En esta variable guardo lo enviado desde la ruta, con respecto a los errores encontrados en la carga de los datos por parte del usuario
+    //res.send(resultValidation);
+    //res.send(resultValidation.mapped());
+    //res.send(resultValidation.errors.length > 0)
+    //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
+    db.User.findAll({}) //{include: [{ association: "productosU" }] para no hacerlo pesada}
+      .then(function (usuarios) {
+        for (let i = 0; i < usuarios.length; i++) {
+          if (usuarios[i].email === req.body.email) {
+            return res.status(200).render("users/register", {
+              errors: {
+                email: { msg: "Un usuario ya se registró con este mail" },
+              },
+              oldData: req.body,
+            });
+          } else if (resultValidation.isEmpty()) {
+            console.log(
+              "Entró al método processRegister del usersController.js"
+            );
+            console.log(req.file);
+            //Ahora piso las propiedades password e image:
+            (req.body.password = bcrypt.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
+              //el ", 10" es la cantidad de "sal", un dato añadido que hace que los hash sean mucho más difíciles de romper. Para contraseñas se suele usar 10 o 12
+              (req.body.image = "/images/avatars/" + req.file.filename);
 
-    // //Antes de hacer la creación, verificar que el usuario no haya sido cargado previamente:
-    // db.User.findAll({
-    //   where: {
-    //     email: req.body.email,
-    //   },
-    // }) //{include: [{ association: "productosU" }] para no hacerlo pesada}
-    //   .then(function (usuarioExiste) {
-    //     if (usuarioExiste.length > 0) {
-    //       res.status(200).render("users/register", {
-    //         errors: {
-    //           email: { msg: "Un usuario ya se registró con este mail" },
-    //         },
-    //         oldData: req.body,
-    //       });
-    //     } else if (resultValidation.isEmpty()) {
-          console.log("Entró al método processRegister del usersController.js");
-          console.log(req.file);
-          //Ahora piso las propiedades password e image:
-          (req.body.password = bcrypt.hashSync(req.body.password, 10)), // encripto password con la librería bcryptjs
-            //el ", 10" es la cantidad de "sal", un dato añadido que hace que los hash sean mucho más difíciles de romper. Para contraseñas se suele usar 10 o 12
-            (req.body.image = "/images/avatars/" + req.file.filename);
-
-          db.User.create({
-            //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            dni: req.body.dni,
-            email: req.body.email,
-            phone: req.body.phone,
-            categoria: 1, // 0-Admin / 1-Comprador
-            avatar: req.body.image,
-            password: req.body.password,
-            status: 1,
-          });
-          res.redirect("/");
-      //   } else {
-      //     //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
-      //     res.render("users/register", {
-      //       errors: resultValidation.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
-      //       oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
-      //     });
-      //   }
-      // });
+            db.User.create({
+              //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
+              first_name: req.body.first_name,
+              last_name: req.body.last_name,
+              dni: req.body.dni,
+              email: req.body.email,
+              phone: req.body.phone,
+              categoria: 1, // 0-Admin / 1-Comprador
+              avatar: req.body.image,
+              password: req.body.password,
+              status: 1,
+            });
+            res.send("ok");
+          } else {
+            //resultValidation es un objeto lit. con la prop. errors, hay elementos en errors?
+            res.render("users/register", {
+              errors: resultValidation.mapped(), // envío los errores como un obj. lit. para que sea + facil trabajarlo
+              oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+            });
+          }
+        }
+      });
 
     //return res.send("Ok, las validaciones se pasaron, no hay errores");
   },

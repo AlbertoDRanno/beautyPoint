@@ -12,9 +12,11 @@ const mainController = {
           association: "productosC",
         },
       ],
-    }).then(function (categories) {
-      res.status(200).render("index", { categories: categories, toThousand });
-    });
+    })
+      .then(function (categories) {
+        return res.status(200).render("index", { categories: categories, toThousand });
+      })
+      .catch((err) => res.send(err));
   },
 
   // search - buscador de la barra del header
@@ -35,7 +37,8 @@ const mainController = {
         productsResults,
         toThousand,
       });
-    });
+    })
+    .catch((err) => res.send(err));
   },
 };
 

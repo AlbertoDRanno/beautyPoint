@@ -173,13 +173,15 @@ const apiController = {
 
   //Pruebas
   store: (req, res) => {
-    db.Product.create(req.body).then((producto) => {
-      return res.status(200).json({
-        data: producto,
-        status: 200,
-        created: "ok",
-      });
-    });
+    db.Product.create(req.body)
+      .then((producto) => {
+        return res.status(200).json({
+          data: producto,
+          status: 200,
+          created: "ok",
+        });
+      })
+      .catch((err) => res.send(err));
   },
 
   delete: (req, res) => {
@@ -195,12 +197,14 @@ const apiController = {
       where: {
         name: { [Op.like]: "%" + req.query.keyword + "%" },
       },
-    }).then((productos) => {
-      if (productos.length > 0) {
-        return res.status(200).json(productos);
-      }
-      return res.status(200).json("No existen productos con ese nombre");
-    });
+    })
+      .then((productos) => {
+        if (productos.length > 0) {
+          return res.status(200).json(productos);
+        }
+        return res.status(200).json("No existen productos con ese nombre");
+      })
+      .catch((err) => res.send(err));
   },
   consumirAPI: async (req, res) => {
     //realizo un pedido asincrónico, y fetch es un método que tiene 2 promesas:
@@ -214,7 +218,8 @@ const apiController = {
         //return res.json(pelicula) - si quisiera enviar a un endpoint la info de la API
         //si quiero enviarla a una vista:
         return res.render("api.ejs", { pelicula: pelicula });
-      });
+      })
+      .catch((err) => res.send(err));
   },
   consumirDosAPIs: async (req, res) => {
     //cuando consumo más de una API, defino las promesas por separado 
@@ -222,8 +227,11 @@ const apiController = {
     //a que el .then se resuelva, y que guardes, lo que devuelva, en cada variable correspondiente
     let pelicula = await fetch("http://www.omdbapi.com/?apikey=d4e35e92&t=Doctor+Strange")
       .then((response) => response.json())
-    let provinces = await fetch("https://apis.datos.gob.ar/georef/api/provincias")
+    let provinces = await fetch(
+      "https://apis.datos.gob.ar/georef/api/provincias"
+    )
       .then((response) => response.json())
+      .catch((err) => res.send(err));
 
    // return res.json({pelicula, provincias})
    return res.render("apiDos.ejs", {

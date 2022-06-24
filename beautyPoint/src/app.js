@@ -1,5 +1,5 @@
 // ************ Require's ************
-const express = require('express');
+const express = require('express'); //Express para que utilice EJS como motor de plantillas
 //const path = require("path");
 const methodOverride = require('method-override'); // Para poder pisar el method="POST" en el formulario por PUT y DELETE
 const logMiddleware = require('./middlewares/logMiddleware');
@@ -25,7 +25,7 @@ const app = express();
 app.use(express.static('public')); // Configuración de carpeta de archivos estáticos
 app.use(express.urlencoded({ extended: false })); // Para capturar datos desde un formulario como un obj literal (req.body)
 app.use(express.json()); // Para que en el body puedan viajar datos en formato JSON
-app.use(methodOverride('_method')); // Para poder pisar el method="POST" en el formulario por PUT y DELETE
+app.use(methodOverride('_method')); //Middleware de aplicación el cual se encargue de controlar la posibilidad de usar otros métodos diferentes al GET y al POST, en nuestros formularios
 app.use(logMiddleware); // Para llevar un registro en txt de las URL visitadas - Reemplaza a los console.log
 app.use(
   session({
@@ -53,7 +53,7 @@ if (enMantenimiento == true) {
 }
 
 // ************ Template Engine ************
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); //motor de plantillas que estamos usando EJS
 app.set('views', __dirname + '/views'); // Define la ubicación de la carpeta de las Vistas
 
 // ************ Route System ************

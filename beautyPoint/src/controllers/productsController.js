@@ -21,7 +21,8 @@ const productsController = {
           packages: packages,
           categories: categories,
         });
-      });
+      })
+      .catch((err) => res.send(err));
   },
 
   // Store -  Método que persiste la data del formulario de creación de un producto
@@ -53,17 +54,16 @@ const productsController = {
       let pedidoCategory = db.Category.findAll({
         include: [{ association: "productosC" }],
       });
-      Promise.all([pedidoPackage, pedidoCategory]).then(function ([
-        packages,
-        categories,
-      ]) {
-        return res.status(200).render("./products/create", {
-          packages: packages,
-          categories: categories,
-          errors: errors.mapped(), // envío los errores como un obj. lit.
-          oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
-        });
-      });
+      Promise.all([pedidoPackage, pedidoCategory])
+        .then(function ([packages, categories]) {
+          return res.status(200).render("./products/create", {
+            packages: packages,
+            categories: categories,
+            errors: errors.mapped(), // envío los errores como un obj. lit.
+            oldData: req.body, // envío los datos anteriores a la vista, para que no tengan que volver a cargar todo
+          });
+        })
+        .catch((err) => res.send(err));
     }
   },
 
@@ -76,7 +76,8 @@ const productsController = {
       console.log(product);
 
       res.render("./products/detail", { product: product });
-    });
+    })
+    .catch((err) => res.send(err));
   },
 
   // Edit - Render del formulario de edición de un producto
@@ -101,7 +102,8 @@ const productsController = {
           package: package,
           category: category,
         });
-      });
+      })
+      .catch((err) => res.send(err));
   },
 
   //Update -  Método que persiste la data del formulario de edición de un producto

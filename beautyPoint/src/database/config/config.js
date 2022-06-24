@@ -1,10 +1,11 @@
 module.exports = { 
   "development": {
     "username": "root",
-    "password": null,
+    "password": null, //reemplazar por la contraseña si la tuviera
     "database": "laca_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port":"3306" //puerto agregado a mano, para especificar que sea el mismo del XAMPP
   },
   "test": {
     "username": "root",
