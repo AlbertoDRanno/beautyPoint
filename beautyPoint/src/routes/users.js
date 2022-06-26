@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const guestMiddleware = require("../middlewares/guestMiddleware");
 
-//Para las validaciones del registro
-//const registerValidations = require("../middlewares/registerValidations"); - no pude levantar los usuarios directamente en el middleware
+//Para las validaciones de la edición de datos personales
+const registerValidations = require("../middlewares/registerValidations"); // Para el registro, no pude levantar los usuarios directamente en el middleware
 const db = require("../database/models");
 const path = require("path");
 const { body } = require("express-validator");
@@ -126,6 +126,10 @@ router.post("/login", loginValidations, usersController.processLogin); //, login
 
 // Perfil de usuario
 router.get("/profile/:id", usersController.profile); //, authMiddleware
+
+/*** EDIT ONE PRODUCT ***/
+router.get("/edit/:id", usersController.uEdit);
+router.put("/edit/:id", uploadFile.single("image"),registerValidations, usersController.uUpdate);
 
 // Logout
 router.get("/logout/", usersController.logout);

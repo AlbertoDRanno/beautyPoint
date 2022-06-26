@@ -126,6 +126,33 @@ const usersController = {
     console.log(req.session);
     return res.redirect("/");
   },
+  uEdit: (req, res) => {
+    console.log("entrando al render de edición de Perfil");
+    db.User.findByPk(req.params.id)
+      .then(function (user) {
+        return res.status(200).render("users/uEdit", { user: user });
+      })
+      .catch((err) => res.send(err));
+  },
+  uUpdate: (req, res) => {
+    console.log("Entró al método update del productController.js");
+    db.User.update(
+      {
+        //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        dni: req.body.dni,
+        email: req.body.email,
+        phone: req.body.phone,
+        categoria: 1, // 0-Admin / 1-Comprador
+        avatar: "/images/avatars/" + req.file.filename, //la imagen viaja por File, no por el body
+      },
+      {
+        where: { id: req.params.id },
+      }
+    );
+    res.redirect("/");
+  },
 };
 
 module.exports = usersController;

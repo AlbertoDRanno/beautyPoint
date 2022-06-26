@@ -12,6 +12,11 @@
         class="profile-image"
       />
       <h2><%= user.email %></h2>
+
+      <button type="submit" class="action-button delete">
+        <a href="/users/edit/<%= user.id %>" class="action-button edit"
+          >Editar datos Personales</a>
+      </button>
     </main>
   </body>
   <%- include('../partials/footer') %>
