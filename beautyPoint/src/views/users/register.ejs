@@ -13,7 +13,7 @@
         <h1>Crear cuenta</h1>
 
         <div class="form-element">
-          <label for="first_name">Nombre:</label>
+          <label for="first_name">Nombres:</label>
           <input
             type="text"
             id="first_name"
@@ -86,29 +86,7 @@
           <span class="feedback"> <%= errors.phone.msg %> </span>
           <% } %>
         </div>
-
-        <!-- <div class="form-element">
-          <div>
-            <label for="genero">Género:</label>
-          </div>
-          <select
-            name="genero"
-          >
-            <option value="">Seleccioná tu Género:</option>
-
-            <% let generos = ["Femenino", "Masculino", "Otro"] %>
-             <% for (const unGenero of generos) { %>
-            <option
-             value="<%= unGenero %>"
-             <%= (locals.oldData && (oldData.genero === unGenero)) ? "selected" : null %> 
-             ><%= unGenero %></option>
-            <% } %>
-          </select>
-          <% if (locals.errors && errors.genero) { %>
-          <span class="feedback"> <%= errors.genero.msg %> </span>
-          <% } %>
-        </div> -->
-
+        
         <div class="form-element">
           <label for="image">Foto de perfil:</label>
           <input type="file" name="image" id="image" accept=".jpg, .png" />

@@ -108,7 +108,13 @@ const productsController = {
 
   //Update -  Método que persiste la data del formulario de edición de un producto
   update: (req, res) => {
+    let errors = validationResult(req);
+    //res.send(errors);
+    if (errors.isEmpty()) {
+      //hay errores en la validación??
+      //console.log(req.file);
     console.log("Entró al método update del productController.js");
+    req.body.image = "/images/products/" + req.file.filename;
     db.Product.update(
       {
         //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
@@ -126,7 +132,28 @@ const productsController = {
       }
     );
     res.redirect("/");
-  },
+  } else {
+    let pedidoProducto = db.Product.findByPk(req.params.id, {
+      include: [{ association: "categories" }, { association: "packages" }],
+    });
+    let pedidoPackage = db.Package.findAll({
+      include: [{ association: "productosP" }],
+    });
+    let pedidoCategory = db.Category.findAll({
+      include: [{ association: "productosC" }],
+    });
+    Promise.all([pedidoProducto, pedidoPackage, pedidoCategory])
+      //cuando obtenga todos los pedidos, recién ahí realiza el "then"
+      .then(function ([product, package, category]) {
+        return res.status(200).render("./products/edit", {
+          product: product,
+          package: package,
+          category: category,
+          errors: errors.mapped(),
+        });
+      })
+      .catch((err) => res.send(err));
+  }},
 
   // destroy - Hard Delete - Elimina un producto de la base de datos
   destroy: (req, res) => {

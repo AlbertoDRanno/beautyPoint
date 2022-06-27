@@ -51,9 +51,7 @@
             rows="10"
             placeholder="Ingresá la presentación del producto"
             class="<%= (locals.errors && errors.description) ? 'is-invalid' : null %>"
-          >
-          <%= (locals.oldData) ? oldData.description : null %></textarea
-          >
+          ><%= (locals.oldData) ? oldData.description : null %></textarea>
           <% if (locals.errors && errors.description) { %>
           <span class="feedback"> <%= errors.description.msg %> </span>
           <% } %>

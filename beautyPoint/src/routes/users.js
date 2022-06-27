@@ -4,6 +4,8 @@ const guestMiddleware = require("../middlewares/guestMiddleware");
 
 //Para las validaciones de la edición de datos personales
 const registerValidations = require("../middlewares/registerValidations"); // Para el registro, no pude levantar los usuarios directamente en el middleware
+
+//Para las validaciones del registro
 const db = require("../database/models");
 const path = require("path");
 const { body } = require("express-validator");
