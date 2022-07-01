@@ -9,8 +9,14 @@ window.addEventListener("load", function () {
 
     if (first_name.value == "") {
       errores.push("Tienes que escribir tu nombre");
+      //is-invalid
+      first_name.classList.add("is-invalid");
     } else if (first_name.value.length < 2) {
       errores.push("El nombre debe tener al menos 2 caracteres");
+      first_name.classList.add("is-invalid");
+    } else {
+      first_name.classList.add("is-valid");
+      first_name.classList.remove("is-invalid");
     }
 
     let last_name = document.querySelector("input.last_name");

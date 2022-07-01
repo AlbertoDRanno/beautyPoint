@@ -5,36 +5,36 @@
     <%- include('../partials/header.ejs')%>
     <main class="login-main">
       <form action="/users/login" method="POST" class="form-login">
-        <div class="form-element-login">
-          <label for="email">Email</label>
+        <div class="form-element-login form-floating mb-3">
           <input
             type="email"
             name="email"
             placeholder="Correo electrónico"
             id="email"
-            class="<%= (locals.errors && errors.email) ? 'is-invalid' : null %>"
+            class="<%= (locals.errors && errors.email) ? 'is-invalid' : null %> form-control"
             value="<%= (locals.oldData) ? oldData.email : null %>"
           />
+          <label for="email">Email</label>
           <% if (locals.errors && errors.email) { %>
           <span class="feedback"> <%= errors.email.msg %> </span>
           <% } %>
         </div>
 
-        <div class="form-element-login">
-          <label for="password">Contraseña</label>
+        <div class="form-element-login form-floating mb-3">
           <input
             type="password"
             name="password"
             placeholder="Contraseña"
-            class="<%= (locals.errors && errors.password) ? 'is-invalid' : null %>"
+            class="<%= (locals.errors && errors.password) ? 'is-invalid' : null %> form-control"
           />
+          <label for="password">Contraseña</label>
           <% if (locals.errors && errors.password) { %>
           <span class="feedback"> <%= errors.password.msg %> </span>
           <% } %>
         </div>
 
         <div class="form-element-login">
-          <button type="submit" class="form-boton" value="login">
+          <button type="submit" class="btn btn-outline-primary " value="login">
             Iniciar Sesión
           </button>
         </div>
@@ -59,3 +59,5 @@
     <%- include('../partials/footer.ejs')%>
   </body>
 </html>
+
+

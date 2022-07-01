@@ -1,6 +1,4 @@
 .home-main {
-  margin-top: 180px;
-  margin-bottom: 0px;
   background-image: url("../images/bg3.png");
 }
 .home-products {
@@ -55,16 +53,16 @@
     font-size: x-large;
   }
   .home-contenedor {
-     max-width: 33%;
+    max-width: 33%;
     padding: 5px;
   }
   .home-main {
-  margin-top: 150px;
-}
+    margin-top: 150px;
+  }
 }
 
 @media (min-width: 1280px) {
   .home-contenedor {
-  max-width: 25%;
-}
+    max-width: 25%;
+  }
 }
