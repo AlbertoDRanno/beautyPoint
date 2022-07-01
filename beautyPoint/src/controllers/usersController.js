@@ -67,7 +67,7 @@ const usersController = {
         //devuelve el objeto usuario en sí
 
         if (userToLogin) {
-          // si el mail existe en mi base de datos, compara las contraseñas
+          // si el mail existe en mi base de datos, compara las contraseñas. Devuelve true or false
           let isOkThePassword = bcrypt.compareSync(
             req.body.password,
             userToLogin.password
@@ -77,6 +77,7 @@ const usersController = {
             // si el password tmb está ok, permite el ingreso
             //quiero guardar al usuario en session. Pero no me interesa, y es más seguro, eliminar antes el password.
             delete userToLogin.password;
+            //session, va con request, porque es manejada desde el back. A diferencia de cookie, que es manejada por el front (xq se almacenará en el nav del usuario)
             req.session.userLogged = userToLogin;
             //ahora el obj session, tiene otra propiedad: userLogged (además de cookie), que guarda toda la info de userToLogin
 
@@ -84,7 +85,7 @@ const usersController = {
             if (req.body.rememberUser) {
               // si viajó, quiero que la cookie se llame userEmail y guarde el email, * 1 seg * 60 * 60 = 1 hora
               res.cookie("userEmail", req.body.email, {
-                maxAge: 1000 * 60 * 60 * 72,
+                maxAge: 1000 * 60 * 60 * 24 * 7,
               });
             }
 

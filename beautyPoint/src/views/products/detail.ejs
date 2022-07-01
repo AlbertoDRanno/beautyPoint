@@ -15,49 +15,47 @@
         </h3>
       </article>
       <article class="product-article">
-        <!--Descripción-->
         <p>
           <%= product.description %>
         </p>
-        <!--Presentanción-->
         <div>
           <%= product.packages.description %>
         </div>
-        <!--Línea-->
         <div>
           <%= product.categories.description %>
         </div>
         <div class="product-cart">
+          <% if (locals.userLogged) { %>
           <form action="/products/cart/<%=product.id %>?_method=PUT" method="POST">
             <button type="submit" value="sumarAlCarrito" class="product-cart-button">
               Agregar al carrito
             </button>
           </form>
-          <input type="number" size="1" />
-          
-            <button type="submit" class="action-button delete">
-             <a href="#" class="buy-now-button">Comprar</a>
-            </button>
+          <% } %>
 
-            <button type="submit" class="action-button delete">
-             <a href="/products/edit/<%= product.id %>" class="action-button edit">Editar</a>
-            </button>
-            
+          <% if (locals.userLogged && locals.userLogged.categoria===0) { %>
+          <button type="submit" class="action-button delete">
+            <a href="/products/edit/<%= product.id %>" class="action-button edit">Editar</a>
+          </button>
+          <% } %>
+
+          <% if (locals.userLogged && locals.userLogged.categoria===0) { %>
           <form action="/products/softDelete/<%= product.id %>?_method=PUT" method="POST" style="display: inline-flex">
-            <button type="submit" class="action-button delete">
-             Eliminar
-            </button>
+          <button type="submit" class="action-button delete">
+            Eliminar
+          </button>
           </form>
-                    
+          <% } %>
+
+          <% if (locals.userLogged && locals.userLogged.categoria===0) { %>
           <form action="/products/delete/<%= product.id %>?_method=DELETE" method="POST" style="display: inline-flex">
             <button type="submit" class="action-button delete">
               Eliminar BD
             </button>
           </form>
-          
+          <% } %>
       </article>
     </section>
-  </main>
-  <%- include('../partials/footer.ejs')%>
-</body>
+  </main> <%- include('../partials/footer.ejs')%> </body>
+
 </html>

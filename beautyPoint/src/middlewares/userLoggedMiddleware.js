@@ -1,36 +1,39 @@
-const JsonModel = require("../modelos/jsonModel");
-const usersModel = new JsonModel("users"); // lo traigo para buscar el usuario de la cookie
+/*Este middleware, a nivel app, determinará, a lo que tenga acceso cada usuario que se loguee correctamente(Que parte 
+  de la NavBar - Logout - RememberUser). Recordar que, en dicho caso, del processLogin, viajará req.session.userLogged.*/
 
-// ************ NavBar - Logout - RememberUser - Middleware a nivel app  ************
+const db = require("../database/models");
 
 function userLoggedMiddleware(req, res, next) {
-  //si tengo a alguien en session muestro una parte de la barra de navegación
-  //let isLogged = false; // invento esta variable para determinar cuando muestro y cuando no
+  /* let isLogged = false; - invento esta variable para determinar cuando muestro los distintos sectores y cuando no.
+  IMP! la paso a la variable "local" (variable super global en la que puedo almacenar datos), para que se puedan 
+  compartir entre las vistas. Dado que las vistas no entienden req.session.usserLogged */
+
   res.locals.isLogged = false;
-  //IMP! la paso a variable local, para que se puedan compartir entre las vistas, indistintamente del controlador (1)
 
-  // si tengo a alguien en una cookie, quiero buscar a esa persona y loguearlo
-  let emailInCookie = req.cookies.userEmail;
-  //console.log(emailInCookie);
-  let usersFromCookie = usersModel.filtrarPorCampoValor("email", emailInCookie);
-  let userFromCookie = usersFromCookie[0];
-  //console.log(userFromCookie);
-  // Por lo tanto, si encuentro a alguien, lo paso a session! (2)
-  if (userFromCookie) {
-    req.session.userLogged = userFromCookie
-  }
-
-  // (1) Por lo que en el header, puedo hacer un condicional sobre lo que muestro, basado en este booleano
-  // y, si tengo alguien en session (2), es porque tengo a alguien logueado, 
+  /*si el usuario pasó las validaciones del processLogin, lo logueo, es decir, viajó req.session.userLogged, 
+  y paso estos datos a locals */
   if (req.session.userLogged) {
-    // la session se crea una vez que entro al Login, por lo que pregunto si hay alguien logueado
+  /* si tengo a alguien en session, isLogged se vuelve true, y se mostrará el Perfil,el logout.. sino el register, login.. */
     res.locals.isLogged = true;
-    //Por lo que si tengo a alguien logueado se mostrará Mi cuenta y Logout, caso contrario, login y register
     res.locals.userLogged = req.session.userLogged;
-    //Arriba estoy pasando lo que tengo en session a las variables locales (de nuevo, para tenerlas disponible en todas las vistas)
+    return next();
+  /* pero tmb, si tengo a alguien en una cookie, debería loguearlo, entonces busco a esa persona a partir del mail 
+  guardado la cookie */
+  } else if (req.cookies.email) {
+    db.User.findOne({
+      where: {
+        email: req.cookies.email,
+      },
+    }).then((user) => {
+  /* una vez lo encuentre, será guardado en session -logueado-. y también paso sus datos a locals */
+      res.locals.isLogged = true;
+      req.session.userLogged = user;
+      res.locals.userLogged = user;
+      return next();
+    });
+  } else {
+    return next();
   }
-
-  next();
 }
 
 module.exports = userLoggedMiddleware;

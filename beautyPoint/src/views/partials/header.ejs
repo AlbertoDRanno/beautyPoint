@@ -10,7 +10,7 @@
             class="logo"
         /></a>
       </div>
-      
+
       <!--<a href="#" class="header-hamburguer-button">
               <i class="fas fa-bars"></i
             ></a>
@@ -49,9 +49,11 @@
       </div>-->
 
       <!--Carrito-->
+      <% if (locals.userLogged) { %>
       <div class="header-cart header-elements-ang">
         <a href="/products/cart"><i class="fa-solid fa-cart-shopping"></i></a>
       </div>
+      <% } %>
 
       <!--Buscador-->
       <div class="header-elements header-search">
@@ -122,20 +124,26 @@
     <ul class="header-elements">
       <% if (locals.isLogged) { %>
       <li>
-        <a href=/users/profile/:id" class="loguito">
+        <a href="/users/profile/:id" class="loguito">
           <img src=" <%= locals.userLogged.image %> " />
           Hola <%= locals.userLogged.first_name %>
         </a>
         <ul>
-          <a href="/users/profile/:id"
-            >Mi cuenta <i class="fa-solid fa-circle-user"></i
-          ></a>
-          <li><hr /></li>
-          <a href="/products/create"
-            >Crear producto <i class="fa-solid fa-file-circle-plus"></i
-          ></a>
-          <li><hr /></li>
-          <a href="/users/logout">Cerrar Sesión</a>
+          <li>
+            <a href="/users/profile/:id"
+              >Mi cuenta <i class="fa-solid fa-circle-user"></i
+            ></a>
+          </li>
+          <% if (locals.userLogged.categoria===0) { %>
+           <li>
+            <a href="/products/create"
+              >Crear producto <i class="fa-solid fa-file-circle-plus"></i
+            ></a>
+          </li>
+          <% } %>
+          <li>
+            <a href="/users/logout">Cerrar Sesión</a>
+          </li>
         </ul>
       </li>
       <% } else { %>

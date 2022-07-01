@@ -12,6 +12,12 @@
       >
         <h1>Crear cuenta</h1>
 
+        <div class="errores">
+          <ul>
+            
+          </ul>
+        </div>
+
         <div class="form-element">
           <label for="first_name">Nombres:</label>
           <input
@@ -19,7 +25,7 @@
             id="first_name"
             name="first_name"
             placeholder="Ingresá tu nombre"
-            class="<%= (locals.errors && errors.first_name) ? 'is-invalid' : null %>"
+            class="<%= (locals.errors && errors.first_name) ? 'is-invalid' : null %> first_name"
             value="<%= (locals.oldData) ? oldData.first_name : null %>"
           />
           <% if (locals.errors && errors.first_name) { %>
@@ -34,7 +40,7 @@
             id="last_name"
             name="last_name"
             placeholder="Ingresá tu apellido"
-            class="<%= (locals.errors && errors.last_name) ? 'is-invalid' : null %>"
+            class="<%= (locals.errors && errors.last_name) ? 'is-invalid' : null %> last_name"
             value="<%= (locals.oldData) ? oldData.last_name : null %>"
           />
           <% if (locals.errors && errors.last_name) { %>
@@ -49,7 +55,7 @@
             name="dni"
             id="dni"
             placeholder="Ingresá tu DNI (sin puntos. Ej. 12345678)"
-            class="<%= (locals.errors && errors.dni) ? 'is-invalid' : null %>"
+            class="<%= (locals.errors && errors.dni) ? 'is-invalid' : null %> dni"
             value="<%= (locals.oldData) ? oldData.dni : null %>"
           />
           <% if (locals.errors && errors.dni) { %>
@@ -86,7 +92,7 @@
           <span class="feedback"> <%= errors.phone.msg %> </span>
           <% } %>
         </div>
-        
+
         <div class="form-element">
           <label for="image">Foto de perfil:</label>
           <input type="file" name="image" id="image" accept=".jpg, .png" />
@@ -136,5 +142,6 @@
       </form>
     </main>
     <%- include('../partials/footer.ejs')%>
+    <script src="/js/register.js"></script>
   </body>
 </html>

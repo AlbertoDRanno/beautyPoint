@@ -4,8 +4,7 @@
 .not-found {
   background-image: url("../images/404-error.jpg");
   background-size: cover;
-  background-repeat:no-repeat;
- 
+  background-repeat: no-repeat;
 }
 input:invalid:required {
   border: solid 2px red;
@@ -18,6 +17,10 @@ input:valid:required {
 .login-forgot-password,
 .login-create-account {
   text-decoration: none;
+}
+
+div.errores {
+  color: red;
 }
 
 /* Estilos para formularios de login.html y registro.html */
@@ -171,7 +174,6 @@ input:valid:required {
   display: none;
 }
 */
-
 
 .header {
   position: fixed;
@@ -376,5 +378,3 @@ input:valid:required {
 
 @media (min-width: 1280px) {
 }
-
-
