@@ -184,31 +184,41 @@ const productsController = {
     res.status(200).render("./products/cart");
   },
   addProductCart: (req, res) => {
-    const product = productsModel.buscar(req.params.id);
-    let cantidad = 1;
+    /*busca el id del producto seleccionado en la base de datos*/
+    /*el buscar ahora devuelve una promesa*/ 
+    productsModel.buscar(req.params.id).then((productdb ) => {
+     
+      const product = productdb
+      console.log(product)
+      /*como en la base de datos no posee cantidad los objetos se inserta una cantidad*/
+    let cantidad = 1; 
 
+    /*corrobora si existe el item en el carrito*/
     const indexItem = req.session.cart.findIndex(
       (item) => item.id == product.id
     );
+    /*si lo encuentra, en el if le suma 1 a la cantidad y si no esta lo agrega */
     if (indexItem != -1) {
       req.session.cart[indexItem].cantidad =
-        req.session.cart[indexItem].cantidad + 1;
+        req.session.cart[indexItem].cantidad + 1 ;
+
     } else {
       req.session.cart.push({ ...product, cantidad });
     }
-    res.redirect("/products/cart");
+    res.redirect("/products/cart");});
+    
   },
   deleteProductCart: (req, res) => {
-    const product = productsModel.buscar(req.params.id);
-
-    const indexItem = req.session.cart.findIndex(
+    productsModel.buscar(req.params.id).then((product) => {   const indexItem = req.session.cart.findIndex(
       (item) => item.id == product.id
     );
     if (indexItem != -1) {
       req.session.cart.splice(indexItem, 1);
     }
 
-    res.redirect("/products/cart");
+    res.redirect("/products/cart");}) ;
+
+ 
   },
 };
 
