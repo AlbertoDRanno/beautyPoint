@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const db = require("../database/models");
 
 class JsonModel {
   constructor(name) {
@@ -42,11 +43,15 @@ class JsonModel {
 
   /** Trae un registro por su valor de pk */
   buscar(id) {
-    let items = this.readJsonFile(); // array con todos los items (usuarios o productos)
+    /*let items = this.readJsonFile(); // array con todos los items (usuarios o productos)
     return items.find((item) => item.id == id);
     //va a iterar todos los items, y va a retornar a aquel cuyo id sea al que tomé por parámetro
-    //si no lo encuentra, devuelve undefined
-  }
+    //si no lo encuentra, devuelve undefined*/
+    
+    return db.Product.findOne({where: {id},
+      include: [{ association: "categories" }, { association: "packages" }],
+    raw:true
+    })}
 
   /** Filtra registros por su clave y valor */
   filtrarPorCampoValor(campo, valor) {
