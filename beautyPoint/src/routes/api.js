@@ -17,8 +17,11 @@ router.get('/products/:id', apiController.mostrarDetalleDeProducto);
 
 /*** API PRUEBAS PROODUCTOS ***/
 router.post("/productsStore", apiController.store);
+router.patch("/productsUpdate/:id", apiController.update);
 router.delete("/productsDelete/:id", apiController.delete);
+
 router.get("/productsSearch", apiController.search);
+
 router.get("/productsConsumirAPI", apiController.consumirAPI);
 router.get("/productsConsumirDosAPIs", apiController.consumirDosAPIs);
 

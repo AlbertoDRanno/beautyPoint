@@ -1,11 +1,47 @@
     //  ctrl + k    luego   ctrl + c
     //  ctrl + u para descomentaar
-  
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"
-></script>;
+
+    consumirAPI: async (req, res) => {
+    //realizo un pedido asíncrono, y fetch es un método que tiene 2 promesas:
+    //la 1era, es la consulta al endpoint - entre los ( ), paso la URL de la API que quiero cosumir
+    fetch("https://randomuser.me/api/?results=100") //&gender=female
+      //la 2da, es la promesa que devuelve ese endpoint, que aún se tiene que resolver - y pido que la entregue en formato JSON
+      .then((response) => response.json())
+      //una vez se resuelva esta promesa, voy a obtener la info
+      .then((usuarios) => {
+        //a partir de aquí es donde puedo trabajar con lo que me llega de la API
+        //return res.json(usuarios.results); //- si quisiera enviar a un endpoint la info de la API
+        //si quiero enviarla a una vista:
+        return res.render("api.ejs", { usuarios: usuarios.results });
+      })
+      .catch((err) => res.send(err));
+    }
+
+listarUsuarios: (req, res) => {
+  db.User.findAll()
+    .then((users) => {
+      //return res.send(users)
+      let respuesta = {
+        metaData: {
+          status: 200, //todo funciona ok
+          total: users.length, //cantidad total de registros publicados
+          url: "/api/users/",
+        },
+        data: users // acá le envío lo que trajo la promesa
+      } // pero esta respuesta yo no la estoy enviando a una vista, sino que la quiero enviar en formato json a un endpoint
+      res.json(respuesta)
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+},
+  (
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  );
 
  /*
             <option value="categoria-1" <%= locals.oldData && oldData.category === "categoria-1" ? "selected" : " " ; %>>Cuidados básicos</option>
@@ -69,3 +105,106 @@ try {
 }
 
 */
+
+// window.addEventListener("load", function () {
+//   let form = document.querySelector("form"); //"la etiqueta form, con clase form-register"
+//   //console.log(form);
+//   let first_name = document.querySelector(".first_name");
+//   let last_name = document.querySelector(".last_name");
+//   let dni = document.querySelector(".dni");
+//   let email = document.querySelector(".email");
+//   let phone = document.querySelector(".phone");
+//   let password = document.querySelector(".password");
+//   let repeatPassword = document.querySelector(".repeatPassword");
+
+//   form.addEventListener("submit", function (e) {
+
+//     checkInputs(); //llamo a un método que valide los inputs
+
+//     function checkInputs() {
+//       //para eliminar cualquier caracter vacío dentro del texto del input
+//       const first_nameValue = first_name.value.trim();
+//       const last_nameValue = last_name.value.trim();
+//       const dniValue = dni.value.trim();
+//       const emailValue = email.value.trim();
+//       const phoneValue = phone.value.trim();
+//       const passwordValue = password.value.trim();
+//       const repeatPasswordValue = repeatPassword.value.trim();
+
+//       //Validaciones:
+//       if (first_nameValue === "") {
+//         setErrorFor(first_name, "FRONT - Tienes que escribir tu NOMBRE"); //si es vacío, llamo a este método
+//       } else {
+//         setSuccessFor(first_name);
+//       }
+
+//       if (last_nameValue === "") {
+//         setErrorFor(last_name, "FRONT - Tienes que escribir tu APELLIDO");
+//       } else {
+//         setSuccessFor(last_name);
+//       }
+
+//       if (dniValue === "") {
+//         setErrorFor(dni, "FRONT - Tienes que escribir tu DNI");
+//       } else {
+//         setSuccessFor(dni);
+//       }
+// /*
+//       if (emailValue === "") {
+//         setErrorFor(email, "FRONT - No puede dejar el email en blanco");
+//       } else if (!isEmail(emailValue)) {
+//         setErrorFor(email, "FRONT - No ingreso un email válido");
+//       } else {
+//         setSuccessFor(email);
+//       }
+// */
+//       if (phoneValue === "") {
+//         setErrorFor(phone, "FRONT - Tienes que escribir tu Teléfono");
+//       } else {
+//         setSuccessFor(phone);
+//       }
+// /*
+//       if (passwordValue === "") {
+//         setErrorFor(password, "FRONT - Password no debe ingresar en blanco.");
+//       } else {
+//         setSuccessFor(password);
+//       }
+
+//       if (repeatPasswordValue === "") {
+//         setErrorFor(
+//           repeatPassword,
+//           "FRONT - Password2 no debe ngresar en blanco"
+//         );
+//       } else if (passwordValue !== repeatPasswordValue) {
+//         setErrorFor(repeatPassword, "FRONT - Passwords no coinciden");
+//       } else {
+//         setSuccessFor(repeatPassword);
+//       }
+// */      
+//     }
+//     //este método recibirá como parámetros el input y el message
+//     function setErrorFor(input, message) {
+//       const formControl = input.parentElement; // el elemento padre del input
+//       const small = formControl.querySelector("small"); //seleccione del padre del input, aquel que tiene la etiqueta small
+//       formControl.className = "form-control error"; //le asigno la clase
+//       small.innerText = message; //le envía el error
+//     }
+
+//     /* la función serErrorFor muestra el error. 
+//     Selecciono el formControl a través de la etiqueta small
+//     Una vez seleccionado, le agrego la clase form-control error, para hacerlo visible
+//     Una vez que se hace visible se muestra el mensaje que estamos enviando */
+
+//     //en caso de éxito, defino la función:
+//     function setSuccessFor(input) {
+//       const formControl = input.parentElement; // el elemento padre del input
+//       formControl.className = "form-control success"; //le asigno la clase
+//     }
+
+//     // function isEmail(email) {
+//     //   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+//     //     email
+//     //   );
+//     // }
+//   });
+// });

@@ -102,16 +102,21 @@
 
 
 window.addEventListener("load", function () {
-  let form = document.querySelector("form.form-register"); //"la etiqueta form, con clase form-register"
-  //console.log(form);
+    let form = document.querySelector("form"); //"la etiqueta form, con clase form-register"
+    //console.log(form);
+    let first_name = document.querySelector(".first_name");
+    let last_name = document.querySelector(".last_name");
+    let dni = document.querySelector(".dni");
+    let email = document.querySelector(".email");
+    let phone = document.querySelector(".phone");
+    let password = document.querySelector(".password");
+    let repeatPassword = document.querySelector(".repeatPassword");
+
   form.addEventListener("submit", function (e) {
     let errores = [];
 
-    let first_name = document.querySelector("input.first_name");
-
     if (first_name.value == "") {
       errores.push("Tienes que escribir tu nombre");
-      //is-invalid
       first_name.classList.add("is-invalid");
     } else if (first_name.value.length < 2) {
       errores.push("El nombre debe tener al menos 2 caracteres");
@@ -121,18 +126,11 @@ window.addEventListener("load", function () {
       first_name.classList.remove("is-invalid");
     }
 
-    let last_name = document.querySelector("input.last_name");
-
     if (last_name.value == "") {
       errores.push("Tienes que escribir tu apellido");
     } else if (last_name.value.length < 2) {
       errores.push("El nombre debe tener al menos 2 caracteres");
-    } else {
-      last_name.classList.add("is-valid");
-      last_name.classList.remove("is-invalid");
     }
-
-    let dni = document.querySelector("input.dni");
 
     if (dni.value == "") {
       errores.push("Tienes que escribir tu DNI");
@@ -148,5 +146,6 @@ window.addEventListener("load", function () {
     }
   });
 });
+
 
 

@@ -72,12 +72,13 @@ const productsController = {
     console.log("entrando al render detail de productsController.js");
     db.Product.findByPk(req.params.id, {
       include: [{ association: "categories" }, { association: "packages" }],
-    }).then(function (product) {
-      console.log(product);
-
-      res.render("./products/detail", { product: product });
     })
-    .catch((err) => res.send(err));
+      .then(function (product) {
+        console.log(product);
+
+        res.render("./products/detail", { product: product });
+      })
+      .catch((err) => res.send(err));
   },
 
   // Edit - Render del formulario de edición de un producto
@@ -113,47 +114,48 @@ const productsController = {
     if (errors.isEmpty()) {
       //hay errores en la validación??
       //console.log(req.file);
-    console.log("Entró al método update del productController.js");
-    req.body.image = "/images/products/" + req.file.filename;
-    db.Product.update(
-      {
-        //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
-        name: req.body.name,
-        price: req.body.price,
-        description: req.body.description,
-        //discount: req.body.discount - Falta agregarlo en la vista
-        package_id: req.body.package,
-        category_id: req.body.category,
-        image: req.body.image,
-        //stock: req.body.stock - Falta agregarlo en la vista
-      },
-      {
-        where: { id: req.params.id },
-      }
-    );
-    res.redirect("/");
-  } else {
-    let pedidoProducto = db.Product.findByPk(req.params.id, {
-      include: [{ association: "categories" }, { association: "packages" }],
-    });
-    let pedidoPackage = db.Package.findAll({
-      include: [{ association: "productosP" }],
-    });
-    let pedidoCategory = db.Category.findAll({
-      include: [{ association: "productosC" }],
-    });
-    Promise.all([pedidoProducto, pedidoPackage, pedidoCategory])
-      //cuando obtenga todos los pedidos, recién ahí realiza el "then"
-      .then(function ([product, package, category]) {
-        return res.status(200).render("./products/edit", {
-          product: product,
-          package: package,
-          category: category,
-          errors: errors.mapped(),
-        });
-      })
-      .catch((err) => res.send(err));
-  }},
+      console.log("Entró al método update del productController.js");
+      req.body.image = "/images/products/" + req.file.filename;
+      db.Product.update(
+        {
+          //1ro nombre de las columnas BBDD, igual que en el modelo. 2do nombre del campo del formulario
+          name: req.body.name,
+          price: req.body.price,
+          description: req.body.description,
+          //discount: req.body.discount - Falta agregarlo en la vista
+          package_id: req.body.package,
+          category_id: req.body.category,
+          image: req.body.image,
+          //stock: req.body.stock - Falta agregarlo en la vista
+        },
+        {
+          where: { id: req.params.id },
+        }
+      );
+      res.redirect("/");
+    } else {
+      let pedidoProducto = db.Product.findByPk(req.params.id, {
+        include: [{ association: "categories" }, { association: "packages" }],
+      });
+      let pedidoPackage = db.Package.findAll({
+        include: [{ association: "productosP" }],
+      });
+      let pedidoCategory = db.Category.findAll({
+        include: [{ association: "productosC" }],
+      });
+      Promise.all([pedidoProducto, pedidoPackage, pedidoCategory])
+        //cuando obtenga todos los pedidos, recién ahí realiza el "then"
+        .then(function ([product, package, category]) {
+          return res.status(200).render("./products/edit", {
+            product: product,
+            package: package,
+            category: category,
+            errors: errors.mapped(),
+          });
+        })
+        .catch((err) => res.send(err));
+    }
+  },
 
   // destroy - Hard Delete - Elimina un producto de la base de datos
   destroy: (req, res) => {
@@ -184,41 +186,52 @@ const productsController = {
     res.status(200).render("./products/cart");
   },
   addProductCart: (req, res) => {
-    /*busca el id del producto seleccionado en la base de datos*/
-    /*el buscar ahora devuelve una promesa*/ 
-    productsModel.buscar(req.params.id).then((productdb ) => {
-     
-      const product = productdb
-      console.log(product)
+    db.Product.findOne({
+      where: { id: req.params.id },
+      include: [{ association: "categories" }, { association: "packages" }],
+      raw: true, //sigo sin saber bien que hace, pero es necesario para que funcione...
+      /* The "Converting circular structure to JSON" error occurs when we pass an object that contains circular 
+      references to the JSON.stringify() method. To solve the error, make sure to remove any circular references
+       before converting the object to JSON. */
+    }).then((productdb) => {
+      //console.log(productdb);
       /*como en la base de datos no posee cantidad los objetos se inserta una cantidad*/
-    let cantidad = 1; 
+      let cantidad = 1;
 
-    /*corrobora si existe el item en el carrito*/
-    const indexItem = req.session.cart.findIndex(
-      (item) => item.id == product.id
-    );
-    /*si lo encuentra, en el if le suma 1 a la cantidad y si no esta lo agrega */
-    if (indexItem != -1) {
-      req.session.cart[indexItem].cantidad =
-        req.session.cart[indexItem].cantidad + 1 ;
-
-    } else {
-      req.session.cart.push({ ...product, cantidad });
-    }
-    res.redirect("/products/cart");});
-    
+      /*corrobora si existe el item en el carrito*/
+      /* El método findIndex() devuelve el índice del primer elemento de un array que cumpla con la función 
+      de prueba proporcionada. En caso contrario devuelve -1. */
+      const indexItem = req.session.cart.findIndex(
+        (item) => item.id == productdb.id
+      );
+      /*si lo encuentra, en el if le suma 1 a la cantidad y si no esta lo agrega */
+      if (indexItem != -1) {
+        req.session.cart[indexItem].cantidad =
+          req.session.cart[indexItem].cantidad + 1;
+      } else {
+        /* Este operador permite que los elementos de un array se expandan y, de esta manera, podemos añadir
+         un array dentro de otro sin que el resultado sean arrays anidados, si no un único array al que se han
+         añadido nuevos valores. */
+        req.session.cart.push({ ...productdb, cantidad });
+      }
+      res.redirect("/products/cart");
+    });
   },
   deleteProductCart: (req, res) => {
-    productsModel.buscar(req.params.id).then((product) => {   const indexItem = req.session.cart.findIndex(
-      (item) => item.id == product.id
-    );
-    if (indexItem != -1) {
-      req.session.cart.splice(indexItem, 1);
-    }
+    db.Product.findOne({
+      where: { id: req.params.id },
+    }).then((product) => {
+      const indexItem = req.session.cart.findIndex(
+        (item) => item.id == product.id
+      );
+      if (indexItem != -1) {
+        /*el método splice(), sirve para eliminar de un array. Desde el índice del primer parámetro (incluido), y 
+        la cantidad de elementos indicados en el 2do parámetro */
+        req.session.cart.splice(indexItem, 1);
+      }
 
-    res.redirect("/products/cart");}) ;
-
- 
+      res.redirect("/products/cart");
+    });
   },
 };
 
