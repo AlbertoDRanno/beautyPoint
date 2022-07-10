@@ -1,152 +1,133 @@
-// window.addEventListener("load", function () {
-//   let form = document.querySelector("form"); //"la etiqueta form, con clase form-register"
-//   //console.log(form);
-//   let first_name = document.querySelector(".first_name");
-//   let last_name = document.querySelector(".last_name");
-//   let dni = document.querySelector(".dni");
-//   let email = document.querySelector(".email");
-//   let phone = document.querySelector(".phone");
-//   let password = document.querySelector(".password");
-//   let repeatPassword = document.querySelector(".repeatPassword");
-
-//   form.addEventListener("submit", function (e) {
-//     e.preventDefault;
-//     checkInputs(); //llamo a un método que valide los inputs
-
-//     function checkInputs() {
-//       //para eliminar cualquier caracter vacío dentro del texto del input
-//       const first_nameValue = first_name.value.trim();
-//       const last_nameValue = last_name.value.trim();
-//       const dniValue = dni.value.trim();
-//       const emailValue = email.value.trim();
-//       const phoneValue = phone.value.trim();
-//       const passwordValue = password.value.trim();
-//       const repeatPasswordValue = repeatPassword.value.trim();
-
-//       //Validaciones:
-//       if (first_nameValue === "") {
-//         setErrorFor(first_name, "FRONT - Tienes que escribir tu NOMBRE"); //si es vacío, llamo a este método
-//       } else {
-//         setSuccessFor(first_name);
-//       }
-
-//       if (last_nameValue === "") {
-//         setErrorFor(last_name, "FRONT - Tienes que escribir tu APELLIDO");
-//       } else {
-//         setSuccessFor(last_name);
-//       }
-
-//       if (dniValue === "") {
-//         setErrorFor(dni, "FRONT - Tienes que escribir tu DNI");
-//       } else {
-//         setSuccessFor(dni);
-//       }
-
-//       if (emailValue === "") {
-//         setErrorFor(email, "FRONT - No puede dejar el email en blanco");
-//       } else if (!isEmail(emailValue)) {
-//         setErrorFor(email, "FRONT - No ingreso un email válido");
-//       } else {
-//         setSuccessFor(email);
-//       }
-
-//       if (phoneValue === "") {
-//         setErrorFor(phone, "FRONT - Tienes que escribir tu Teléfono");
-//       } else {
-//         setSuccessFor(phone);
-//       }
-
-//       if (passwordValue === "") {
-//         setErrorFor(password, "FRONT - Password no debe ingresar en blanco.");
-//       } else {
-//         setSuccessFor(password);
-//       }
-
-//       if (repeatPasswordValue === "") {
-//         setErrorFor(
-//           repeatPassword,
-//           "FRONT - Password2 no debe ngresar en blanco"
-//         );
-//       } else if (passwordValue !== repeatPasswordValue) {
-//         setErrorFor(repeatPassword, "FRONT - Passwords no coinciden");
-//       } else {
-//         setSuccessFor(repeatPassword);
-//       }
-//     }
-//     //este método recibirá como parámetros el input y el message
-//     function setErrorFor(input, message) {
-//       const formControl = input.parentElement; // el elemento padre del input
-//       const small = formControl.querySelector("small"); //seleccione del padre del input, aquel que tiene la etiqueta small
-//       formControl.className = "form-control error"; //le asigno la clase
-//       small.innerText = message; //le envía el error
-//     }
-
-//     /* la función serErrorFor muestra el error. 
-//     Selecciono el formControl a través de la etiqueta small
-//     Una vez seleccionado, le agrego la clase form-control error, para hacerlo visible
-//     Una vez que se hace visible se muestra el mensaje que estamos enviando */
-
-//     //en caso de éxito, defino la función:
-//     function setSuccessFor(input) {
-//       const formControl = input.parentElement; // el elemento padre del input
-//       formControl.className = "form-control success"; //le asigno la clase
-//     }
-
-//     // function isEmail(email) {
-//     //   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-//     //     email
-//     //   );
-//     // }
-//   });
-// });
-
-
 window.addEventListener("load", function () {
   let form = document.querySelector("form.form-register"); //"la etiqueta form, con clase form-register"
   //console.log(form);
   form.addEventListener("submit", function (e) {
-    let errores = [];
+    let errores = 0;
 
     let first_name = document.querySelector("input.first_name");
+    let h2first_name = document.querySelector("h2.first_name");
+    let last_name = document.querySelector("input.last_name");
+    let h2last_name = document.querySelector("h2.last_name");
+    let dni = document.querySelector("input.dni");
+    let h2dni = document.querySelector("h2.dni");
+    let email = document.querySelector("input.email");
+    let h2email = document.querySelector("h2.email");
+    let phone = document.querySelector("input.phone");
+    let h2phone = document.querySelector("h2.phone");
+    let password = document.querySelector("input.password");
+    let h2password = document.querySelector("h2.password");
+    let repeatPassword = document.querySelector("input.repeatPassword");
+    let h2repeatPassword = document.querySelector("h2.repeatPassword");
+    //expresión regular recomendada para validacion de email básico??
+    function validarEmail(valor) {
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+        valor
+      );
+    }
 
     if (first_name.value == "") {
-      errores.push("Tienes que escribir tu nombre");
-      //is-invalid
+      errores++;
       first_name.classList.add("is-invalid");
+      h2first_name.innerHTML = "Tienes que escribir tu nombre";
     } else if (first_name.value.length < 2) {
-      errores.push("El nombre debe tener al menos 2 caracteres");
+      errores++;
       first_name.classList.add("is-invalid");
+      h2first_name.innerHTML = "El nombre debe tener al menos 2 caracteres";
     } else {
       first_name.classList.add("is-valid");
       first_name.classList.remove("is-invalid");
+      first_name.classList.add("success");
+      h2first_name.innerHTML = "Bien hecho!";
     }
 
-    let last_name = document.querySelector("input.last_name");
-
     if (last_name.value == "") {
-      errores.push("Tienes que escribir tu apellido");
+      errores++;
+      last_name.classList.add("is-invalid");
+      h2last_name.innerHTML = "Tienes que escribir tu apellido";
     } else if (last_name.value.length < 2) {
-      errores.push("El nombre debe tener al menos 2 caracteres");
+      errores++;
+      last_name.classList.add("is-invalid");
+      h2last_name.innerHTML = "El apellido debe tener al menos 2 caracteres";
     } else {
       last_name.classList.add("is-valid");
       last_name.classList.remove("is-invalid");
+      last_name.classList.add("success");
+      h2last_name.innerHTML = "Bien hecho!";
     }
-
-    let dni = document.querySelector("input.dni");
 
     if (dni.value == "") {
-      errores.push("Tienes que escribir tu DNI");
+      errores++;
+      dni.classList.add("is-invalid");
+      h2dni.innerHTML = "Tienes que escribir tu DNI - Solo números";
+    } else {
+      dni.classList.add("is-valid");
+      dni.classList.remove("is-invalid");
+      dni.classList.add("success");
+      h2dni.innerHTML = "Bien hecho!";
     }
 
-    if (errores.length > 0) {
-      e.preventDefault();
+    if (email.value == "") {
+      errores++;
+      email.classList.add("is-invalid");
+      h2email.innerHTML = "Tienes que escribir tu correo electrónico";
+    } /* else if (!validarEmail(email.value)) {
+      errores++;
+      email.classList.add("is-invalid");
+      h2email.innerHTML = "Debes escribir un formato de correo válido";
+    } */ else {
+      email.classList.add("is-valid");
+      email.classList.remove("is-invalid");
+      email.classList.add("success");
+      h2email.innerHTML = "Bien hecho!";
+    }
 
-      let ulErrores = document.querySelector("div.errores ul");
-      for (let i = 0; i < errores.length; i++) {
-        ulErrores.innerHTML += "<li>" + errores[i] + "</li>";
-      }
+    if (phone.value == "") {
+      errores++;
+      phone.classList.add("is-invalid");
+      h2phone.innerHTML = "Tienes que escribir tu número de celular";
+    } else {
+      phone.classList.add("is-valid");
+      phone.classList.remove("is-invalid");
+      phone.classList.add("success");
+      h2phone.innerHTML = "Bien hecho!";
+    }
+
+    if (password.value == "") {
+      errores++;
+      password.classList.add("is-invalid");
+      h2password.innerHTML = "Tienes que escribir una contraseña";
+    } else if (!(password.value.length >= 8 && password.value.length <= 15)) {
+      errores++;
+      password.classList.add("is-invalid");
+      h2password.innerHTML = "La contraseña debe tener entre 8 y 15 caracteres";
+    } else {
+      password.classList.add("is-valid");
+      password.classList.remove("is-invalid");
+      password.classList.add("success");
+      h2password.innerHTML = "Bien hecho!";
+    }
+
+    if (repeatPassword.value == "") {
+      errores++;
+      repeatPassword.classList.add("is-invalid");
+      h2repeatPassword.innerHTML = "Tienes que repetir la contraseña elegida";
+    } else if (password.value !== repeatPassword.value) {
+      errores++;
+      repeatPassword.classList.add("is-invalid");
+      h2repeatPassword.innerHTML = "Las contraseñas no coinciden";
+    } else {
+      repeatPassword.classList.add("is-valid");
+      repeatPassword.classList.remove("is-invalid");
+      repeatPassword.classList.add("success");
+      h2repeatPassword.innerHTML = "Bien hecho!";
+    }
+
+    if (errores > 0) {
+      e.preventDefault();
+      // let ulErrores = document.querySelector("div.errores ul");
+      // for (let i = 0; i < errores.length; i++) {
+      //   ulErrores.innerHTML += "<li>" + errores[i] + "</li>";
+      // }
     }
   });
 });
-
-
