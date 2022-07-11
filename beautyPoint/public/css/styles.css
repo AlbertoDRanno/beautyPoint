@@ -49,6 +49,12 @@ div.errores {
   width: 70vw;
 }
 
+.form-element-login h2{
+  font-style: italic;
+  font-size: small;
+  position: absolute;  
+}
+
 .form-element-login input {
   width: 100%;
 }

@@ -23,6 +23,7 @@ const usersController = {
       res.render("users/register", {
         errors: resultValidation.mapped(), //los envío como un obj. lit. para que sea + facil trabajarlos, que dentro de un array
         oldData: req.body, // envío los datos de los campos que estuvieron correctos
+        //oldImage: req.file, //es posible persistir la imagen??(recordar que viaja por file y no por body)
       });
     } else {
       /*Si no hubo errores, genero el usuario a partir de los datos del request*/

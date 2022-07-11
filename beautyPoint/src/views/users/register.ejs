@@ -101,7 +101,16 @@
 
         <div class="form-element form-control">
           <label for="image">Foto de perfil:</label>
-          <input type="file" name="image" id="image" accept=".jpg, .png" />
+          <input
+            type="file"
+            name="image"
+            id="image"
+            accept=".jpg, .png, .jpeg, .gif"
+            class="image"
+            
+          />
+          <!--value="<%= (locals.oldImage) ? oldImage.filename : null %>"-->
+          <h2 class="image"></h2>
           <% if (locals.errors && errors.image) { %>
           <span class="feedback"> <%= errors.image.msg %> </span>
           <% } %>

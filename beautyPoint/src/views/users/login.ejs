@@ -11,10 +11,11 @@
             name="email"
             placeholder="Correo electrónico"
             id="email"
-            class="<%= (locals.errors && errors.email) ? 'is-invalid' : null %> form-control"
+            class="<%= (locals.errors && errors.email) ? 'is-invalid' : null %> form-control email"
             value="<%= (locals.oldData) ? oldData.email : null %>"
           />
           <label for="email">Email</label>
+          <h2 class="email"></h2>
           <% if (locals.errors && errors.email) { %>
           <span class="feedback"> <%= errors.email.msg %> </span>
           <% } %>
@@ -25,16 +26,17 @@
             type="password"
             name="password"
             placeholder="Contraseña"
-            class="<%= (locals.errors && errors.password) ? 'is-invalid' : null %> form-control"
+            class="<%= (locals.errors && errors.password) ? 'is-invalid' : null %> form-control password"
           />
           <label for="password">Contraseña</label>
+          <h2 class="password"></h2>
           <% if (locals.errors && errors.password) { %>
           <span class="feedback"> <%= errors.password.msg %> </span>
           <% } %>
         </div>
 
         <div class="form-element-login">
-          <button type="submit" class="btn btn-outline-primary " value="login">
+          <button type="submit" class="btn btn-outline-primary" value="login">
             Iniciar Sesión
           </button>
         </div>
@@ -57,7 +59,6 @@
       </form>
     </main>
     <%- include('../partials/footer.ejs')%>
+    <script src="/js/login.js"></script>
   </body>
 </html>
-
-

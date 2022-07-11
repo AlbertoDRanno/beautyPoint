@@ -83,7 +83,7 @@ db.User.findAll()
           .withMessage("Completar solamente con números"),
         body("image").custom((value, { req }) => {
           let file = req.file;
-          let acceptedExtensions = [".jpg", "jpeg", ".png", ".gif"];
+          let acceptedExtensions = [".jpg", ".jpeg", ".png", ".gif"];
 
           if (!file) {
             throw new Error("Tienes que subir una imagen");

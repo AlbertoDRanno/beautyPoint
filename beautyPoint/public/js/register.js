@@ -14,6 +14,8 @@ window.addEventListener("load", function () {
     let h2email = document.querySelector("h2.email");
     let phone = document.querySelector("input.phone");
     let h2phone = document.querySelector("h2.phone");
+    let image = document.querySelector("input.image");
+    let h2image = document.querySelector("h2.image");
     let password = document.querySelector("input.password");
     let h2password = document.querySelector("h2.password");
     let repeatPassword = document.querySelector("input.repeatPassword");
@@ -23,6 +25,33 @@ window.addEventListener("load", function () {
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
         valor
       );
+    }
+
+    function validarImage() {
+      // Obtener nombre de archivo
+      let archivo = image.value;
+      // Obtener extensión del archivo
+      let extension = archivo.substring(
+        /*substring() devuelve una parte de una cadena definida por los índices pasados ​​como parámetros a esta función.
+        Toma dos parámetros, el índice inicial y el índice final*/
+        archivo.lastIndexOf("."),
+        /*lastIndexOf(), el 1er parámetro, averigua la última posición donde el "." está presente */
+        archivo.length //2do parámetro, el índice final.
+      );
+      // Si la extensión obtenida no está incluida en la lista de valores del atributo "accept", mostraré el error.
+      if (
+        document
+          .querySelector("input.image")
+          .getAttribute("accept")
+          .split(
+            ","
+          ) /*String original del accept=".jpg, .png, .jpeg, .gif". El método split() devuelve un array con cada uno de
+           los elementos que estaban entre los separadores, en este caso, las comas: [.jpg, .png, .jpeg, .gif].*/
+          .indexOf(extension) < 0 //si la extensión no se encuentra en ese array, el indexOf dará "-1"
+      ) {
+        return true; /* devuelve que es verdad que la extensión no está en el array. Por lo que si la validación es true,
+        devuelvo un error*/
+      }
     }
 
     if (first_name.value == "") {
@@ -90,6 +119,22 @@ window.addEventListener("load", function () {
       phone.classList.remove("is-invalid");
       phone.classList.add("success");
       h2phone.innerHTML = "Bien hecho!";
+    }
+
+    if (image.value == "") {
+      errores++;
+      image.classList.add("is-invalid");
+      h2image.innerHTML = "Tienes que subir una foto de perfil";
+    } else if (validarImage(image.value)) {
+      errores++;
+      image.classList.add("is-invalid");
+      h2image.innerHTML =
+        "Archivo inválido. No se permite la extensión " + extension;
+    } else {
+      image.classList.add("is-valid");
+      image.classList.remove("is-invalid");
+      image.classList.add("success");
+      h2image.innerHTML = "Bien hecho!";
     }
 
     if (password.value == "") {
