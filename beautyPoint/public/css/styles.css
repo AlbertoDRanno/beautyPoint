@@ -386,3 +386,7 @@ div.errores {
 }
 
 /*Register*/
+.create {
+  font-size: small;
+  font-style: italic;
+}
