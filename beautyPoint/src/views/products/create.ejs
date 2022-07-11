@@ -71,6 +71,7 @@
         <div class="form-element ">
           <label for="package">Package:</label>
           <select name="package" id="package" class="package">
+            <option value="sinAsignar">Elige uno:</option>
             <% for( let i = 0; i < packages.length; i++ ) { %>
             <option value=" <%= packages[i].id %>  ">
               <%= packages[i].description %>
@@ -86,6 +87,7 @@
         <div class="form-element ">
           <label for="category">Categoría:</label>
           <select name="category" id="category" class="category">
+            <option value="sinAsignar">Elige una:</option>
             <% for( let i = 0; i < categories.length; i++ ) { %>
             <option value=" <%= categories[i].id %>  ">
               <%= categories[i].description %>

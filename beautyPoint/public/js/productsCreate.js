@@ -86,7 +86,7 @@ window.addEventListener("load", function () {
       h2description.innerHTML = "Bien hecho!";
     }
 
-    if (package.value == "") {
+    if (package.value == "sinAsignar") {
       errores++;
       package.classList.add("is-invalid");
       h2package.innerHTML = "Debes completar el campo Package";
@@ -97,7 +97,7 @@ window.addEventListener("load", function () {
       h2package.innerHTML = "Bien hecho!";
     }
 
-    if (category.value == "") {
+    if (category.value == "sinAsignar") {
       errores++;
       category.classList.add("is-invalid");
       h2category.innerHTML = "Debes elegir una categoría";
