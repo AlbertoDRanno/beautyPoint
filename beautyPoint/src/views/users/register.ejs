@@ -66,10 +66,19 @@
           <% } %>
         </div>
 
+        <!--
+        Importante! para que la validación del email, del lado del front, pueda ejecutarse, tuve que cambiar el 
+        type del input. Pasarlo de “email”, a “text”, porque si no hago eso, el formulario directamente no permite
+        hacer submit, si la expresión a validar no cumple con el tipo email. Pero tampoco muestra ningún error...
+        Para que la expresión a validar viaje, es que paso el tipo del input a text.. y en ese caso será la función
+        validarEmail la que la analice en base a la expresión regular que le haya pasado y muestre los errores 
+        correspondientes
+        -->
+        
         <div class="form-element form-control">
           <label for="email">E-mail:</label>
           <input
-            type="email"
+            type="text" 
             id="email"
             name="email"
             placeholder="Ingresá tu correo"
@@ -109,7 +118,7 @@
             class="image"
             
           />
-          <!--value="<%= (locals.oldImage) ? oldImage.filename : null %>"-->
+          <!--value="Dado que la imagen no viaja por el body, persistir la imagen seleccionada excede nuestros conocimientos actuales-->
           <h2 class="image"></h2>
           <% if (locals.errors && errors.image) { %>
           <span class="feedback"> <%= errors.image.msg %> </span>

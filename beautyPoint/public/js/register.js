@@ -20,11 +20,11 @@ window.addEventListener("load", function () {
     let h2password = document.querySelector("h2.password");
     let repeatPassword = document.querySelector("input.repeatPassword");
     let h2repeatPassword = document.querySelector("h2.repeatPassword");
-    //expresión regular recomendada para validacion de email básico??
+    //expresión regular recomendada para validacion de email básico:
     function validarEmail(valor) {
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-        valor
-      );
+      let regex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/g;
+
+      return regex.test(valor); //si cumple la validación devolverá un True
     }
 
     function validarImage() {
@@ -99,11 +99,11 @@ window.addEventListener("load", function () {
       errores++;
       email.classList.add("is-invalid");
       h2email.innerHTML = "Tienes que escribir tu correo electrónico";
-    } /* else if (!validarEmail(email.value)) {
+    } else if (!validarEmail(email.value)) {
       errores++;
       email.classList.add("is-invalid");
       h2email.innerHTML = "Debes escribir un formato de correo válido";
-    } */ else {
+    } else {
       email.classList.add("is-valid");
       email.classList.remove("is-invalid");
       email.classList.add("success");

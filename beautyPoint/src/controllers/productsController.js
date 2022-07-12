@@ -217,6 +217,10 @@ const productsController = {
       res.redirect("/products/cart");
     });
   },
+  saveProductCart: (req, res) => {
+    console.log("entrando al método save del carrito");
+
+ },
   deleteProductCart: (req, res) => {
     db.Product.findOne({
       where: { id: req.params.id },
