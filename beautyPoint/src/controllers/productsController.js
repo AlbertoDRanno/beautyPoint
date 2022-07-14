@@ -219,8 +219,19 @@ const productsController = {
   },
   saveProductCart: (req, res) => {
     console.log("entrando al método save del carrito");
-
- },
+    let productosCarritos = req.session.cart;
+    console.log(productosCarritos);
+    for (let i = 0; i < productosCarritos.length; i++) {
+      db.Cart.create({
+        comprador_id: req.session.userLogged.id,
+        product_id: productosCarritos[i].product_id,
+        quantity: productosCarritos[i].cantidad,
+        price: productosCarritos[i].price,
+        status: 2,
+      });
+    }
+    res.redirect("/");
+  },
   deleteProductCart: (req, res) => {
     db.Product.findOne({
       where: { id: req.params.id },

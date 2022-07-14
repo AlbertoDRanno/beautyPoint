@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
     },*/,
     status: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER, //status 1, todo ok, se muestra en las vistas - status 0, no se muestra - status 2, vendido
     },
     vendedor_id: {
       type: DataTypes.INTEGER,

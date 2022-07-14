@@ -89,7 +89,7 @@ const usersController = {
                 maxAge: 1000 * 60 * 60 * 24 * 7,
               });
             }
-
+            console.log(req.session.userLogged.id);
             return res.redirect("/users/profile/" + userToLogin.id);
           }
           return res.render("users/login", {

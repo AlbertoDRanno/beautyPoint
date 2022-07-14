@@ -45,6 +45,13 @@
               <% } %>
           </tbody>
         </table>
+        <% if (locals.userLogged) { %>
+          <form action="/products/cart/" method="POST">
+            <button type="submit" value="" class="">
+              Comprar
+            </button>
+          </form>
+          <% } %>
       </main>
       <%- include('../partials/footer.ejs')%>
   </body>
