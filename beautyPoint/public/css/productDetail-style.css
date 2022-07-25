@@ -47,3 +47,10 @@
   width: 50%;
   text-align: center;
 }
+.product-cart-form {
+  display: flex;
+}
+.product-cart-quantity {
+  width: 70px;
+  margin: 5px;
+}

@@ -196,7 +196,7 @@ const productsController = {
     }).then((productdb) => {
       //console.log(productdb);
       /*como en la base de datos no posee cantidad los objetos se inserta una cantidad*/
-      let cantidad = 1;
+      let cantidad = parseInt(req.body.cantidad);
 
       /*corrobora si existe el item en el carrito*/
       /* El método findIndex() devuelve el índice del primer elemento de un array que cumpla con la función 
@@ -207,7 +207,7 @@ const productsController = {
       /*si lo encuentra, en el if le suma 1 a la cantidad y si no esta lo agrega */
       if (indexItem != -1) {
         req.session.cart[indexItem].cantidad =
-          req.session.cart[indexItem].cantidad + 1;
+          req.session.cart[indexItem].cantidad + cantidad;
       } else {
         /* Este operador permite que los elementos de un array se expandan y, de esta manera, podemos añadir
          un array dentro de otro sin que el resultado sean arrays anidados, si no un único array al que se han
@@ -248,6 +248,20 @@ const productsController = {
       res.redirect("/products/cart");
     });
   },
+  editProductCart: (req, res) => {
+const carrito = req.session.cart
+
+const productIndex = carrito.findIndex(
+  
+  (item) => item.id == req.params.id
+);
+console.log(req.body.cantidad)   
+carrito[productIndex].cantidad = req.body.cantidad
+
+    res.redirect("/products/cart")
+
+  }
+  
 };
 
 // ************ exports  ************
