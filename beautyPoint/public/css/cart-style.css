@@ -51,4 +51,8 @@
 .carrito-Column input {
   max-width: 3em;
 }
+.carrito-Cantidad-Container  {
+  display: flex;
+  justify-content: center;
+}
 /*/cart main*/

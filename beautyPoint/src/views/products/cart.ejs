@@ -25,15 +25,27 @@
                     <%= cart[i].name%>
                   </h5>
                 </td>
-                <td class="carrito-Column">
-                  <input value="<%=cart[i].cantidad%>" type="number" id="tentacles" name="tentacles" min="1"
-                    max="100" />
+                <td class="carrito-Column carrito-Cantidad-Container">
+                  <form id= "btnRest" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
+                    <input name="cantidad" type="hidden" value="<%=parseInt( cart[i].cantidad) - 1 %>">
+                    
+                    <button type="submit" form="btnRest" <%=parseInt( cart[i].cantidad) === 1?"disabled": "" %>> - </button>
+                  </form>
+                  <input value="<%=cart[i].cantidad%>" type="number" min="1" max="100" disabled />
+                  <form id= "btnAdd" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
+                    <input name="cantidad" type="hidden" value="<%= parseInt(cart[i].cantidad )+ 1 %>">
+                    <button type="submit" form="btnAdd"> + </button>
+                  </form>
                 </td>
                 <td class="carrito-Column">
-                  <span>$<%=cart[i].price%></span>
+
+                <span>$<%=cart[i].price%></span>
+
                 </td>
                 <td class="carrito-Column">
+
                   <span>$<%=cart[i].price*cart[i].cantidad%></span>
+
                 </td>
 
                 <td class="carrito-Column carrito-Trash">
