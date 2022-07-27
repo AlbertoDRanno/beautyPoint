@@ -317,16 +317,16 @@ const apiController = {
       .catch((err) => res.send(err));
   },
   consumirDosAPIs: async (req, res) => {
-    //cuando consumo más de una API, defino las promesas por separado
-    //En cada caso, le estoy diciendo: de manera asincrónica, quiero que leas estas líneas de código y que esperes,
-    //a que el .then se resuelva, y que guardes, lo que devuelva, en cada variable correspondiente
+    /*cuando consumo más de una API, defino las promesas por separado
+    En cada caso, le estoy diciendo: de manera asincrónica, quiero que leas estas líneas de código
+     y que esperes a que el .then se resuelva, y que guardes, lo que devuelva, en cada variable
+    correspondiente*/
     let pelicula = await fetch(
       "http://www.omdbapi.com/?apikey=d4e35e92&t=Doctor+Strange"
     ).then((response) => response.json());
     let provinces = await fetch(
       "https://apis.datos.gob.ar/georef/api/provincias"
-    )
-      .then((response) => response.json())
+    ).then((response) => response.json())
       .catch((err) => res.send(err));
 
     // return res.json({pelicula, provincias})

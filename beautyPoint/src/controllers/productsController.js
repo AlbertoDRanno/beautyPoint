@@ -221,16 +221,37 @@ const productsController = {
     console.log("entrando al método save del carrito");
     let productosCarritos = req.session.cart;
     console.log(productosCarritos);
-    for (let i = 0; i < productosCarritos.length; i++) {
-      db.Cart.create({
-        comprador_id: req.session.userLogged.id,
-        product_id: productosCarritos[i].product_id,
-        quantity: productosCarritos[i].cantidad,
-        price: productosCarritos[i].price,
-        status: 2,
-      });
-    }
-    res.redirect("/");
+
+    // comprador_id = req.session.userLogged.id
+    // db.Cart.create({
+    //     comprador_id: comprador_id,
+    //     product_id: product_id,
+    //     quantity: quantity,
+    //     price: price,
+    //     status: 2,
+    //   })
+    // for (let i = 0; i < productosCarritos.length; i++) {
+    //     product_id= productosCarritos[i].product_id,
+    //     quantity= productosCarritos[i].cantidad,
+    //     price= productosCarritos[i].price,
+        
+    //   }
+    // }
+      
+
+  
+    
+    // let totalPrecio = 0;
+    // Item.findAll({
+    //   where: {
+    //     userId: req.session.usuario.id,
+    //     state: 1,
+    //   },
+    // }).then((items) => {
+    //   let totalPrecio = items.reduce(
+    //     (total, item) => total + Number(item.subtotal)
+    //   ); //total =
+    // });
   },
   deleteProductCart: (req, res) => {
     db.Product.findOne({
