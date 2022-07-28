@@ -1,4 +1,3 @@
-import React from "react";
 import Fila from "./Fila";
 
 function Tabla(props) {
@@ -23,7 +22,6 @@ function Tabla(props) {
                   <th>ID</th>
                   <th>Nombre</th>
                   <th>Categoría</th>
-                  <th>Link</th>
                   <th>Descripción</th>
                 </tr>
               </thead>

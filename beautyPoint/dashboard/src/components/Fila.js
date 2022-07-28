@@ -1,6 +1,3 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
 function Fila(props) {
   return (
     <>
@@ -8,14 +5,17 @@ function Fila(props) {
         <h6>{props.id}</h6>
       </td>
       <td>
-        <h6>{props.name}</h6>
+        <h6>
+          <a
+            className="nav-link"
+            href={"http://localhost:3000/products/detail/" + props.id}
+          >
+            <span>{props.name}</span>
+          </a>
+        </h6>
       </td>
       <td>
         <h6>{props.categories.description}</h6>
-      </td>
-      <td>
-        <h6></h6>
-        <Link to={props.detail}>View product detail</Link>
       </td>
       <td>
         <h6>{props.description}</h6>

@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 function Sidebar(props) {
   return (
@@ -23,10 +23,14 @@ function Sidebar(props) {
 
       {/* <!-- Nav Item - Dashboard --> */}
       <li className="nav-item active">
-        <a className="nav-link" href="/">
+        <Link
+          to="/Tabla"
+          exact="true"
+          className="nav-link collapsed"
+        >
           <i className="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
+          <span>Listado de Productos</span>
+        </Link>
       </li>
 
       {/* <!-- Divider --> */}
@@ -37,26 +41,30 @@ function Sidebar(props) {
 
       {/* <!-- Nav Item - Pages --> */}
       <li className="nav-item">
-        <a className="nav-link collapsed" href="/">
+        <Link
+          to="/ContentCategories"
+          exact="true"
+          className="nav-link collapsed"
+        >
           <i className="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
+          <span>Categorías</span>
+        </Link>
       </li>
 
       {/* <!-- Nav Item - Charts --> */}
       <li className="nav-item">
-        <a className="nav-link" href="/">
+        <Link to="/LastProductInDB" exact="true" className="nav-link">
           <i className="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span>
-        </a>
+          <span>Último lanzamiento</span>
+        </Link>
       </li>
 
       {/* <!-- Nav Item - Tables --> */}
       <li className="nav-item">
-        <a className="nav-link" href="/">
+        <Link to="/ContentRowProducts" exact="true" className="nav-link">
           <i className="fas fa-fw fa-table"></i>
-          <span>Tables</span>
-        </a>
+          <span>Resumen base de datos</span>
+        </Link>
       </li>
 
       {/* <!-- Divider --> */}
