@@ -1,4 +1,4 @@
-function Fila(props) {
+function ProductRow(props) {
   return (
     <>
       <td>
@@ -24,4 +24,4 @@ function Fila(props) {
   );
 }
 
-export default Fila;
+export default ProductRow;

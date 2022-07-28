@@ -1,12 +1,9 @@
-import Fila from "./Fila";
+import UserRow from "./UserRow";
 
-function Tabla(props) {
+function UsersTable(props) {
   return (
     <>
-      <h1 className="h3 mb-2 text-gray-800">
-        {" "}
-        All the products in the Database
-      </h1>
+      <h1 className="h3 mb-2 text-gray-800"> All the users in the Database</h1>
 
       <div className="card shadow mb-4">
         <div className="card-body">
@@ -21,14 +18,13 @@ function Tabla(props) {
                 <tr>
                   <th>ID</th>
                   <th>Nombre</th>
-                  <th>Categoría</th>
-                  <th>Descripción</th>
+                  <th>Email</th>
                 </tr>
               </thead>
               <tbody>
-                {props.productsList.map((product, i) => (
+                {props.usersList.map((user, i) => (
                   <tr key={i}>
-                    <Fila {...product} />
+                    <UserRow {...user} />
                   </tr>
                 ))}
               </tbody>
@@ -40,4 +36,4 @@ function Tabla(props) {
   );
 }
 
-export default Tabla;
+export default UsersTable;

@@ -23,13 +23,15 @@ function Sidebar(props) {
 
       {/* <!-- Nav Item - Dashboard --> */}
       <li className="nav-item active">
-        <Link
-          to="/Tabla"
-          exact="true"
-          className="nav-link collapsed"
-        >
+        <Link to="/ProductsTable" exact="true" className="nav-link collapsed">
           <i className="fas fa-fw fa-tachometer-alt"></i>
           <span>Listado de Productos</span>
+        </Link>
+      </li>
+      <li className="nav-item active">
+        <Link to="/UsersTable" exact="true" className="nav-link collapsed">
+          <i className="fas fa-fw fa-tachometer-alt"></i>
+          <span>Listado de Usuarios</span>
         </Link>
       </li>
 

@@ -5,7 +5,8 @@ import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import LastProductInDB from "./LastProductInDB";
 import ContentCategories from "./ContentCategories";
-import Tabla from "./Tabla";
+import UsersTable from "./UsersTable";
+import ProductsTable from "./ProductsTable";
 import ContentRowProducts from "./ContentRowProducts";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./NotFound";
@@ -48,6 +49,7 @@ class App extends Component {
     //console.log(data.data);
     this.setState({
       usersTotal: data.count,
+      usersList: data.data,
     });
   };
 
@@ -112,11 +114,18 @@ class App extends Component {
                     exact="true"
                   ></Route>
                   <Route
-                    path="/Tabla"
-                    element={<Tabla productsList={this.state.productsList} />}
+                    path="/ProductsTable"
+                    element={
+                      <ProductsTable productsList={this.state.productsList} />
+                    }
                     exact="true"
                   ></Route>
-                  <Route path="*" element={<NotFound/>}></Route>
+                  <Route
+                    path="/UsersTable"
+                    element={<UsersTable usersList={this.state.usersList} />}
+                    exact="true"
+                  ></Route>
+                  <Route path="*" element={<NotFound />}></Route>
                 </Routes>
               </div>
               <Footer />
