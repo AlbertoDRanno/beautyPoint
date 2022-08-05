@@ -72,3 +72,27 @@ CREATE TABLE `cart` (
   CONSTRAINT `fk_productCart` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `fk_userCart` FOREIGN KEY (`comprador_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `product_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `price` float unsigned DEFAULT NULL,
+  `quantity` smallint(5) unsigned DEFAULT NULL,
+  `buy_history_id` int(11) unsigned DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_buy_product_history_idx` (`buy_history_id`),
+  CONSTRAINT `fk_buy_product_history` FOREIGN KEY (`buy_history_id`) REFERENCES `buy_history` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `buy_history` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `comprador_id` int(10) unsigned NOT NULL,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_history_buy_idx` (`comprador_id`),
+  CONSTRAINT `fk_history_buy` FOREIGN KEY (`comprador_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+

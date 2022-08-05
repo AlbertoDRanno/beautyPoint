@@ -183,6 +183,11 @@ const productsController = {
 
   cart: (req, res) => {
     console.log("entrando al render cart");
+    db.Product.findAll({
+    
+     
+    })
+    .then(console.log)
     res.status(200).render("./products/cart");
   },
   addProductCart: (req, res) => {
@@ -214,6 +219,7 @@ const productsController = {
          añadido nuevos valores. */
         req.session.cart.push({ ...productdb, cantidad });
       }
+      console.log(cantidad)
       res.redirect("/products/cart");
     });
   },
@@ -221,6 +227,16 @@ const productsController = {
     console.log("entrando al método save del carrito");
     let productosCarritos = req.session.cart;
     console.log(productosCarritos);
+    
+    comprador_id = req.session.userLogged.id
+     
+    // db.Cart.create({
+    //  comprador_id: comprador_id,
+    // product_id: product_id,
+    // quantity: quantity,
+    //  price: price,
+    //   status: 2,
+    //  })
 
     // comprador_id = req.session.userLogged.id
     // db.Cart.create({

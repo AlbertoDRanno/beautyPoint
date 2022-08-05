@@ -47,7 +47,7 @@ router.put("/softDelete/:id", productsController.delete);
 /*** GET PRODUCTS FROM CART ***/
 router.get("/cart", authMiddleware, productsController.cart);
 
-//router.post("/cart/", productsController.saveProductCart);
+router.post("/cart/:id", productsController.saveProductCart);
 
 router.put("/cart/:id", productsController.addProductCart);
 

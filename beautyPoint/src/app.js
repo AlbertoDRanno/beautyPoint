@@ -46,6 +46,7 @@ app.use(function (req, res, next) {
   /*se agrega en la session una variable cart para representar en el carrito*/
   req.session.cart = req.session.cart || [];
   console.log(req.session.cart);
+  
   /* el locals se usa para darle acceso al ejs y que lo pueda leer*/
   res.locals.cart = req.session.cart;
   next();
