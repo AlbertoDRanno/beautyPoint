@@ -23,7 +23,9 @@ INSERT INTO `packages` (`id`, `description`, `createdAt`, `updatedAt`, `status`)
 (3, 'Presentacion de test 3', NULL, NULL, 1),
 (4, 'Presentacion de test 4', NULL, NULL, 1),
 (5, 'Presentacion de test 5', NULL, NULL, 1),
-(6, 'Presentacion de test 6', NULL, NULL, 1);
+(6, 'Presentacion de test 6', NULL, NULL, 1),
+(7, 'Presentacion de test 7', NULL, NULL, 1),
+(8, 'Presentacion de test 8', NULL, NULL, 1);
 UNLOCK TABLES;
 
 /* en proceso: users y products... */
