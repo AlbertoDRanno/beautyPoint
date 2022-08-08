@@ -23,18 +23,18 @@
                   <img class="carrito-ProductImage" src="<%=cart[i].image%>" />
                   <h5>
                     <%= cart[i].name%>
+                    
                   </h5>
                 </td>
                 <td class="carrito-Column carrito-Cantidad-Container">
-                  <form id= "btnRest" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
-                    <input name="cantidad" type="hidden" value="<%=parseInt( cart[i].cantidad) - 1 %>">
-                    
-                    <button type="submit" form="btnRest" <%=parseInt( cart[i].cantidad) === 1?"disabled": "" %>> - </button>
+                  <form id= "btnRest-<%= cart[i].id %>" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
+                    <input name="cantidad" type="hidden" value="<%=parseInt( cart[i].cantidad) - 1 %>">                    
+                    <button type="submit" form="btnRest-<%= cart[i].id %>" <%=parseInt( cart[i].cantidad) === 1?"disabled": "" %>> - </button>
                   </form>
                   <input value="<%=cart[i].cantidad%>" type="number" min="1" max="100" disabled />
-                  <form id= "btnAdd" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
+                  <form id= "btnAdd-<%= cart[i].id %>" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
                     <input name="cantidad" type="hidden" value="<%= parseInt(cart[i].cantidad )+ 1 %>">
-                    <button type="submit" form="btnAdd"> + </button>
+                    <button type="submit" form="btnAdd-<%= cart[i].id %>"> + </button>
                   </form>
                 </td>
                 <td class="carrito-Column">
@@ -58,8 +58,8 @@
           </tbody>
         </table>
         <% if (locals.userLogged) { %>
-          <form action="/products/cart/" method="POST">
-            <button type="submit" value="" class="">
+          <form id="buy" action="/users/buy" method="POST">
+            <button form="buy" type="submit" value="" class="">
               Comprar
             </button>
           </form>

@@ -3,6 +3,7 @@
 const { validationResult } = require("express-validator"); // trae el resultados de las validaciones que hicimos
 const bcrypt = require("bcryptjs");
 const db = require("../database/models");
+const BuyHistory = require("../database/models/BuyHistory");
 
 const usersController = {
   register: (req, res) => {
@@ -169,6 +170,22 @@ const usersController = {
         .catch((err) => res.send(err));
     }
   },
+  buy: (req, res) => {
+
+    db.BuyHistory.create({ comprador_id: req.session.userLogged.id  })
+    .then(function (buyHistory) 
+    {
+
+      req.session.cart.map(item => ({ ...item, quantity: item.cantidad, buy_history_id:buyHistory.id,id:undefined })).forEach(element => {
+        db.ProductHistory.create(element)
+      });
+ 
+      req.session.cart = []
+      res.redirect("/products/cart");
+    })
+    .catch((err) => res.send(err));
+  },
+ 
 };
 
 module.exports = usersController;
