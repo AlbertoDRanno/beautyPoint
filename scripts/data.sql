@@ -33,7 +33,7 @@ UNLOCK TABLES;
 /* password default: '12345678' */
 LOCK TABLES `users` WRITE;
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `dni`, `email`, `categoria`, `avatar`, `password`, `createdAt`, `updatedAt`, `status`, `phone`) VALUES
-(1, 'Rick', 'Sanchez', 20123456, 'rick@laca.com.ar', 1, '/images/dataset/avatar_prueba_01.jpg', '$2a$10$RLvCG1TvBVfgc.tXaTdbVe/1wD7/mlk1dMPhhI.SIWOQYemmTteDG', NULL, NULL, 1, '1234-5678');
+(1, 'Rick', 'Sanchez', 20123456, 'rick@laca.com.ar', 1, '/images/dataset/avatar_prueba_01.jpg', '$2a$10$RLvCG1TvBVfgc.tXaTdbVe/1wD7/mlk1dMPhhI.SIWOQYemmTteDG', NULL, NULL, 0, '1234-5678');
 UNLOCK TABLES;
 
 /* INSERTS EN TABLA: products */
