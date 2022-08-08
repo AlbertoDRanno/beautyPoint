@@ -1,4 +1,6 @@
-CREATE DATABASE `laca_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE `laca_db`;
+
+USE laca_db;
 
 CREATE TABLE `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
