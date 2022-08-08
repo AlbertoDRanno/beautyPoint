@@ -71,16 +71,16 @@ module.exports = (sequelize, DataTypes) => {
       // ok
       // Muchos a 1
       //cada producto pertenece a usa sola categoria./ Le digo con que tabla se relaciona
-      as: 'categories', // un alias para llamar la relación,
-      foreignKey: 'category_id', // Cuál es la columna de la bbdd que une a éstas 2 tablas
+      as: "categories", // un alias para llamar la relación,
+      foreignKey: "category_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
     });
 
     Product.belongsTo(models.Package, {
       // ok
       // Muchos a 1
       //cada producto tiene un package específico./ Le digo con que tabla se relaciona
-      as: 'packages', // un alias para llamar la relación,
-      foreignKey: 'package_id', // Cuál es la columna de la bbdd que une a éstas 2 tablas
+      as: "packages", // un alias para llamar la relación,
+      foreignKey: "package_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas
     });
 
     Product.belongsTo(models.User, {
@@ -90,6 +90,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "vendedor_id", //Cuál es la columna de la bbdd que une a éstas 2 tablas
       //timestamps: true, //False en caso de que, la tabla pivot, no tenga createdAt y updatedAt
     });
+    //3-8-22 Faltaba relación complementaria
+    // Product.belongsTo(models.Cart, {
+    //   // belongsTo: un registro puede estar asociado a uno más de otra tabla
+    //   // un carrito puede contener uno o varios productos (1 a 1 ó 1 a N) (porque la relación, considera de a un carrito por registro)
+    //   as: "cartProducts",
+    //   foreignKey: "product_id",
+    // });
   };
 
   return Product;

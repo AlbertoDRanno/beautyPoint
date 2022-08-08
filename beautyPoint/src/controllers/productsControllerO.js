@@ -1,5 +1,5 @@
-const JsonModel = require("../modelos/jsonModel");
-const productsModel = new JsonModel("products");
+// const JsonModel = require("../modelos/jsonModel");
+// const productsModel = new JsonModel("products");
 const { validationResult } = require("express-validator");
 const db = require("../database/models");
 
@@ -181,26 +181,30 @@ const productsController = {
     res.redirect("/");
   },
 
+
+  /* ============Carrito==============*/
+
   cart: (req, res) => {
     console.log("entrando al render cart");
     res.status(200).render("./products/cart");
   },
+  
   addProductCart: (req, res) => {
-    db.Product.findOne({
-      where: { id: req.params.id },
+    db.Product.findByPk(req.params.id, {
       include: [{ association: "categories" }, { association: "packages" }],
-      raw: true, //sigo sin saber bien que hace, pero es necesario para que funcione...
-      /* The "Converting circular structure to JSON" error occurs when we pass an object that contains circular 
+      raw: true, /* Corta una referencia circular, que se genera tanto con findByPk, como con findOne. 
+      The "Converting circular structure to JSON" error occurs when we pass an object that contains circular 
       references to the JSON.stringify() method. To solve the error, make sure to remove any circular references
        before converting the object to JSON. */
     }).then((productdb) => {
       //console.log(productdb);
-      /*como en la base de datos no posee cantidad los objetos se inserta una cantidad*/
+
+      /*como en la base de datos, los objetos no tienen una cantidad asignada, se define una cantidad*/
       let cantidad = parseInt(req.body.cantidad);
 
-      /*corrobora si existe el item en el carrito*/
-      /* El método findIndex() devuelve el índice del primer elemento de un array que cumpla con la función 
-      de prueba proporcionada. En caso contrario devuelve -1. */
+      /*corroboro si existe el item en el carrito*/
+      /* El método findIndex() devuelve el índice del primer elemento de un array que cumpla 
+      con la función de prueba proporcionada. En caso contrario devuelve -1. */
       const indexItem = req.session.cart.findIndex(
         (item) => item.id == productdb.id
       );
@@ -214,9 +218,23 @@ const productsController = {
          añadido nuevos valores. */
         req.session.cart.push({ ...productdb, cantidad });
       }
-      res.redirect("/products/cart");
-    });
+
+      //res.redirect("/products/cart");
+      // return db.Cart.create({
+      //   // comprador_id: req.session.userLogged.id,
+      //   // product_id: req.body.id,
+      //   quantity: req.session.cantidad,
+      //   price: req.body.price,
+      //   state: 1,
+      // });
+      })
+    
   },
+
+
+
+
+
   saveProductCart: (req, res) => {
     console.log("entrando al método save del carrito");
     let productosCarritos = req.session.cart;

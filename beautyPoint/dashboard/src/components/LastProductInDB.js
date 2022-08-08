@@ -1,5 +1,5 @@
-import productImage from "../assets/images/product_dummy.svg"
-import { Link } from "react-router-dom"; 
+import productImage from "../assets/images/product-1659703876087.png";
+import { Link } from "react-router-dom";
 
 function LastProductInDB(props) {
   return (
@@ -23,7 +23,14 @@ function LastProductInDB(props) {
             <p>{props.name}</p>
             <p>{props.price}</p>
             <p>{props.description}</p>
-            <Link to="">View product detail</Link>
+            <h6>
+              <a
+                className="nav-link"
+                href={"http://localhost:3000/products/detail/" + props.id}
+              >
+                <span>Ver detalles...</span>
+              </a>
+            </h6>
           </div>
         </div>
       </div>

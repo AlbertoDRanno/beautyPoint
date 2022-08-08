@@ -88,6 +88,7 @@ class App extends Component {
                   <h1 className="h3 mb-0 text-gray-800">App Dashboard</h1>
                 </div>
                 <Routes>
+                  <Route path="/"></Route>
                   <Route
                     path="/ContentRowProducts"
                     element={

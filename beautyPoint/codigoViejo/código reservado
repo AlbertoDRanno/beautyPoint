@@ -1,5 +1,15 @@
     //  ctrl + k    luego   ctrl + c
     //  ctrl + u para descomentaar
+   <h5 class="card-title"><%= product.name %></h5>
+        <p class="card-text"><%= product.description %></p>
+        <p class="card-text">$ <%= product.price %></p>
+        <p class="card-text"><%= product.packages.description %></p>
+    <p class="card-text"><%= product.categories.description %></p>
+
+
+
+
+
 
     consumirAPI: async (req, res) => {
     //realizo un pedido asíncrono, y fetch es un método que tiene 2 promesas:

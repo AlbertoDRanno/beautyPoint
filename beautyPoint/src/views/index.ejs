@@ -4,45 +4,130 @@
 
   <body>
     <%- include('partials/header.ejs')%>
-    <main class="home-main">
-      <ul style="list-style: none;">
-        <% for( let i = 0; i < categories.length; i++ ) { %>
-        <li>
-          <div class="home-banners">
+    <main >
+      <!--Carousel-->
+      <div
+        id="carouselExampleDark"
+        class="carousel carousel-dark slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
             <img
-              src="https://images.squarespace-cdn.com/content/v1/5e7c10d0cc95f518282dbf0c/1587665808500-FZO4SCXWMMSP5BNMOK1E/apm-dibi-pure-equalizer-line-banner.jpg"
-              alt="rostro de mujer"
+              src="/images/banners/banner1.jpg"
+              class="d-block w-100"
+              alt="..."
             />
-            <h2><a href="#"><%= categories[i].description %></a></h2>
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p></p>
+            </div>
           </div>
-          <ul>
-            <section>
-              <article class="home-products">
-                <% for( let j = 0; j < categories[i].productosC.length; j++ ) {
-                %>
-                <div class="home-contenedor">
-                  <% if (categories[i].productosC[j].status != 0) { %>
-                  <a
-                    href="/products/detail/<%= categories[i].productosC[j].id%>"
-                  >
-                    <img
-                      src="<%= categories[i].productosC[j].image%>"
-                      alt="<%= categories[i].productosC[j].name%>"
-                  /></a>
-                  <div><%= categories[i].productosC[j].name%></div>
-                  <div class="home-price">
-                    $ <%= toThousand(categories[i].productosC[j].price) %>
-                  </div>
-                </div>
-                <% } %> <% } %>
-              </article>
-            </section>
-          </ul>
-        </li>
-        <% } %>
-      </ul>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img
+              src="/images/banners/banner2.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p></p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="/images/banners/banner3.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p></p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!--End of Carousel-->
+
+      <% for( let i = 0; i < categories.length; i++ ) { %>
+      <figure class="text-center">
+        <blockquote class="blockquote">
+          <h2><%= categories[i].description %></h2>
+        </blockquote>
+      </figure>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% for( let j = 0; j < categories[i].productosC.length; j++ ) { %>
+
+        <div class="col">
+          <div class="card h-100">
+            <% if (categories[i].productosC[j].status != 0) { %>
+            <a href="/products/detail/<%= categories[i].productosC[j].id%>">
+              <img
+                src="<%= categories[i].productosC[j].image%>"
+                alt="<%= categories[i].productosC[j].name%>"
+                class="card-img-top"
+              />
+            </a>
+            <div class="card-body">
+              <h5 class="card-title"><%= categories[i].productosC[j].name%></h5>
+              <p class="card-text">
+                $ <%= toThousand(categories[i].productosC[j].price) %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <% } %> <% } %>
+      </div>
+      <% } %>
+
     </main>
     <%- include('partials/footer.ejs')%>
-    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

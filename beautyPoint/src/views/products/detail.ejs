@@ -5,61 +5,61 @@
 <body>
   <%- include('../partials/header.ejs')%>
   <main class="product-main">
-    <h3>
-      <%= product.name %>
-    </h3>
-    <section class="product-section">
-      <article class="product-article">
-        <img src=<%= product.image %> alt=<%= product.name %> />
-        <h3>$ <%= product.price %>
-        </h3>
-      </article>
-      <article class="product-article">
-        <p>
-          <%= product.description %>
-        </p>
-        <div>
-          <%= product.packages.description %>
+
+    <div class="card mb-3" style="max-width: 800px;">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <img src=<%= product.image %> alt=<%= product.name %> class="img-fluid rounded-start">
         </div>
-        <div>
-          <%= product.categories.description %>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= product.description %></p>
+            <p class="card-text"><i style="color: rgb(46, 232, 46)">$ <%= product.price %></i></p>
+            <p class="card-text">Presentación por: <%= product.packages.description %></p>
+            <p class="card-text"><%= product.categories.description %></p>
+          </div>
         </div>
         <div class="product-cart">
-        <% if (locals.userLogged) { %>
-                  
-       
+          <% if (locals.userLogged) { %>
           <form action="/products/cart/<%=product.id %>?_method=PUT" method="POST" class="product-cart-form">
+            <!--Reemplazar number por hidden afecta al carrito??-->
             <input type="number" name="cantidad" value="1" class="product-cart-quantity" required min="1">
-            <button type="submit" value="sumarAlCarrito" class="product-cart-button">
+            <button type="submit" value="sumarAlCarrito" class="btn btn-success" style="margin-right: 50px">
               Agregar al carrito
             </button>
-            </form>
-            
+          </form>
+
           <% } %>
 
           <% if (locals.userLogged && locals.userLogged.categoria===0) { %>
-          <button type="submit" class="action-button delete">
-            <a href="/products/edit/<%= product.id %>" class="action-button edit">Editar</a>
-          </button>
+          <form action="/products/edit/<%= product.id %>" method="get">
+            <button type="submit" class="btn btn-info" style="margin-right: 10px">
+              Editar
+            </button>
+          </form>
           <% } %>
 
           <% if (locals.userLogged && locals.userLogged.categoria===0) { %>
           <form action="/products/softDelete/<%= product.id %>?_method=PUT" method="POST" style="display: inline-flex">
-          <button type="submit" class="action-button delete">
-            Eliminar
-          </button>
+            <button type="submit" class="btn btn-warning" style="margin-right: 10px">
+              Eliminar
+            </button>
           </form>
           <% } %>
 
           <% if (locals.userLogged && locals.userLogged.categoria===0) { %>
           <form action="/products/delete/<%= product.id %>?_method=DELETE" method="POST" style="display: inline-flex">
-            <button type="submit" class="action-button delete">
-              Eliminar BD
+            <button type="submit" class="btn btn-danger">
+              EliminarBD
             </button>
           </form>
           <% } %>
-      </article>
-    </section>
+        </div>
+      </div>
+    </div>
+
   </main> <%- include('../partials/footer.ejs')%> </body>
+
 
 </html>

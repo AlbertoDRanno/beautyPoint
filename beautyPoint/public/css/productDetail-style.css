@@ -1,8 +1,13 @@
 .product-main {
-  margin-top: 180px;
+  margin-top: 0;
   margin-bottom: 0;
-  background-image: url("../images/bg3.png");
+  /* background-image: url("../images/bg3.png"); */
   padding-top: 10px;
+}
+
+.imagenFondo {
+  border: red solid 3px;
+  background-size: contain;
 }
 .product-main h3 {
   text-align: center;
@@ -51,6 +56,7 @@
   display: flex;
 }
 .product-cart-quantity {
-  width: 70px;
+  width: 30px;
   margin: 5px;
+  text-align: center;
 }

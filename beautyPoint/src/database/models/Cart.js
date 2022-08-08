@@ -43,15 +43,14 @@ module.exports = (sequelize, DataTypes) => {
     //aquí defino cómo son esas asociaciones
     Cart.belongsTo(models.Product, {
       // Product porque es el apodo de la tabla, que le puse en el modelo
-      // Muchos a 1
-      // Muchos carritos van a tener ese producto (porque la relación, considera de a un producto por carrito)
+      // belongsTo: un registro puede estar asociado a uno más de otra tabla 
+      // un carrito puede contener uno o varios productos (1 a 1 ó 1 a N) (porque la relación, considera de a un carrito por registro)
       as: "productosCart", // un alias para llamar la relación,
       foreignKey: "product_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas. No importa donde estamos parados
     });
     Cart.belongsTo(models.User, {
       // User porque es el apodo de la tabla, que le puse en el modelo
-      // Muchos a 1
-      // Varias compras van a ser realizada por un mismo usuario.
+      // un registro de carrito va a pertenecer a un solo usuario. (1 a 1)
       as: "userCart", // un alias para llamar la relación,
       foreignKey: "comprador_id", // Cuál es la columna de la bbdd que une a éstas 2 tablas. No importa donde estamos parados
     });
