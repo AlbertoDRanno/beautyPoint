@@ -23,7 +23,6 @@
         <div class="product-cart">
           <% if (locals.userLogged) { %>
           <form action="/products/cart/<%=product.id %>?_method=PUT" method="POST" class="product-cart-form">
-            <!--Reemplazar number por hidden afecta al carrito??-->
             <input type="number" name="cantidad" value="1" class="product-cart-quantity" required min="1">
             <button type="submit" value="sumarAlCarrito" class="btn btn-success" style="margin-right: 50px">
               Agregar al carrito

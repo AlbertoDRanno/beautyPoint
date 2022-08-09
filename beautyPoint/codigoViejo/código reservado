@@ -1,5 +1,86 @@
     //  ctrl + k    luego   ctrl + c
     //  ctrl + u para descomentaar
+
+
+
+
+
+
+      <main class="cart-main">
+        <table class="cart-table">
+          <thead>
+            <tr class="carrito-HeaderCompras carrito-Row">
+              <td class="carrito-Column First"><span>Producto </span></td>
+              <td class="carrito-Column"><span>Cantidad</span></td>
+              <td class="carrito-Column"><span>Valor</span></td>
+              <td class="carrito-Column"><span>Total</span></td>
+              <td class="carrito-Column"></td>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% for (let i=0; i < cart.length; i++) { %>
+              <tr class="carrito-Row carrito-BodyCompras">
+                <td class="carrito-Column First">
+                  <img class="carrito-ProductImage" src="<%=cart[i].image%>" />
+                  <h5>
+                    <%= cart[i].name%>
+                    
+                  </h5>
+                </td>
+                <td class="carrito-Column carrito-Cantidad-Container">
+                  <form id= "btnRest-<%= cart[i].id %>" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
+                    <input name="cantidad" type="hidden" value="<%=parseInt( cart[i].cantidad) - 1 %>">                    
+                    <button type="submit" form="btnRest-<%= cart[i].id %>" <%=parseInt( cart[i].cantidad) === 1?"disabled": "" %>> - </button>
+                  </form>
+                  <input value="<%=cart[i].cantidad%>" type="number" min="1" max="100" disabled />
+                  <form id= "btnAdd-<%= cart[i].id %>" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
+                    <input name="cantidad" type="hidden" value="<%= parseInt(cart[i].cantidad )+ 1 %>">
+                    <button type="submit" form="btnAdd-<%= cart[i].id %>"> + </button>
+                  </form>
+                </td>
+                <td class="carrito-Column">
+
+                <span>$<%=cart[i].price%></span>
+
+                </td>
+                <td class="carrito-Column">
+
+                  <span>$<%=cart[i].price*cart[i].cantidad%></span>
+
+                </td>
+
+                <td class="carrito-Column carrito-Trash">
+                  <form action="/products/cart/<%=cart[i].id %>?_method=DELETE" method="POST">
+                    <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+        <% if (locals.userLogged) { %>
+          <form id="buy" action="/users/buy" method="POST">
+            <button form="buy" type="submit" value="" class="">
+              Comprar
+            </button>
+          </form>
+          <% } %>
+      </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    <h5 class="card-title"><%= product.name %></h5>
         <p class="card-text"><%= product.description %></p>
         <p class="card-text">$ <%= product.price %></p>

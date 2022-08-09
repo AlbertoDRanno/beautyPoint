@@ -135,6 +135,7 @@ router.put("/edit/:id", uploadFile.single("image"),registerValidations, usersCon
 
 // Logout
 router.get("/logout/", usersController.logout);
+
 //buyHistory
 router.post("/buy", usersController.buy)
 

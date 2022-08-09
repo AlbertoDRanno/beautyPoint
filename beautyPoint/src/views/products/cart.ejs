@@ -2,70 +2,138 @@
 <html lang="en">
 <%- include('../partials/head.ejs', {title: "Tu Carrito" })%>
 
-  <body>
-    <%- include('../partials/header.ejs')%>
-      <main class="cart-main">
-        <table class="cart-table">
-          <thead>
-            <tr class="carrito-HeaderCompras carrito-Row">
-              <td class="carrito-Column First"><span>Producto </span></td>
-              <td class="carrito-Column"><span>Cantidad</span></td>
-              <td class="carrito-Column"><span>Valor</span></td>
-              <td class="carrito-Column"><span>Total</span></td>
-              <td class="carrito-Column"></td>
-            </tr>
-          </thead>
-          <tbody>
+<body>
+  <%- include('../partials/header.ejs')%>
+  <section class="h-100 h-custom" style="background-color: #d2c9ff;">
+    <div class="py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="card-body p-0">
+              <div class="row g-0">
+                <div class="col-lg-8">
+                  <div class="p-5">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                      <h1 class="fw-bold mb-0 text-black">Tu carrito</h1>
+                    </div>
+                  </div>
 
-            <% for (let i=0; i < cart.length; i++) { %>
-              <tr class="carrito-Row carrito-BodyCompras">
-                <td class="carrito-Column First">
-                  <img class="carrito-ProductImage" src="<%=cart[i].image%>" />
-                  <h5>
-                    <%= cart[i].name%>
-                    
-                  </h5>
-                </td>
-                <td class="carrito-Column carrito-Cantidad-Container">
-                  <form id= "btnRest-<%= cart[i].id %>" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
-                    <input name="cantidad" type="hidden" value="<%=parseInt( cart[i].cantidad) - 1 %>">                    
-                    <button type="submit" form="btnRest-<%= cart[i].id %>" <%=parseInt( cart[i].cantidad) === 1?"disabled": "" %>> - </button>
-                  </form>
-                  <input value="<%=cart[i].cantidad%>" type="number" min="1" max="100" disabled />
-                  <form id= "btnAdd-<%= cart[i].id %>" action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
-                    <input name="cantidad" type="hidden" value="<%= parseInt(cart[i].cantidad )+ 1 %>">
-                    <button type="submit" form="btnAdd-<%= cart[i].id %>"> + </button>
-                  </form>
-                </td>
-                <td class="carrito-Column">
+                  <table class="cart-table">
+                    <thead>
+                      <tr class="carrito-HeaderCompras carrito-Row">
+                        <td class="carrito-Column First"><span>Producto </span></td>
+                        <td class="carrito-Column"><span>Cantidad</span></td>
+                        <td class="carrito-Column"><span>Valor</span></td>
+                        <td class="carrito-Column"><span>Total</span></td>
+                        <td class="carrito-Column"></td>
+                      </tr>
+                    </thead>
+                    <tbody>
 
-                <span>$<%=cart[i].price%></span>
+                      <% for (let i=0; i < cart.length; i++) { %>
 
-                </td>
-                <td class="carrito-Column">
+                      <tr class="carrito-Row carrito-BodyCompras">
+                        <td class="carrito-Column First">
+                          <div class="col-lg-7">
+                            <img src="<%=cart[i].image%>" class="img-fluid rounded-3" alt=<%= cart[i].name%>>
+                            <h6 class="text-muted"><%= cart[i].name%></h6>
+                          </div>
+                        </td>
 
-                  <span>$<%=cart[i].price*cart[i].cantidad%></span>
 
-                </td>
 
-                <td class="carrito-Column carrito-Trash">
-                  <form action="/products/cart/<%=cart[i].id %>?_method=DELETE" method="POST">
-                    <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
-                  </form>
-                </td>
-              </tr>
-              <% } %>
-          </tbody>
-        </table>
-        <% if (locals.userLogged) { %>
-          <form id="buy" action="/users/buy" method="POST">
-            <button form="buy" type="submit" value="" class="">
-              Comprar
-            </button>
-          </form>
-          <% } %>
-      </main>
-      <%- include('../partials/footer.ejs')%>
-  </body>
+                        <td class="carrito-Column carrito-Cantidad-Container">
+                          <form id="btnRest-<%= cart[i].id %>"
+                            action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
+                            <input name="cantidad" type="hidden" value="<%=parseInt( cart[i].cantidad) - 1 %>">
+                            <button class="btn btn-link px-2" type="submit" form="btnRest-<%= cart[i].id %>"
+                              <%=parseInt( cart[i].cantidad) === 1?"disabled": "" %>><i class="fas fa-minus"></i>
+                            </button>
+                          </form>
+                          <input value="<%=cart[i].cantidad%>" type="number" min="1" max="100" disabled />
+                          <form id="btnAdd-<%= cart[i].id %>"
+                            action="/products/cart/update/<%= cart[i].id %>?_method=PUT" method="POST">
+                            <input name="cantidad" type="hidden" value="<%= parseInt(cart[i].cantidad )+ 1 %>">
+                            <button class="btn btn-link px-2" type="submit" form="btnAdd-<%= cart[i].id %>"> <i
+                                class="fas fa-plus"></i> </button>
+                          </form>
+                        </td>
+                        <td class="carrito-Column">
+
+                          <span>$<%=cart[i].price%></span>
+
+                        </td>
+                        <td class="carrito-Column">
+
+                          <span>$<%=cart[i].price*cart[i].cantidad%></span>
+
+                        </td>
+
+                        <td class="carrito-Column carrito-Trash">
+                          <form action="/products/cart/<%=cart[i].id %>?_method=DELETE" method="POST">
+                            <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                          </form>
+                        </td>
+
+                      </tr>
+
+                      <% } %>
+                    </tbody>
+                  </table>
+                  <div class="pt-5">
+                    <h6 class="mb-0"><a href="/" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Seguir
+                        comprando...</a></h6>
+                  </div>
+
+                </div>
+                <div class="col-lg-4 bg-grey">
+                  <div class="p-5">
+                    <h3 class="fw-bold mb-5 mt-2 pt-1">Resumen de compra:</h3>
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between mb-4">
+                      <h5 class="text-uppercase"><%=cart.length%> artículo/s</h5>                   
+                    </div>
+
+                    <h5 class=" mb-3">Opciones de envío y retiro:</h5>
+
+                    <div class="mb-4 pb-2">
+                      <select class="select">
+                        <option value="1">Retirar en tienda</option>
+                        <option value="2">Moto</option>
+                        <option value="3">Correo</option>
+                      </select>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between mb-5">
+                      <h5 class="text-uppercase">Total</h5>
+                      <% for (let i=0; i < cart.length; i++) { %>                      
+                      <h5>$<%=cart[i].price*cart[i].cantidad%></h5>
+                      <% } %>                    
+                    </div>
+
+
+                    <% if (locals.userLogged) { %>
+                    <form id="buy" action="/users/buy" method="POST">
+                      <button form="buy" type="submit" value="" class="btn btn-dark btn-block btn-lg">
+                        Comprar
+                      </button>
+                    </form>
+                    <% } %>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+  <%- include('../partials/footer.ejs')%>
+</body>
 
 </html>

@@ -170,6 +170,7 @@ const usersController = {
         .catch((err) => res.send(err));
     }
   },
+  
   buy: (req, res) => {
 
     db.BuyHistory.create({ comprador_id: req.session.userLogged.id  })

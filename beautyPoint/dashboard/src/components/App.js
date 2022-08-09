@@ -88,9 +88,8 @@ class App extends Component {
                   <h1 className="h3 mb-0 text-gray-800">App Dashboard</h1>
                 </div>
                 <Routes>
-                  <Route path="/"></Route>
                   <Route
-                    path="/ContentRowProducts"
+                    path="/"
                     element={
                       <ContentRowProducts
                         categoriesTotal={this.state.categoriesTotal}
@@ -98,8 +97,8 @@ class App extends Component {
                         usersTotal={this.state.usersTotal}
                       ></ContentRowProducts>
                     }
-                    exact="true"
                   ></Route>
+                  
                   <Route
                     path="/LastProductInDB"
                     element={<LastProductInDB {...this.state.lastProduct} />}

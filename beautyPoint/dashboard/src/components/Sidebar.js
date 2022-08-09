@@ -61,13 +61,7 @@ function Sidebar(props) {
         </Link>
       </li>
 
-      {/* <!-- Nav Item - Tables --> */}
-      <li className="nav-item">
-        <Link to="/ContentRowProducts" exact="true" className="nav-link">
-          <i className="fas fa-fw fa-table"></i>
-          <span>Resumen base de datos</span>
-        </Link>
-      </li>
+  
 
       {/* <!-- Divider --> */}
       <hr className="sidebar-divider d-none d-md-block"></hr>
