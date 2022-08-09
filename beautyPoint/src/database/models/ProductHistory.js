@@ -38,7 +38,12 @@ module.exports = (sequelize, DataTypes) => {
   
     const ProductHistory = sequelize.define(alias, cols, config);
   
-  
+  ProductHistory.associate = function (models) {
+    ProductHistory.belongsTo(models.BuyHistory, {
+      as: "productsX",
+      foreignKey: "comprador_id",
+    });
+  };
   
     return ProductHistory;
   };

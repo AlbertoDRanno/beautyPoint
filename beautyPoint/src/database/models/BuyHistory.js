@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   
     const BuyHistory = sequelize.define(alias, cols, config);
     BuyHistory.associate = function (models) {
-    BuyHistory.hasMany (models.ProductHistory, {as:"products"})
+    BuyHistory.hasMany (models.ProductHistory, {as:"productsX", foreignKey: "comprador_id"})
     }
     return BuyHistory;
   };

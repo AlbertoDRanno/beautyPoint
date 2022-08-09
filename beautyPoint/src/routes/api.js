@@ -25,4 +25,6 @@ router.get("/productsSearch", apiController.search);
 router.get("/productsConsumirAPI", apiController.consumirAPI);
 router.get("/productsConsumirDosAPIs", apiController.consumirDosAPIs);
 
+router.get("/historialCompras", apiController.historialCompras);
+
 module.exports = router;

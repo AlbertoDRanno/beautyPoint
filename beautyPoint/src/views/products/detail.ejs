@@ -28,8 +28,13 @@
               Agregar al carrito
             </button>
             <% console.log(product) %>
-            </form>
-            
+          </form>
+          <form action="/" method="GET">
+            <button type="submit" value="" class="btn btn-secondary" style="margin-right: 10px">
+              Cancelar
+            </button>
+          </form>
+
           <% } %>
 
           <% if (locals.userLogged && locals.userLogged.categoria===0) { %>

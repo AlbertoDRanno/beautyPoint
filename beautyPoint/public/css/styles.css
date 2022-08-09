@@ -93,13 +93,19 @@ div.errores {
   justify-content: space-around;
 }
 
-.form-boton {
+
+/* .form-boton {
   background-color: #3cc3b2;
   color: #ffffff;
   font-size: 20px;
   padding: 5px 10px;
   margin: 5px;
-  width: 50%;
+  
+} */
+
+.form-boton a {
+  text-decoration: none;
+  color: black
 }
 
 /*Header*/

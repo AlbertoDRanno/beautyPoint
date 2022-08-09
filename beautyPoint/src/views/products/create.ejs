@@ -100,19 +100,22 @@
           <% } %>
         </div>
 
-        <div class="form-element">
+       
           <div class="form-botonera">
-            <% if (locals.userLogged && locals.userLogged.categoria===0) { %>
-            <button type="submit" value="product_create" class="form-boton">
-              Crear producto
-            </button>
-            <% } %>
-            <button type="reset" value="cancelar" class="form-boton">
-              Cancelar
-            </button>
-          </div>
+           <% if (locals.userLogged && locals.userLogged.categoria===0) { %>
+        <button type="submit" value="product_create" class="form-boton btn btn-info">
+          Crear producto
+        </button>
+        <a href="/" >
+        <button type="button" class="form-boton btn btn-info">
+        Cancelar
+      </button></a>
+        <% } %>
+            
+            
         </div>
       </form>
+  
     </main>
     <%- include('../partials/footer.ejs')%>
     <script src="/js/productsCreate.js"></script>

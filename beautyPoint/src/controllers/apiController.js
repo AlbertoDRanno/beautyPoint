@@ -171,6 +171,40 @@ const apiController = {
         res.send(err);
       });
   },
+  historialCompras: (req, res) => {
+    // /api/historialCompras
+    console.log(
+      "entrando al método historialCompras del apiController.js"
+    );
+    db.BuyHistory.findAll({
+      // include: [
+      //   {
+      //     association: "productsX",
+      //     attributes: [
+      //       "id",
+      //       "name",
+      //       "quantity",
+      //       "price",
+      //       "buy_history_id",
+      //       "description",
+      //     ],
+      //   },
+      // ],
+      attributes: ["id", "comprador_id"],
+    })
+      .then((compras) => {
+        console.log(compras);
+        res.status(200).json({
+          //envío info en formato JSON
+          cantidadDeCompras: compras.length,
+          data: compras,
+          status: 200,
+        });
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
 
   //Pruebas
   store: (req, res) => {
@@ -326,7 +360,8 @@ const apiController = {
     ).then((response) => response.json());
     let provinces = await fetch(
       "https://apis.datos.gob.ar/georef/api/provincias"
-    ).then((response) => response.json())
+    )
+      .then((response) => response.json())
       .catch((err) => res.send(err));
 
     // return res.json({pelicula, provincias})
