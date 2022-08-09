@@ -92,7 +92,7 @@
                     <hr class="my-4">
 
                     <div class="d-flex justify-content-between mb-4">
-                      <h5 class="text-uppercase"><%=cart.length%> artículo/s</h5>                   
+                      <h5 class="text-uppercase"><%=cart.length%> artículo/s</h5>
                     </div>
 
                     <h5 class=" mb-3">Opciones de envío y retiro:</h5>
@@ -109,9 +109,11 @@
 
                     <div class="d-flex justify-content-between mb-5">
                       <h5 class="text-uppercase">Total</h5>
-                      <% for (let i=0; i < cart.length; i++) { %>                      
-                      <h5>$<%=cart[i].price*cart[i].cantidad%></h5>
-                      <% } %>                    
+                      <%  let total = 0 %>
+                      <% for (let i=0; i < cart.length; i++) { %>
+                      <% total += Number(cart[i].price*cart[i].cantidad)  %>
+                      <% } %>
+                      <h5>$<%= total %></h5>
                     </div>
 
 
