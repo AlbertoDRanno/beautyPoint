@@ -34,36 +34,52 @@ Como referencia para los wireframes de nuestro proyecto, nos gustaron las siguie
 https://trello.com/b/2tFnzpXC/tablero-equipo-04
 
 ## INSTRUCCIONES PARA DESCARGAR Y EJECUTAR EL PROYECTO:
-#### Precondiciones: Tener instalado en la computadora: VSCode, Xampp, MySql Workbench.
-#### Setups de conexiones necesarias para Xampp y MySqlWorkbench
+#### Precondiciones: Tener instalado en la computadora: VSCode, Xampp y MySql Workbench.
+#### Setup recomendado para Xampp y MySqlWorkbench (conexiones y puertos, etc):
 
 ![imagen](https://user-images.githubusercontent.com/1665906/184036913-a4105f01-6b93-4e46-9ba4-345ceb08fa49.png)
 
 ![imagen](https://user-images.githubusercontent.com/1665906/184036981-220b35ed-126f-49a0-9960-92b645a85df2.png)
 
 
-0- Ejecutar Xampp y darle "start" al servicio "MySql"
+**0- Ejecutar Xampp y darle "start" al servicio "MySql"**
+
 ![imagen](https://user-images.githubusercontent.com/1665906/184035403-b14b8306-274c-4dd4-bf1d-44b9f30ad464.png)
 
 
-1- Abrir el gestor de base de datos instalado, conectándose a localhost:
+**1- Abrir el gestor de base de datos instalado, conectándose a localhost:**
 
 ![imagen](https://user-images.githubusercontent.com/1665906/184036521-a607f176-c9e4-493e-a23f-e01d61948d66.png)
 
-2- Con el gestor de base de datos instalado, abrir un nuevo tab para ingresar queries. Allí pegaremos y ejecutaremos los scripts para crear nuestro modelo de datos y también poblarlo con datos de pruena. Los scripts se encuentran disponibles en nuestro repositorio en el siguiente directorio: 
+**2- Con el gestor de base de datos instalado, abrir un nuevo tab para ingresar queries. Allí pegaremos y ejecutaremos los scripts para crear nuestro modelo de datos y también poblarlo con datos de pruena. Los scripts se encuentran disponibles en nuestro repositorio en el siguiente directorio:**
 > structure.sql
 > data.sql
 
-3- Ejecutar VSCode. Posicionarse en una carpeta donde se desee descargar nuestro proyecto. Presionar botón derecho opción "open in integrated terminal" (esto abrirá una consola integrada dentro de VSCode en la ruta que indicamos).
+![imagen](https://user-images.githubusercontent.com/1665906/184038881-f433e5a7-5401-446d-8e14-3de3143ed42f.png)
 
-4- Ahora, posicionados en la ruta del paso anterior, ejecutar el siguiente comando en la terminal y aguardar a que se descargue el proyecto:
+![imagen](https://user-images.githubusercontent.com/1665906/184038909-daf0eccd-2c28-4910-9d07-770aadcf5a86.png)
+
+![imagen](https://user-images.githubusercontent.com/1665906/184039695-83a2dd3a-ad73-44d5-a125-f9ce83e26c57.png)
+
+
+**3- Ejecutar VSCode. Posicionarse en una carpeta donde se desee descargar nuestro proyecto. Presionar botón derecho opción "open in integrated terminal" (esto abrirá una consola integrada dentro de VSCode en la ruta que indicamos).**
+
+**4- Ahora, posicionados en la ruta del paso anterior, ejecutar el siguiente comando en la terminal y aguardar a que se descargue el proyecto:**
 > git clone https://github.com/MauroCarvajalDeSousa/grupo_4_beautyPoint.git
 
-5- Ahora necesitamos instalarar todas las dependencias utilizadas en nuestro proyecto. Utilizando la consola, posicionarse en el directorio "/grupo_4_beautyPoint/beautyPoint" y ejecutar el siguiente comando:
+**5- Ahora necesitamos instalarar todas las dependencias utilizadas en nuestro proyecto. Utilizando la consola, posicionarse en el directorio "/grupo_4_beautyPoint/beautyPoint" y ejecutar el siguiente comando:**
 > npm install
 
-6- Ahora, para iniciar el servidor ejecutar el comando:
+![imagen](https://user-images.githubusercontent.com/1665906/184040299-3351cb9b-c83c-44b4-a0d3-23e40c39e42c.png)
+
+
+**6- Ahora, para iniciar el servidor ejecutar el comando:**
 > npm start
 
-7- Para visualizar nuestro e-commerce, abrir un browser y en la barra de direcciones ingresar a:
+![imagen](https://user-images.githubusercontent.com/1665906/184040421-b2c69a00-ea22-4c11-90d8-9a3312ca7908.png)
+
+![imagen](https://user-images.githubusercontent.com/1665906/184040515-2c87d3ba-fd39-403e-b2d6-d984647e06c0.png)
+
+
+**7- Para visualizar nuestro e-commerce, abrir un browser y en la barra de direcciones ingresar a:**
 > http://localhost:3000/
