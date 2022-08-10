@@ -396,3 +396,8 @@ div.errores {
   font-size: small;
   font-style: italic;
 }
+
+/* results */
+.search-not-found {
+ color: rgb(245, 169, 38)
+}
