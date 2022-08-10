@@ -4,31 +4,31 @@
 
 <body>
   <%- include('partials/header.ejs')%>
-<div class="row row-cols-1 row-cols-md-2 g-4">
-          <h2>Resultados de la búsqueda:</h2>
-  <% for (let i = 0; i < productsResults.length; i++) { %>
-    <div class="col-2">
-        <div class="card">
+  <main class="home-main">
+    <div class="home-banners">
+      <h2>Resultados de la búsqueda:</h2>
+    </div>
+    <section>
+      <article class="home-products">
+        <% for (let i = 0; i < productsResults.length; i++) { %>
+        <div class="home-contenedor">
           <% if (productsResults[i].status != 0) { %>                    
           <a href="/products/detail/<%= productsResults[i].id%>"><img src=<%= productsResults[i].image%>
-              alt=<%= productsResults[i].name%> class="card-img-top"/></a>
-          <h5 class="card-title"><%= productsResults[i].name%></h5>
-          <p class="card-text">$ <%= toThousand(productsResults[i].price) %></p>
-        </div>
+              alt=<%= productsResults[i].name%> /></a>
+          <div><%= productsResults[i].name%></div>
+          <div class="home-price">$ <%= toThousand(productsResults[i].price) %></div>
         </div>
         <% } %>
         <% } %>
-  <% if (productsResults.length == 0) { %>
+      </article>
+      <% if (productsResults.length == 0) { %>
       <div class="col-12">
         <h2 class="products-title" style="color: cyan">
           No hay productos que coincidan con esa búsqueda
         </h2>
       </div>
       <% } %>
-  
-</div>
-</div>
-
+  </main>
   <%- include('partials/footer') %>
 </body>
 
