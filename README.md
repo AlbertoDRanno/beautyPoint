@@ -33,7 +33,7 @@ Como referencia para los wireframes de nuestro proyecto, nos gustaron las siguie
 
 https://trello.com/b/2tFnzpXC/tablero-equipo-04
 
-## INSTRUCCIONES PARA DESCARGAR Y EJECUTAR EL PROYECTO:
+## INSTRUCCIONES PARA DESCARGAR Y EJECUTAR EL PROYECTO beautyPoint:
 #### Precondiciones: Tener instalado en la computadora: VSCode, Xampp y MySql Workbench.
 #### Setup recomendado para Xampp y MySqlWorkbench (conexiones y puertos, etc):
 
@@ -67,7 +67,7 @@ https://trello.com/b/2tFnzpXC/tablero-equipo-04
 **4- Ahora, posicionados en la ruta del paso anterior, ejecutar el siguiente comando en la terminal y aguardar a que se descargue el proyecto:**
 > git clone https://github.com/MauroCarvajalDeSousa/grupo_4_beautyPoint.git
 
-**5- Ahora necesitamos instalarar todas las dependencias utilizadas en nuestro proyecto. Utilizando la consola, posicionarse en el directorio "/grupo_4_beautyPoint/beautyPoint" y ejecutar el siguiente comando:**
+**5- Ahora necesitamos instalar todas las dependencias utilizadas en nuestro proyecto. Utilizando la consola, posicionarse en el directorio "/grupo_4_beautyPoint/beautyPoint" y ejecutar el siguiente comando:**
 > npm install
 
 ![imagen](https://user-images.githubusercontent.com/1665906/184040299-3351cb9b-c83c-44b4-a0d3-23e40c39e42c.png)
@@ -83,3 +83,20 @@ https://trello.com/b/2tFnzpXC/tablero-equipo-04
 
 **7- Para visualizar nuestro e-commerce, abrir un browser y en la barra de direcciones ingresar a:**
 > http://localhost:3000/
+
+
+## INSTRUCCIONES PARA DESCARGAR Y EJECUTAR EL PROYECTO dashboard:
+#### Precondiciones: tener descargado y corriendo el proyecto beautyPoint (ver sección anterior)
+
+**0- Ahora necesitamos instalar todas las dependencias utilizadas en nuestro proyecto dashboard. Utilizando la consola, posicionarse en el directorio "/grupo_4_beautyPoint/beautyPoint/dashboard" y ejecutar el siguiente comando:**
+> npm install
+
+![imagen](https://user-images.githubusercontent.com/1665906/184041634-06fbd8e2-2ca1-46d2-9a24-1e6dcf499450.png)
+
+![imagen](https://user-images.githubusercontent.com/1665906/184041703-e9646bd6-4610-4c47-bb64-7218b49f93cf.png)
+
+![imagen](https://user-images.githubusercontent.com/1665906/184041798-27dfc09c-bc31-4ce5-a203-8bf5d812a193.png)
+
+
+**1- Ahora, para iniciar el servidor ejecutar el comando:**
+> npm start
