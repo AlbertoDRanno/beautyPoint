@@ -33,9 +33,9 @@ Como referencia para los wireframes de nuestro proyecto, nos gustaron las siguie
 
 https://trello.com/b/2tFnzpXC/tablero-equipo-04
 
-#### INSTRUCCIONES PARA DESCARGAR Y EJECUTAR EL PROYECTO:
-## Precondiciones: Tener instalado en la computadora: VSCode, Xampp, MySql Workbench.
-## Setups de conexiones necesarias para Xampp y MySqlWorkbench
+## INSTRUCCIONES PARA DESCARGAR Y EJECUTAR EL PROYECTO:
+#### Precondiciones: Tener instalado en la computadora: VSCode, Xampp, MySql Workbench.
+#### Setups de conexiones necesarias para Xampp y MySqlWorkbench
 
 ![imagen](https://user-images.githubusercontent.com/1665906/184036913-a4105f01-6b93-4e46-9ba4-345ceb08fa49.png)
 
