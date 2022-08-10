@@ -172,12 +172,17 @@ const usersController = {
   },
   
   buy: (req, res) => {
-
+/* primero crea un registro de compra en el cual le pone una id unica asociada con el usuario que esta logueado en el momento   */
     db.BuyHistory.create({ comprador_id: req.session.userLogged.id  })
     .then(function (buyHistory) 
     {
-
-      req.session.cart.map(item => ({ ...item, quantity: item.cantidad, buy_history_id:buyHistory.id,id:undefined })).forEach(element => {
+/*  el "...item" trae tambien la id del producto lo cual le queremos 
+poner una nueva y no necesitamos con la que ya tiene el producto. entonces copiamos la id y luego usamos el id:undefined 
+para que no se guarde dentro el array completo ya que podria traer problemas */
+      
+const productHistoryCopy = req.session.cart.map(item => ({ ...item, quantity: item.cantidad, buy_history_id:buyHistory.id,id:undefined }))
+/* recorre y guarda los productHistory  */
+productHistoryCopy.forEach(element => {
         db.ProductHistory.create(element)
       });
  
