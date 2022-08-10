@@ -32,3 +32,38 @@ Como referencia para los wireframes de nuestro proyecto, nos gustaron las siguie
 #### Tablero Trello del equipo 04
 
 https://trello.com/b/2tFnzpXC/tablero-equipo-04
+
+## INSTRUCCIONES PARA DESCARGAR Y EJECUTAR EL PROYECTO:
+#### Precondiciones: Tener instalado en la computadora: VSCode, Xampp, MySql Workbench.
+#### Setups de conexiones necesarias para Xampp y MySqlWorkbench
+
+![imagen](https://user-images.githubusercontent.com/1665906/184036913-a4105f01-6b93-4e46-9ba4-345ceb08fa49.png)
+
+![imagen](https://user-images.githubusercontent.com/1665906/184036981-220b35ed-126f-49a0-9960-92b645a85df2.png)
+
+
+0- Ejecutar Xampp y darle "start" al servicio "MySql"
+![imagen](https://user-images.githubusercontent.com/1665906/184035403-b14b8306-274c-4dd4-bf1d-44b9f30ad464.png)
+
+
+1- Abrir el gestor de base de datos instalado, conectándose a localhost:
+
+![imagen](https://user-images.githubusercontent.com/1665906/184036521-a607f176-c9e4-493e-a23f-e01d61948d66.png)
+
+2- Con el gestor de base de datos instalado, abrir un nuevo tab para ingresar queries. Allí pegaremos y ejecutaremos los scripts para crear nuestro modelo de datos y también poblarlo con datos de pruena. Los scripts se encuentran disponibles en nuestro repositorio en el siguiente directorio: 
+> structure.sql
+> data.sql
+
+3- Ejecutar VSCode. Posicionarse en una carpeta donde se desee descargar nuestro proyecto. Presionar botón derecho opción "open in integrated terminal" (esto abrirá una consola integrada dentro de VSCode en la ruta que indicamos).
+
+4- Ahora, posicionados en la ruta del paso anterior, ejecutar el siguiente comando en la terminal y aguardar a que se descargue el proyecto:
+> git clone https://github.com/MauroCarvajalDeSousa/grupo_4_beautyPoint.git
+
+5- Ahora necesitamos instalarar todas las dependencias utilizadas en nuestro proyecto. Utilizando la consola, posicionarse en el directorio "/grupo_4_beautyPoint/beautyPoint" y ejecutar el siguiente comando:
+> npm install
+
+6- Ahora, para iniciar el servidor ejecutar el comando:
+> npm start
+
+7- Para visualizar nuestro e-commerce, abrir un browser y en la barra de direcciones ingresar a:
+> http://localhost:3000/
