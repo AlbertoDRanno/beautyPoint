@@ -1,6 +1,6 @@
     //  ctrl + k    luego   ctrl + c
     //  ctrl + u para descomentaar
-
+    // Para iniciar React en otro puerto: "scripts": { "start": "set PORT=3001 && react-scripts start",
 
 
 

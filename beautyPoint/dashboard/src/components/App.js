@@ -32,11 +32,11 @@ class App extends Component {
   }
 
   traerInfoUsers() {
-    this.apiCall("http://localhost:3000/api/users", this.mostrarInfoUsers);
+    this.apiCall("http://localhost:3001/api/users", this.mostrarInfoUsers);
   }
   traerInfoProducts() {
     this.apiCall(
-      "http://localhost:3000/api/products",
+      "http://localhost:3001/api/products",
       this.mostrarInfoProducts
     );
   }

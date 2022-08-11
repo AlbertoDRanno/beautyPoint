@@ -8,7 +8,7 @@ function ProductRow(props) {
         <h6>
           <a
             className="nav-link"
-            href={"http://localhost:3000/products/detail/" + props.id}
+            href={"http://localhost:3001/products/detail/" + props.id}
           >
             <span>{props.name}</span>
           </a>
