@@ -52,8 +52,9 @@ https://trello.com/b/2tFnzpXC/tablero-equipo-04
 ![imagen](https://user-images.githubusercontent.com/1665906/184036521-a607f176-c9e4-493e-a23f-e01d61948d66.png)
 
 **2- Con el gestor de base de datos instalado, abrir un nuevo tab para ingresar queries. Allí pegaremos y ejecutaremos los scripts para crear nuestro modelo de datos y también poblarlo con datos de pruena. Los scripts se encuentran disponibles en nuestro repositorio en el siguiente directorio:**
-> structure.sql
-> data.sql
+> grupo_4_beautyPoint/scripts/structure.sql
+
+> grupo_4_beautyPoint/scripts/data.sql
 
 ![imagen](https://user-images.githubusercontent.com/1665906/184038881-f433e5a7-5401-446d-8e14-3de3143ed42f.png)
 
