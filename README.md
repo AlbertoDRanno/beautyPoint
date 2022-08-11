@@ -78,11 +78,11 @@ https://trello.com/b/2tFnzpXC/tablero-equipo-04
 
 ![imagen](https://user-images.githubusercontent.com/1665906/184040421-b2c69a00-ea22-4c11-90d8-9a3312ca7908.png)
 
-![imagen](https://user-images.githubusercontent.com/1665906/184040515-2c87d3ba-fd39-403e-b2d6-d984647e06c0.png)
+![imagen](https://user-images.githubusercontent.com/1665906/184043438-df1b2c9e-5f27-4b7d-a225-c0b09daf06f2.png)
 
 
 **7- Para visualizar nuestro e-commerce, abrir un browser y en la barra de direcciones ingresar a:**
-> http://localhost:3000/
+> http://localhost:3001/
 
 
 ## INSTRUCCIONES PARA DESCARGAR Y EJECUTAR EL PROYECTO dashboard:
@@ -100,3 +100,6 @@ https://trello.com/b/2tFnzpXC/tablero-equipo-04
 
 **1- Ahora, para iniciar el servidor ejecutar el comando:**
 > npm start
+
+![imagen](https://user-images.githubusercontent.com/1665906/184043262-50eab6df-9310-4ea4-9eef-4c099cb24546.png)
+
