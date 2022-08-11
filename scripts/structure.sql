@@ -1,3 +1,20 @@
+/*
+CREATE TABLE `cart` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `comprador_id` int(10) unsigned NOT NULL,
+  `product_id` int(10) unsigned NOT NULL,
+  `quantity` decimal(7,0) unsigned NOT NULL,
+  `price` float NOT NULL,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NULL DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_productCart_idx` (`product_id`),
+  KEY `fk_userCart_idx` (`comprador_id`),
+  CONSTRAINT `fk_productCart` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  CONSTRAINT `fk_userCart` FOREIGN KEY (`comprador_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+*/
 CREATE DATABASE `laca_db`;
 
 USE laca_db;
@@ -24,8 +41,8 @@ CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `dni` int(10) unsigned NOT NULL,
-  `email` varchar(320) NOT NULL,
+  `dni` int(10) unsigned NOT NULL UNIQUE,
+  `email` varchar(320) NOT NULL UNIQUE,
   `categoria` tinyint(1) NOT NULL DEFAULT 0,
   `avatar` varchar(400) NOT NULL,
   `password` varchar(400) NOT NULL,
@@ -59,23 +76,7 @@ CREATE TABLE `products` (
   CONSTRAINT `fk_productVendedor` FOREIGN KEY (`vendedor_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*
-CREATE TABLE `cart` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `comprador_id` int(10) unsigned NOT NULL,
-  `product_id` int(10) unsigned NOT NULL,
-  `quantity` decimal(7,0) unsigned NOT NULL,
-  `price` float NOT NULL,
-  `createdAt` timestamp NULL DEFAULT NULL,
-  `updatedAt` timestamp NULL DEFAULT NULL,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_productCart_idx` (`product_id`),
-  KEY `fk_userCart_idx` (`comprador_id`),
-  CONSTRAINT `fk_productCart` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  CONSTRAINT `fk_userCart` FOREIGN KEY (`comprador_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-*/
+
 
 CREATE TABLE `buy_history` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
