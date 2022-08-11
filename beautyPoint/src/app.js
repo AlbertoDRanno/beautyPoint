@@ -1,20 +1,20 @@
 // ************ Require's ************
-const express = require("express"); //Express para que utilice EJS como motor de plantillas
+const express = require('express'); //Express para que utilice EJS como motor de plantillas
 //const path = require("path");
-const methodOverride = require("method-override"); // Para poder pisar el method="POST" en el formulario por PUT y DELETE
-const logMiddleware = require("./middlewares/logMiddleware"); // Para llevar un registro en txt de las URL visitadas
-const session = require("express-session"); // Obj. Lit. que vive en el req (req.sesion), que cruza toda la app. Desde él puedo
+const methodOverride = require('method-override'); // Para poder pisar el method="POST" en el formulario por PUT y DELETE
+const logMiddleware = require('./middlewares/logMiddleware'); // Para llevar un registro en txt de las URL visitadas
+const session = require('express-session'); // Obj. Lit. que vive en el req (req.sesion), que cruza toda la app. Desde él puedo
 // acceder a todo lo que tenga en el request. Muere al cerrar el navegador
-const cookies = require("cookie-parser"); // Para guardar del lado del cliente - por navegador (lo que guarda en chrome, no lo tendrá Firefox)
-const userLoggedMiddleware = require("./middlewares/userLoggedMiddleware"); //determinará a lo que tenga acceso cada usuario que se loguee
-const cors = require("cors");
+const cookies = require('cookie-parser'); // Para guardar del lado del cliente - por navegador (lo que guarda en chrome, no lo tendrá Firefox)
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware'); //determinará a lo que tenga acceso cada usuario que se loguee
+const cors = require('cors');
 
 // ************ Sequelize ************
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize');
 // Option 3: Passing parameters separately (other dialects)
-const sequelize = new Sequelize("database", "username", "password", {
-  host: "localhost",
-  dialect: "mysql" /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */,
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'mysql' /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */,
 });
 
 // ************ express() ************
@@ -24,16 +24,16 @@ const app = express();
 //la petición tiene que cumplir con estos, antes de que el servidor la derive a la ruta correspondiente
 //IMP! El orden de ponerlos es el orden en que se ejecutarán!
 //app.use() hace referencia a que toda la app usará ese middleware
-app.use(express.static("public")); // Configuración de carpeta de archivos estáticos
+app.use(express.static('public')); // Configuración de carpeta de archivos estáticos
 app.use(express.urlencoded({ extended: false })); // Para capturar datos desde un formulario como un obj literal (req.body)
 app.use(express.json()); // Para que en el body puedan viajar datos en formato JSON
-app.use(methodOverride("_method")); //Middleware de aplicación el cual se encargue de controlar la posibilidad de usar otros métodos diferentes al GET y al POST, en nuestros formularios
+app.use(methodOverride('_method')); //Middleware de aplicación el cual se encargue de controlar la posibilidad de usar otros métodos diferentes al GET y al POST, en nuestros formularios
 // app.use(logMiddleware); // Para llevar un registro en txt de las URL visitadas - Reemplaza a los console.log
 app.use(cors());
 
 app.use(
   session({
-    secret: "secret",
+    secret: 'secret',
     // 'texto único aleatorio para identificar nuestro sitio web y evitar que otras páginas usen lo que guardamos en session',
     //tendría que ir cifrada (googlear)
     resave: false, //ambos en false según google e integrador clase 26
@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
   /*se agrega en la session una variable cart para representar en el carrito*/
   req.session.cart = req.session.cart || [];
   console.log(req.session.cart);
-  
+
   /* el locals se usa para darle acceso al ejs y que lo pueda leer*/
   res.locals.cart = req.session.cart;
   next();
@@ -55,36 +55,36 @@ app.use(function (req, res, next) {
 let enMantenimiento = false; // Pasar a true para poner en modo "Página en Mantenimiento"
 if (enMantenimiento == true) {
   app.use((req, res, next) => {
-    res.send("Momentáneamente esta página está en Mantenimiento"); // Se podría crear una vista para esto
+    res.send('Momentáneamente esta página está en Mantenimiento'); // Se podría crear una vista para esto
     next();
   });
 }
 
 // ************ Template Engine ************
-app.set("view engine", "ejs"); //motor de plantillas que estamos usando EJS
-app.set("views", __dirname + "/views"); // Define la ubicación de la carpeta de las Vistas
+app.set('view engine', 'ejs'); //motor de plantillas que estamos usando EJS
+app.set('views', __dirname + '/views'); // Define la ubicación de la carpeta de las Vistas
 
 // ************ Route System ************
 //ruteos
-const rutasMain = require("./routes/main.js");
-const rutasProducts = require("./routes/products.js");
-const rutasUsers = require("./routes/users.js");
-const rutasApi = require("./routes/api.js");
+const rutasMain = require('./routes/main.js');
+const rutasProducts = require('./routes/products.js');
+const rutasUsers = require('./routes/users.js');
+const rutasApi = require('./routes/api.js');
 
 //configuración de ruteo
-app.use("/products", rutasProducts);
-app.use("/users", rutasUsers);
-app.use("/api", rutasApi);
-app.use("/", rutasMain);
+app.use('/products', rutasProducts);
+app.use('/users', rutasUsers);
+app.use('/api', rutasApi);
+app.use('/', rutasMain);
 
 // ************ Middleware Error 404 - Siempre último! ************
 //Se ejecuta en caso de que una ruta no exista
 app.use((req, res, next) => {
-  res.status(404).render("not-found");
+  res.status(404).render('not-found');
   next();
 });
 
 // Server escuchando
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Servidor corriendo en el puerto 3000");
+app.listen(process.env.PORT || 3001, () => {
+  console.log('Servidor corriendo en el puerto 3001');
 });
