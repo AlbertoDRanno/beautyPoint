@@ -74,7 +74,7 @@ window.addEventListener("load", function () {
       errores++;
       description.classList.add("is-invalid");
       h2description.innerHTML = "Debes completar el campo descripción";
-    } else if (!(description.length >= 20)) {
+    } else if ((description.length < 20)) {
       errores++;
       description.classList.add("is-invalid");
       h2description.innerHTML =

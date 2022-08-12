@@ -28,7 +28,7 @@ app.use(express.static('public')); // Configuración de carpeta de archivos est�
 app.use(express.urlencoded({ extended: false })); // Para capturar datos desde un formulario como un obj literal (req.body)
 app.use(express.json()); // Para que en el body puedan viajar datos en formato JSON
 app.use(methodOverride('_method')); //Middleware de aplicación el cual se encargue de controlar la posibilidad de usar otros métodos diferentes al GET y al POST, en nuestros formularios
-// app.use(logMiddleware); // Para llevar un registro en txt de las URL visitadas - Reemplaza a los console.log
+app.use(logMiddleware); // Para llevar un registro en txt de las URL visitadas - Reemplaza a los console.log
 app.use(cors());
 
 app.use(
