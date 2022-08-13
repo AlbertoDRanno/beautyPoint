@@ -1,4 +1,22 @@
-Instructivo para correr tests postman
+Listado de endpoints disponibles para users y products
+--
+#### Users
+- GET : "/users/profile/:id"
+- GET : "/users/register"
+- POST : "/users/register"
+- GET : "/users/edit/:id"
+- PUT : "/users/edit/:id"
+
+#### Products
+- GET : "/products"
+- GET : "/products/create"
+- GET : "/products/detail/:id"
+- POST : "/products/create"
+- GET : "/products/edit/:id"
+- PUT : "/products/edit/:id"
+- DEL : "/products/delete/:id"
+
+Instructivo para testear los endpoints (setup Postman)
 --
 1- Importar las collection .json
 
