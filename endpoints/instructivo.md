@@ -8,7 +8,7 @@ Listado de endpoints disponibles para users y products
 - PUT : "/users/edit/:id"
 
 #### Products
-- GET : "/products"
+- GET : "/" (la home de la página levanta todos los productos de la base de datos)
 - GET : "/products/create"
 - GET : "/products/detail/:id"
 - POST : "/products/create"
