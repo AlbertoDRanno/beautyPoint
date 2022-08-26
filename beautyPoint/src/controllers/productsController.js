@@ -1,5 +1,3 @@
-const JsonModel = require("../modelos/jsonModel");
-const productsModel = new JsonModel("products");
 const { validationResult } = require("express-validator");
 const db = require("../database/models");
 

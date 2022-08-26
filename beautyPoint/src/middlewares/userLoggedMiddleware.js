@@ -18,7 +18,7 @@ function userLoggedMiddleware(req, res, next) {
     res.locals.userLogged = req.session.userLogged;
     return next();
   /* pero tmb, si tengo a alguien en una cookie, debería loguearlo, entonces busco a esa persona a partir del mail 
-  guardado la cookie */
+  guardado en la cookie */
   } else if (req.cookies.email) {
     db.User.findOne({
       where: {

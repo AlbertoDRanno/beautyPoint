@@ -1,5 +1,4 @@
 // ************ Validaciones para el Formulario de Login - Middleware a nivel ruta ************
-const path = require("path");
 const { body } = require("express-validator"); // body() === check()
 
 const loginValidations = [
